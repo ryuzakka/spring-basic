@@ -9,7 +9,7 @@
 <body>
 	
 	<form method="post" action="write_ok">
-	<table width="600" align="left" border="1">
+	<table width="600" border="1">
 		<tr>
 			<th> 제 목 </th>
 			<td> <input type="text" name="title"> </td>
@@ -28,6 +28,7 @@
 		</tr>
 	</table><br>
 	<input type="submit" value="submit"><p>
+	<a href="list">목록으로</a>
 	</form>
 	
 </body>

@@ -11,6 +11,8 @@
 	
 	<h2>게시판</h2>
 	
+	<a href="write">글쓰기</a>
+	
 	<table width="600" border="1">
 		<tr>
 			<th> 제 목 </th>
@@ -19,7 +21,7 @@
 		</tr>
 		<c:forEach items="${list}" var="board">
 			<tr>
-				<td> ${board.title} </td>
+				<td><a href="readnum?id=${board.id}">${board.title}</a></td>
 				<td> ${board.readnum} </td>
 				<td> ${board.writeday} </td>
 			</tr>
