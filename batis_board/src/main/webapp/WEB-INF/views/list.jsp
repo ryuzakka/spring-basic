@@ -21,7 +21,7 @@
 		</tr>
 		<c:forEach items="${list}" var="bdto">
 			<tr>
-				<td> ${bdto.title} </td>
+				<td><a href="readnum?id=${bdto.id}">${bdto.title}</a></td>
 				<td> ${bdto.name} </td>
 				<td> ${bdto.readnum} </td>
 				<td> ${bdto.writeday} </td>
