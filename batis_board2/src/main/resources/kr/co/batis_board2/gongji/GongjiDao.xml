@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.batis_board2.gongji.GongjiDao">
+	
+	<select id="list" resultType="kr.co.batis_board2.gongji.GongjiDto">
+		select * from gongji order by id desc
+	</select>
+	
+</mapper>
