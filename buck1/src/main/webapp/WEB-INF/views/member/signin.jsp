@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>sign in</title>
+
+<c:import url="${pageContext.request.contextPath}/common/top" />
 <style>
 	h2 {
 		margin:102px 0 71px 0;
@@ -57,8 +54,8 @@
 		color:red;
 	}
 </style>
-</head>
-<body>
+
+<div id="section">
 	
 	<h2>STARBUCK</h2>
 	
@@ -89,6 +86,7 @@
 	<c:if test="${param.err == 1}">
 		<div id="signinErr">로그인 정보가 일치하지 않습니다.<br>아이디나 비밀번호를 확인 후 다시 입력해 주세요.</div>
 	</c:if>
-	
-</body>
-</html>
+
+</div>
+
+<c:import url="${pageContext.request.contextPath}/common/bottom" />

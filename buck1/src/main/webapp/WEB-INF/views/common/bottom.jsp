@@ -1,6 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style>
+	#footer {
+		position:relative;
+		width:100%;
+		font-size:12px;
+		background:#2C2A29;
+		text-align:center;
+	}
+	#footer .copyright {
+		width:1200px;
+		margin:auto;
+		padding:60px 0px;
+		color:#CCCCCC;
+	}
+	#footer .copyright a {
+		text-decoration:none;
+		color:#CCCCCC;
+		padding:0 10px;
+	}
+	#footer .copyright a:hover {
+		text-decoration:underline;
+	}
+	#footer .copyright .copy_menu {
+		color:#999999;
+		padding:25px 0 5px 0;
+	}
+	#footer .copyright .copy_menu li {
+		list-style:none;
+		line-height:1.3;
+		display:inline-block;
+		margin:0px 7px;
+	}
+	#footer .copyright .en {
+		color:#999999;	
+	}
+</style>
+
 <div id="footer">
 	<div class="copyright">
 		<a class="c_00b050" href="/footer/etc/privacy.do">개인정보처리방침</a>

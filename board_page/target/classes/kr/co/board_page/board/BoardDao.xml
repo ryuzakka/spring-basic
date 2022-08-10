@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+
+<mapper namespace="kr.co.board_page.board.BoardDao">
+
+	<select id="list" resultType="kr.co.board_page.board.BoardDto">
+		select * from board1 limit #{param1},#{param2}
+	</select>
+	
+	<select id="totalCount" resultType="Integer">
+		select ceil(count(*)/#{param1}) cnt from board1
+	</select>
+
+</mapper>

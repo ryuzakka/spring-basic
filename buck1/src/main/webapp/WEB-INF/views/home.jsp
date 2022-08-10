@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>buck1</title>
 </head>
 <body>
 <h1>
@@ -12,8 +12,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<a href="./main">메인</a><p>
-<a href="./menu/">메뉴</a><p>
-<a href="./member/signin">로그인</a>
+<a href="main/">메인</a><p>
+<a href="menu/">메뉴</a><p>
+<a href="member/signin">로그인</a>
 </body>
 </html>
