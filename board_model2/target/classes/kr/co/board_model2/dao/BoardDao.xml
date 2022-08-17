@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.board_model2.dao.BoardDao">
+	
+	<select id="list" resultType="kr.co.board_model2.dto.BoardDto">
+		select * from board order by id desc
+	</select>
+	
+</mapper>
