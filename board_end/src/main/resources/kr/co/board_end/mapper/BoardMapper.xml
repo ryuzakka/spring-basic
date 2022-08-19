@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+
+<mapper namespace="kr.co.board_end.mapper.BoardMapper">
+	
+	<select id="list" resultType="kr.co.board_end.vo.BoardVO">
+		select * from board1 where ${param1} like concat('%',#{param2},'%') order by id desc limit #{param3},10
+	</select>
+	
+	<select id="getTotal" resultType="Integer">
+		select ceil(count(*)/10) from board1 where ${param1} like concat('%',#{param2},'%')
+	</select>
+	
+</mapper>
