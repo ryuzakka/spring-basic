@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.shop.mapper.ProductMapper">
+
+	<select id="pro_write" resultType="kr.co.shop.vo.DaeVO">
+		select * from dae order by code asc
+	</select>
+	
+	<select id="getjung" resultType="kr.co.shop.vo.JungVO">
+		select * from jung where daecode=#{param1}
+	</select>
+	
+	<select id="getso" resultType="kr.co.shop.vo.SoVO">
+		select * from so where daejung=#{param1}
+	</select>
+	
+	<select id="getpcode" resultType="String">
+		select ifnull(max(pcode),1) from product where pcode like concat(#{param1},'___')
+	</select>
+	
+
+</mapper>
