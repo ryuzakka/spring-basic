@@ -2,8 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:import url="${pageContext.request.contextPath}/common/top" />
+<c:import url="/common/top" />
 <style>
+	#section {
+		width:800px;
+		height:auto;
+		margin-top:85px;
+		margin:auto;
+		padding-bottom:85px;
+		text-align:left;
+	}
 	h2 {
 		margin:102px 0 71px 0;
 	}
@@ -60,7 +68,10 @@
 	<h2>STARBUCK</h2>
 	
 	<div id="welcome">
-		<div id="logo"><img src="" alt=""></div>
+		<div id="logo">
+			<img src="${pageContext.request.contextPath}/resources/images/sb_logo.png">
+		</div>
+		
 		<div id="message">
 			<h3>안녕하세요. 스타벅스 입니다.</h3>
 			<span>회원서비스 이용을 위해 로그인 해주세요.</span>
@@ -89,4 +100,4 @@
 
 </div>
 
-<c:import url="${pageContext.request.contextPath}/common/bottom" />
+<c:import url="/common/bottom" />

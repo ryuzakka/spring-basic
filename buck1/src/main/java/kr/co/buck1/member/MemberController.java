@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
 	@Autowired
-	private SqlSession sqlSession;
+	@Qualifier("ms")
+	private MemberService service;
 	
 	@RequestMapping("/member/signin")
 	public String signin() {
@@ -19,21 +21,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/signin_ok")
-	public String signin_ok(MemberDto dto, HttpSession session) {
-		MemberDao dao = sqlSession.getMapper(MemberDao.class);
-		if(dao.signup(dto) == 1) {
-			session.setAttribute("userid", dto.getUserid());
-			session.setAttribute("username", dto.getUsername());
-			
-			return "redirect:/menu/";
-		} else {
-			
-			return "redirect:/member/signin?err=1";
-		}
+	public String signin_ok(MemberVO vo, HttpSession session) {
+		return service.signin_ok(vo, session);
 	}
 	
 	@RequestMapping("/member/signup")
 	public String signup() {
-		return "redirect:/member/signup_ok";
+		return "/member/signup";
 	}
+	
+	@RequestMapping("/member/signup_ok")
+	public String signup_ok(MemberVO vo) {
+		return service.signup_ok(vo);
+	}
+	
+	@RequestMapping("/member/logout")
+	public String logout(HttpSession session) {
+		return service.logout(session);
+	}
+	
+	
 }

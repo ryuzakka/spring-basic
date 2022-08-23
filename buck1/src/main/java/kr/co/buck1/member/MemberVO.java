@@ -1,6 +1,6 @@
 package kr.co.buck1.member;
 
-public class MemberDto {
+public class MemberVO {
 
 	private int id, star, level, state;
 	private String userid, pwd, username, nickname, birth, phone, email, writeday;
