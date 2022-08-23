@@ -18,8 +18,14 @@
 	</select>
 	
 	<select id="getpcode" resultType="String">
-		select ifnull(max(pcode),1) from product where pcode like concat(#{param1},'___')
+		select ifnull(substring(max(pcode),8,3),1) from product where pcode like concat(#{param1},'___')
 	</select>
+	
+	<insert id="pro_write_ok" parameterType="kr.co.shop.vo.ProductVO">
+		insert into product
+		(pcode,pimg,cimg,title,price,made,halin,juk,su,baesong,baeday,writeday)
+		values(#{pcode},#{pimg},#{cimg},#{title},#{price},#{made},#{halin},#{juk},#{su},#{baesong},#{baeday},now())
+	</insert>
 	
 
 </mapper>

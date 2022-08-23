@@ -55,34 +55,75 @@
 </head>
 <body>
 	
-	<h2>상품 추가</h2>
+	<h2>추가 상품등록</h2>
 	
-	<form name="inpro" method="post" action="">
-	<table width="700" border="1">
-		<tr>
-			<td> 상품 코드 </td>
-			<td> <!-- 대,중,소 -->
-				<!-- 
-					option태그의 길이 => length
-					option태그에 나타낼 글자 => text
-					option태그에 값을 서버로 => value
-				 -->
-				<select name="dae" onchange="selectDae(this.value)">
-					<option>- 대분류 -</option>
-					 <c:forEach items="${dae}" var="dae">
-						<option value="${dae.code}">${dae.title}</option>
-					 </c:forEach>
-				</select>
-				<select name="jung" onchange="selectJung(this.value)">
-					<option>- 중분류 -</option>
-				</select>
-				<select name="so" onchange="selectSo(this.value)">
-					<option>- 소분류 -</option>
-				</select>
-			</td>
-			<td> <input type="text" name="pcode" placeholder="상품코드를 입력하세요"> </td>
-		</tr>
-	</table>
+	<form name="inpro" method="post" action="pro_write_ok" enctype="multipart/form-data">
+		<table width="700" border="1">
+			<tr>
+				<td> 상품 코드 </td>
+				<td> <!-- 대,중,소 -->
+					<!-- 
+						option태그의 길이 => length
+						option태그에 나타낼 글자 => text
+						option태그에 값을 서버로 => value
+					 -->
+					<select name="dae" onchange="selectDae(this.value)">
+						<option>- 대분류 -</option>
+						 <c:forEach items="${dae}" var="dae">
+							<option value="${dae.code}">${dae.title}</option>
+						 </c:forEach>
+					</select>
+					<select name="jung" onchange="selectJung(this.value)">
+						<option>- 중분류 -</option>
+					</select>
+					<select name="so" onchange="selectSo(this.value)">
+						<option>- 소분류 -</option>
+					</select>
+					<input type="text" name="pcode" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td> 대표 이미지 </td>
+				<td> <input type="file" name="pimg"> </td>
+			</tr>
+			<tr>
+				<td> 상품상세 이미지 </td>
+				<td> <input type="file" name="cimg"> </td>
+			</tr>
+			<tr>
+				<td> 상품 제목 </td>
+				<td> <input type="text" name="title"> </td>
+			</tr>
+			<tr>
+				<td> 상품 가격 </td>
+				<td> <input type="text" name="price"> </td>
+			</tr>
+			<tr>
+				<td> 상품 제조사 </td>
+				<td> <input type="text" name="made"> </td>
+			</tr>
+			<tr>
+				<td> 상품 할인율 </td>
+				<td> <input type="text" name="halin"> </td>
+			</tr>
+			<tr>
+				<td> 적립금 </td>
+				<td> <input type="text" name="juk"> </td>
+			</tr>
+			<tr>
+				<td> 상품수량 </td>
+				<td> <input type="text" name="su"> </td>
+			</tr>
+			<tr>
+				<td> 배송비 </td>
+				<td> <input type="text" name="baesong" value="0"> </td>
+			</tr>
+			<tr>
+				<td> 배송일 </td>
+				<td> <input type="text" name="baeday" value="2"> </td>
+			</tr>
+		</table>
+		<p><input type="submit" value="상품등록"></p>
 	</form>
 	
 </body>
