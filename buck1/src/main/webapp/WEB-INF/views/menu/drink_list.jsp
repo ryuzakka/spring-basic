@@ -13,7 +13,7 @@
 	.list {
 		width:900px;
 		margin:auto;
-		border:1px solid green;
+		/* border:1px solid green; */
 		display:flex;
 		flex-flow:row wrap;
 		justify-content:left;
@@ -42,7 +42,9 @@
 	}
 </style>
 
+
 <div id="section">	
+	<h1>음 료</h1>
 	<div class="list">
 		<c:forEach items="${list}" var="drink">
 			<div class="prod">

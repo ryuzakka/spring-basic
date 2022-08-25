@@ -2,7 +2,8 @@ package kr.co.buck1.menu;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -30,5 +31,16 @@ public class MenuController {
 		
 		return service.drink_list(model);
 	}
+	
+	@RequestMapping("/menu/drink_content")
+	public String drink_content(HttpServletRequest req, Model model) {
+		return service.drink_content(req, model);
+	}
+	
+	@RequestMapping("/menu/drink_order")
+	public String drink_order(HttpServletRequest req) {
+		return service.drink_order(req);
+	}
+	
 	
 }
