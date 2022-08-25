@@ -55,8 +55,8 @@
 		padding-top:10px;
 	}
 	
-	#gnb #first #nav-member > #admin, #user {
-		margin:0 0 22px 0;
+	#gnb #first #nav-member > #guest, #admin, #user {
+		margin:0 0 32px 0;
 	}
 	#gnb #first #nav-member #admin li {
 		list-style:none;
@@ -70,9 +70,9 @@
 		text-align:center;
 		width:90px;
 	}
-	#gnb #first #nav-member #guest {
+	/* #gnb #first #nav-member #guest {
 		margin:0 0 32px 0;
-	}
+	} */
 	#gnb #first #nav-member #guest li {
 		list-style:none;
 		display:inline-block;
@@ -143,9 +143,9 @@
 				</c:if>
 				<c:if test="${userid != null}">
 					<c:if test="${userid != 'admin'}">
-						<div>반갑습니다 ${nick}님</div>
+						<!-- <div>반갑습니다 ${nick}님</div> -->
 						<ul id="user">
-							<li><a href="">회원정보</a></li>
+							<li><a href="../member/info">회원정보</a></li>
 							<li><a href="">장바구니</a></li>
 							<li><a href="">나의 주문</a></li>
 							<li><a href="">나의 리워드</a></li>

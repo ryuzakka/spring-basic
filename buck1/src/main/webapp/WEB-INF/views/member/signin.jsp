@@ -37,9 +37,17 @@
 		border-bottom:1px solid #DDD;
 		width:300px;
 	}
-	#signin-form input[type="submit"] {
+	#signin-form input[type="submit"] {		
 		width:300px;
 		border-radius:10px;
+		border:0px;
+		background:#f4f4f1;
+		color:#222;
+		font-size:16px;
+		padding:15px 0 18px 0;
+		vertical-align:center;
+	}
+	#signin-form input[type="submit"]:hover {
 		background:#006633;
 		color:white;
 	}
@@ -80,12 +88,14 @@
 	
 	<div id="signin-form">
 	<form method="post" action="signin_ok">
-		<input type="text" name="userid" placeholder="아이디" required><p>
+		<c:if test="${param.userid == null}"><input type="text" name="userid" placeholder="아이디" required></c:if>
+		<c:if test="${param.userid != null}"><input type="text" name="userid" value="${param.userid}" required></c:if>
+		<p>
 		<input type="password" name="pwd" placeholder="비밀번호" required><p>
 		<ul id="support-btn">
-			<li><a href="member_find_id">아이디 찾기</a></li>
+			<li><a href="search_id">아이디 찾기</a></li>
 			<li>|</li>
-			<li><a href="member_find_pwd">비밀번호 찾기</a></li>
+			<li><a href="search_pwd">비밀번호 찾기</a></li>
 			<li>|</li>
 			<li><a href="signup">회원가입</a></li>
 		</ul>

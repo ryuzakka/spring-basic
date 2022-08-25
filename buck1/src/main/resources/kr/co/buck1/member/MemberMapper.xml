@@ -19,4 +19,28 @@
 		select * from member where userid=#{param1}
 	</select>
 	
+	<select id="idcheck" resultType="Integer">
+		select count(*) from member where userid=#{param1}
+	</select>
+	
+	<select id="phonecheck" resultType="Integer">
+		select count(*) from member where phone=#{param1}
+	</select>
+	
+	<select id="search_id" resultType="String">
+		select userid from member where phone=#{param1}
+	</select>
+	
+	<select id="search_pwd" resultType="kr.co.buck1.member.MemberVO">
+		select * from member where userid=#{param1} and phone=#{param2}
+	</select>
+	
+	<update id="info_update_ok">
+		update member set nickname=#{param1}, email=#{param2} where id=#{param3}
+	</update>
+	
+	
+	
 </mapper>
+
+

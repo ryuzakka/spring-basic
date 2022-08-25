@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.shop.service.ProductService;
+import kr.co.shop.vo.ProductVO;
 
 @Controller
 public class ProductController {
@@ -39,6 +40,12 @@ public class ProductController {
 	public void getpcode(HttpServletRequest req, PrintWriter out) {
 		service.getpcode(req, out);
 	}
+	
+	@RequestMapping("/product/pro_write_ok")
+	public void pro_write_ok(HttpServletRequest req) {
+		service.pro_write_ok(req);
+	}
+	
 	
 	
 }
