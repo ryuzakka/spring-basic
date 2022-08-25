@@ -1,87 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>index</title>
-	<style>
-		body {
-			margin:0px;
-		}
-		#message {
-			width:1000px;
-			height:33px;
-			background:#EEE;
-		}
-		header {
-			width:1000px;
-			height:50px;
-			background:#EEA
-		}
-		nav {
-			
-		}
-		section {
-			width:1000px;
-			height:300px;
-			background:salmon;
-		}
-		section #ar1 {
-			width:1300px;
-			height:300px;
-			background:#EEB;
-		}
-		section #ar2 {
-			width:1000px;
-			height:200px;
-			background:#EEF;
-		}
-		section #ar3 {
-			width:1000px;
-			height:200px;
-			background:#B2CCFF;
-		}
-		section #ar4 {
-			width:1000px;
-			height:200px;
-			background:#EEC;
-		}
-		section #ar5 {
-			width:1000px;
-			height:200px;
-			background:#EEF;
-		}
-		footer {
-		
-		}
-	</style>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script>
-		$(function() {
-			$("#message #right").click(function() {
-				$("#message").slideUp(600);
-			});
+<style>
+	/* 검색창 만들기 끝 */
+    #image {
+       width:1300px;
+       height:300px;
+       background:red;
+       margin:auto;
+    }
+    
+    #image #outer {
+       width:1300px;
+       height:300px;
+       overflow:hidden;  
+    }
+    #image #inner {
+       width:6600px;
+       height:300px;
+    }
+    
+    section {
+       width:1000px;
+       height:800px;
+       margin:auto;
+    }
+    section #ar2 {
+       width:1000px;
+       height:200px;
+       background:#FFB2F5;
+       margin:auto;
+    }
+    section #ar3 {
+       width:1000px;
+       height:200px;
+       background:#B2CCFF;
+       margin:auto;
+    }
+    section #ar4 {
+       width:1000px;
+       height:200px;
+       background:#FFC19E;
+       margin:auto;
+    }
+    section #ar5 {
+       width:1000px;
+       height:200px;
+       background:#BDBDBD;
+       margin:auto;
+    }
+</style>
+
+<script>
+$(function(){
+	// 슬라이드 그림 움직이기
+	setInterval(function(){
+		$("#image #inner").animate({
+			marginLeft:"-1300px"
+		},2000,function(){
+			$("#image #inner").css("margin-left","0px");
+			$("#image #inner img").eq(0).insertAfter($("#image #inner img").eq(4));
 		});
-	</script>
+	},4000);
+});
+</script> 
+
 </head>
-<body>
 	
-	<div id="message">						<!-- 간단메세지 -->
-		<div id="left"> 사이트 회원가입 이벤트 : </div>
-		<div id="right"> X </div>
-	</div>
-	<header>header</header>					<!-- 로고, 로그인, 회원가입 -->
-	<nav>nav</nav>							<!-- 메뉴 및 링크 -->
-	<section>								<!-- 현재페이지의 필요한 내용 --> <!-- article은 section내의 하나의 항목 -->
-		<article id="ar1">article1</article>	<!-- 그림 슬라이드 -->
-		<article id="ar2">article2</article>	<!-- 최신 상품 -->
-		<article id="ar3">article3</article>	<!-- 인기 상품 -->
-		<article id="ar4">article4</article>	<!-- 특가 상품 -->
-		<article id="ar5">article5</article>	<!-- 이벤트 상품 -->
-	</section>
-	<footer>footer</footer>					<!-- 사이트 관련 정보 -->
-	
-</body>
-</html>
+	<div id="image"><!-- 그림슬라이드 -->
+      <div id="outer">
+        <div id="inner">
+          <img src="../resources/main/1.png" width="1300" height="300"><img src="../resources/main/2.png" width="1300" height="300"><img src="../resources/main/3.png" width="1300" height="300"><img src="../resources/main/4.png" width="1300" height="300"><img src="../resources/main/5.png" width="1300" height="300">
+        </div>
+      </div>
+    </div> 
+    <section>           <!-- 현재페이지의 필요한 내용 -->  <!-- article는 section내의 하나의 항목 -->
+      <article id="ar2"> 최신상품 5개</article> <!-- 최신 상품 -->
+      <article id="ar3"> 인기상품 5개 </article> <!-- 인기 상품 -->
+      <article id="ar4"> 특가상품 5개 </article> <!-- 특가 상품 -->
+      <article id="ar5"> 이벤트 상품 5개 </article> <!-- 이벤트상품 -->
+    </section>

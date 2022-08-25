@@ -27,11 +27,11 @@
 	#wrap {
 		width:100%;
 		position:relative;
-		overflow-x:hidden;
+		/* overflow-x:hidden; */
 	}
 	#wrap #gnb {
 		width:100%;
-		height:120px;
+		height:100%;
 		background:#f6f5ef;
 		margin:0;
 	}
@@ -45,7 +45,7 @@
 		position:absolute;
 		left:0px;
 		width:75px;
-		height:75px;
+		/* height:75px; */
 		cursor:pointer;
 		padding-top:23px;
 	}
@@ -55,8 +55,8 @@
 		padding-top:10px;
 	}
 	
-	#gnb #first #nav-member > #admin, #user {
-		margin:0 0 22px 0;
+	#gnb #first #nav-member > #guest, #admin, #user {
+		margin:0 0 32px 0;
 	}
 	#gnb #first #nav-member #admin li {
 		list-style:none;
@@ -70,9 +70,9 @@
 		text-align:center;
 		width:90px;
 	}
-	#gnb #first #nav-member #guest {
+	/* #gnb #first #nav-member #guest {
 		margin:0 0 32px 0;
-	}
+	} */
 	#gnb #first #nav-member #guest li {
 		list-style:none;
 		display:inline-block;
@@ -129,26 +129,28 @@
 	<div id="gnb">
 		<div id="first">
 			<div id="left">
-				<a href="../main/index"><img src="/img/sb_logo.png"></a>
+				<a href="../main/index">
+					<img src="${pageContext.request.contextPath}/resources/images/sb_logo.png">
+				</a>
 			</div>
 			<div id="nav-member">
 				<c:if test="${userid == null}">
 					<!-- <div>회원서비스</div> -->
 					<ul id="guest">
 						<li><a href="../member/signin">Sign In</a></li>
-						<li><a href="/member/signup">Sign Up</a></li>
+						<li><a href="../member/signup">Sign Up</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${userid != null}">
 					<c:if test="${userid != 'admin'}">
-						<div>반갑습니다 ${userid}님</div>
+						<!-- <div>반갑습니다 ${nick}님</div> -->
 						<ul id="user">
-							<li><a href="">회원정보</a></li>
+							<li><a href="../member/info">회원정보</a></li>
 							<li><a href="">장바구니</a></li>
 							<li><a href="">나의 주문</a></li>
 							<li><a href="">나의 리워드</a></li>
 							<li><a href="">Gift 확인</a></li>
-							<li><a href="">로그아웃</a></li>
+							<li><a href="../member/logout">로그아웃</a></li>
 						</ul>
 					</c:if>
 					<c:if test="${userid == 'admin'}">
@@ -160,7 +162,7 @@
 							<li><a href="">새소식관리</a></li>
 							<li><a href="">신상품관리</a></li>
 							<li><a href="">이벤트관리</a></li>
-							<li><a href="/member/logout.jsp">로그아웃</a></li>
+							<li><a href="../member/logout">로그아웃</a></li>
 						</ul>
 					</c:if>
 				</c:if>
@@ -171,7 +173,7 @@
 					<li id="top-menu" onmouseover="view(0)" onmouseout="hide(0)">
 						<div class="drop-menu-title">MENU</div>
 						<ul class="drop-menu">
-							<li><a href="../menu/drink_list.jsp">음료</a></li>
+							<li><a href="../menu/drink_list">음료</a></li>
 							<li><a href="">푸드</a></li>
 						</ul>
 					</li>
