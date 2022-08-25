@@ -35,6 +35,12 @@
 		select * from member where userid=#{param1} and phone=#{param2}
 	</select>
 	
+	<update id="info_update_ok">
+		update member set nickname=#{param1}, email=#{param2} where id=#{param3}
+	</update>
+	
+	
+	
 </mapper>
 
 

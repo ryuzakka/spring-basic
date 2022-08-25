@@ -72,6 +72,7 @@
 	<h2>회원정보 수정</h2>
 	
 	<form name="updateForm" method="post" action="info_update_ok">
+		<input type="hidden" name="id" value="${my.id}">
 	<table>
 		<tr>
 			<td>아이디</td>

@@ -111,5 +111,17 @@ public class MemberServiceImpl implements MemberService {
 		return "/member/info_update";
 	}
 	
+	@Override
+	public String info_update_ok(HttpServletRequest req) {
+		String email, nick, id;
+		email = req.getParameter("email1") +"@"+ req.getParameter("email2");
+		nick = req.getParameter("nickname");
+		id = req.getParameter("id");
+		
+		mapper.info_update_ok(nick, email, id);
+		return "redirect:/member/info";
+	}
+	
+	
 	
 }

@@ -89,6 +89,11 @@ public class MemberController {
 		return service.info_update(req, model);
 	}
 	
+	@RequestMapping("/member/info_update_ok")
+	public String info_update_ok(HttpServletRequest req) {
+		return service.info_update_ok(req);
+	}
+	
 	
 	
 }

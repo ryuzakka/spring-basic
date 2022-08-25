@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MenuController {
 
 	@Autowired
-	private SqlSession sqlSession;
+	@Qualifier("ms")
+	private MenuService service;
+//	private SqlSession sqlSession;
 	
 	@RequestMapping("/menu/")
 	public String list() {
@@ -21,11 +24,11 @@ public class MenuController {
 	
 	@RequestMapping("/menu/drink_list")
 	public String drink_list(Model model) {
-		MenuDao dao = sqlSession.getMapper(MenuDao.class);
-		ArrayList<MenuDto> list = dao.list();
-		model.addAttribute("list", list);
+//		MenuDao dao = sqlSession.getMapper(MenuDao.class);
+//		ArrayList<MenuDto> list = dao.list();
+//		model.addAttribute("list", list);
 		
-		return "/menu/drink_list";
+		return service.drink_list(model);
 	}
 	
 }

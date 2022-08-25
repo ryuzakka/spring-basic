@@ -18,5 +18,7 @@ public interface MemberService {
 	public String search_pwd(HttpServletRequest req);
 	public String info(HttpSession session, Model model);
 	public String info_update(HttpServletRequest req, Model model);
+	public String info_update_ok(HttpServletRequest req); 
+	
 	
 }
