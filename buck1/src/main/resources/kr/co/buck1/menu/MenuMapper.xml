@@ -24,9 +24,18 @@
 		limit 1
 	</select>
 	
-	<select id="getPrice" resultType="String">
+	<select id="getPrice" resultType="Integer">
 		select price from menu where name=#{param1} and size=#{param2}
 	</select>
 	
+	<select id="getCode" resultType="String">
+		select code from menu where name=#{param1} and size=#{param2}
+	</select>
+	
+	<insert id="insertCart" parameterType="kr.co.buck1.cart.CartVO">
+		insert into cart
+		(userid,code,unit,prod_cost,total_cost,writeday)
+		values(#{userid},#{code},#{unit},#{prod_cost},#{total_cost},now())
+	</insert>
 	
 </mapper>

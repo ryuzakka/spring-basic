@@ -146,7 +146,7 @@
 						<!-- <div>반갑습니다 ${nick}님</div> -->
 						<ul id="user">
 							<li><a href="../member/info">회원정보</a></li>
-							<li><a href="">장바구니</a></li>
+							<li><a href="../cart/list">장바구니</a></li>
 							<li><a href="">나의 주문</a></li>
 							<li><a href="">나의 리워드</a></li>
 							<li><a href="">Gift 확인</a></li>

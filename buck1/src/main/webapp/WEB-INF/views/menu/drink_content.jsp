@@ -87,12 +87,19 @@
 								<span style="color:blue;">Ice</span>
 							</c:if>
 						</td>
-						<td>${drink.size}</td>
+						<td>
+							<c:choose>
+								<c:when test="${drink.size == 1}">Short</c:when>
+								<c:when test="${drink.size == 2}">Tall</c:when>
+								<c:when test="${drink.size == 3}">Grande</c:when>
+								<c:when test="${drink.size == 4}">Venti</c:when>
+							</c:choose>
+						</td>
 						<td><fmt:formatNumber value="${drink.price}" type="number" /></td>
 					</tr>
 				</c:forEach>
 			</table>
-			<p><input type="button" onclick="javascript:location='../cart/ordersheet.jsp?name=${param.name}'" value="주문하기"></p>
+			<p><input type="button" onclick="javascript:location='drink_order?name=${param.name}'" value="주문하기"></p>
 		</div>
 	</div>
 	

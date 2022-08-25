@@ -64,6 +64,7 @@
 				var price = xhr.responseText.trim();
 				document.getElementById('price').innerText = price;
 				document.orderSheet.cost.value = price;
+				document.orderSheet.pricePerUnit.value = price;
 				costPerUnit = price;
 			}
 		}
@@ -83,8 +84,7 @@
 	}
 	function plus() {
 		var unit = document.getElementById('unit');
-		var price = document.orderSheet.cost
-		;
+		var price = document.orderSheet.cost;
 		cnt += 1;
 		unit.innerText = cnt;
 		document.orderSheet.unit.value = cnt;
@@ -105,19 +105,20 @@
 	</div>
 	
 	<div id="container">
-		<form name="orderSheet" method="get" action="cart.jsp">
-			<%-- <input type="hidden" name="userid" value="${userid}"> --%>
+		<form name="orderSheet" method="post" action="drink_order_ok">
 			<input type="hidden" name="name" value="${param.name}">
-			<%-- <input type="hidden" name="cate1" value="${param.cate1}"> --%>
-			<%-- <input type="hidden" name="cate2" value="${param.cate2}"> --%>
 			<div id="sizeBtn">
 				<span>사이즈 선택</span>
-				<c:if test="${type ==  1}">
-					<input type="radio" name="size" onchange="sizeChanged('${param.name}',1)" value="1">Short
-				</c:if>
-				<input type="radio" name="size" onchange="sizeChanged('${param.name}',2)" value="2">Tall
-				<input type="radio" name="size" onchange="sizeChanged('${param.name}',3)" value="3">Grande
-				<input type="radio" name="size" onchange="sizeChanged('${param.name}',4)" value="4">Venti
+				<c:forEach items="${info}" var="drink">
+					<input type="radio" name="size" onchange="sizeChanged('${drink.name}',${drink.size})" value="${drink.size}">
+					<c:choose>
+						<c:when test="${drink.size == 1}">Short</c:when>
+						<c:when test="${drink.size == 2}">Tall</c:when>
+						<c:when test="${drink.size == 3}">Grande</c:when>
+						<c:when test="${drink.size == 4}">Venti</c:when>
+					</c:choose>
+				</c:forEach>
+				<input type="hidden" name="pricePerUnit">
 			</div>
 			<div id="unitBtn">
 				<span>수량 선택</span>
@@ -130,11 +131,9 @@
 				<input type="hidden" name="cost" >
 				<span id="price"></span> 원
 			</div>
-			<input type="submit" value="담 기">
-		</form>		
+			<p><input type="submit" value="담 기"></p>
+		</form>
 	</div>
-	
-	
 	
 </div>
 

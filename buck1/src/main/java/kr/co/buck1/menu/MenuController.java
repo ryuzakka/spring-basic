@@ -1,8 +1,10 @@
 package kr.co.buck1.menu;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,9 +40,18 @@ public class MenuController {
 	}
 	
 	@RequestMapping("/menu/drink_order")
-	public String drink_order(HttpServletRequest req) {
-		return service.drink_order(req);
+	public String drink_order(HttpServletRequest req, Model model) {
+		return service.drink_order(req, model);
 	}
 	
+	@RequestMapping("/menu/get_price")
+	public void get_price(HttpServletRequest req, PrintWriter out) {
+		service.getPrice(req, out);
+	}
+	
+	@RequestMapping("/menu/drink_order_ok")
+	public String drink_order_ok(HttpServletRequest req, HttpSession session) {
+		return service.drink_order_ok(req, session);
+	}
 	
 }
