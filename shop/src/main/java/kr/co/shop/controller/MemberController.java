@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.shop.service.MemberService;
+import kr.co.shop.vo.MemberVO;
 
 @Controller
 public class MemberController {
@@ -18,5 +19,11 @@ public class MemberController {
 	public String memberinput() {
 		return "/member/memberinput";
 	}
+	
+	@RequestMapping("/member/memberinput_ok")
+	public String memberinput_ok(MemberVO vo) {
+		return service.memberinput_ok(vo);
+	}
+	
 	
 }

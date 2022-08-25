@@ -64,8 +64,8 @@
 			<h2> 회 원 가 입 </h2>
 			<div> <input type="text" name="userid" placeholder="아이디"> </div>
 			<div> <input type="text" name="name" placeholder="이 름"> </div>
-			<div> <input type="text" name="pwd" placeholder="비밀번호"> </div>
-			<div> <input type="text" name="pwd2" placeholder="비밀번호 확인"> </div>
+			<div> <input type="password" name="pwd" placeholder="비밀번호"> </div>
+			<div> <input type="password" name="pwd2" placeholder="비밀번호 확인"> </div>
 			<div> <input type="text" name="zip" id="zip" readonly  placeholder="우편번호"> <input  id="btn1" type="button" onclick="juso_search()" value="주소검색"> </div>
 			<div> <input type="text" name="juso" placeholder="주 소" readonly> </div>
 			<div> <input type="text" name="juso_etc" placeholder="상세주소"> </div>
