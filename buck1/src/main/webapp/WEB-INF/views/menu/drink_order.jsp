@@ -56,6 +56,8 @@
 	var cnt = 1;
 	var costPerUnit;
 	function sizeChanged(prodname, size) {
+		document.getElementById('unit').innerText = 1;
+		document.orderSheet.unit.value = 1;
 		var xhr = new XMLHttpRequest();
 		xhr.open("get", "get_price?name="+prodname+"&size="+size);
 		xhr.send();
@@ -66,6 +68,7 @@
 				document.orderSheet.cost.value = price;
 				document.orderSheet.pricePerUnit.value = price;
 				costPerUnit = price;
+				
 			}
 		}
 	}

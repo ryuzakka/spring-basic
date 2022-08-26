@@ -1,5 +1,6 @@
 package kr.co.buck1.cart;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,14 @@ public class CartServiceImpl implements CartService {
 		model.addAttribute("list", mapper.list(session.getAttribute("userid").toString()));
 		return "/cart/list";
 	}
+	
+	@Override
+	public void delete(HttpServletRequest req) {
+		String id;
+		id = req.getParameter("id");
+//		userid = session.getAttribute("userid").toString();
+		mapper.delete(id);
+	}
+	
 	
 }

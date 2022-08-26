@@ -11,7 +11,7 @@
 		text-align:center;
 	}
 	.list {
-		width:900px;
+		width:1200px;
 		margin:auto;
 		/* border:1px solid green; */
 		display:flex;

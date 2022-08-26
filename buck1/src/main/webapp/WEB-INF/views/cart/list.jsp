@@ -31,6 +31,23 @@
 		border-spacing:0px;
 		border:1px solid lightgreen;
 	}
+	#section #bill {
+		margin:50px auto 20px auto;
+	}
+	#section #bill input[type='submit'] {
+		width:300px;
+		border-radius:10px;
+		border:0px;
+		background:#f4f4f1;
+		color:#222;
+		font-size:16px;
+		padding:15px 0 18px 0;
+		vertical-align:center;
+	}
+	#section #bill input[type='submit']:hover {
+		background:#006633;
+		color:white;
+	}
 </style>
 <script>
 	function delrow(cartid) {
@@ -62,14 +79,14 @@
 			<table width="1000" align="center" border="1">
 				<tr>
 					<td>이미지</td>
-					<td>상품코드</td>
+					<!-- <td>상품코드</td> -->
 					<td>상품명</td>
 					<td>상품타입</td>
 					<td>상품사이즈</td>
 					<td>주문수량</td>
 					<td>단품금액</td>
-					<td>총 금액</td>
-					<td>매장번호</td>
+					<td>합계금액</td>
+					<!-- <td>매장번호</td> -->
 					<td>담은날짜</td>
 					<td></td>
 				</tr>
@@ -79,14 +96,22 @@
 						<input type="hidden" name="prod_code" value="${cart.code}">
 						<input type="hidden" name="prod_unit" value="${cart.unit}">
 						<td><img width="100" src="${pageContext.request.contextPath}/resources/images/${cart.name}.jpg"></td>
-						<td>${cart.code }</td>
+						<%-- <td>${cart.code }</td> --%>
 						<td>${cart.name }</td>
-						<td>${cart.type }</td>
-						<td>${cart.size }</td>
+						<td>
+							<c:if test="${cart.type == 1}"><span style="color:red;">Hot</span></c:if>
+							<c:if test="${cart.type == 2}"><span style="color:blue;">Ice</span></c:if>
+						</td>
+						<td><c:choose>
+							<c:when test="${cart.size == 1}">Short</c:when>
+							<c:when test="${cart.size == 2}">Tall</c:when>
+							<c:when test="${cart.size == 3}">Grande</c:when>
+							<c:when test="${cart.size == 4}">Venti</c:when>
+						</c:choose></td>
 						<td>${cart.unit }</td>
 						<td>${cart.prod_cost }</td>
 						<td>${cart.total_cost }</td>
-						<td>${cart.store_id }</td>
+						<%-- <td>${cart.store_id }</td> --%>
 						<td>${cart.writeday }</td>
 						<td><input type="button" onclick="delrow(${cart.id})" value="삭제"></td>
 					</tr>
@@ -95,10 +120,10 @@
 		</div>
 		
 	
-		<div>
+		<div id="bill">
 			<div>
-				<div></div>
-				<div></div>
+				<!-- <div>총 상품수량</div> -->
+				<!-- <div>총 결제금액 : </div> -->
 			</div>
 			<input type="submit" value="결제하기">
 		</div>

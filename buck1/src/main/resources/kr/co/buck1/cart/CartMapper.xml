@@ -11,4 +11,9 @@
 		on a.userid=#{param1} and B.code=A.code and A.state=0;
 	</select>
 	
+	<update id="delete">
+		update cart set state=9 where id=#{param1}
+	</update>
+	
+	
 </mapper>

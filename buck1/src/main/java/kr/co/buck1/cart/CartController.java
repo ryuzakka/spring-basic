@@ -1,5 +1,6 @@
 package kr.co.buck1.cart;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class CartController {
 	public String list(HttpSession session, Model model) {
 		return service.list(session, model);
 	}
+	
+	@RequestMapping("/cart/delete")
+	public void delete(HttpServletRequest req) {
+		service.delete(req);
+	}
+	
 	
 	
 }
