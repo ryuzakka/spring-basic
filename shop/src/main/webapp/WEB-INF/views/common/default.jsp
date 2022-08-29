@@ -237,50 +237,50 @@
       <ul class="menu">
         <li id="cate"> 카테고리 
           <ul class="dae">
-             <li> 농산물 
+             <li> <a href="../product/pro_list?pcode=p01">농산물</a> 
                <ul class="jung">
-                 <li> 야채류 
+                 <li> <a href="../product/pro_list?pcode=p0101">야채류</a> 
                    <ul class="so">
-                     <li> 쌈채소 </li>
-                     <li> 뿌리채소 </li>
-                     <li> 열매채소 </li>
+                     <li> <a href="../product/pro_list?pcode=p010101">쌈채소</a> </li>
+                     <li> <a href="../product/pro_list?pcode=p010102">뿌리채소</a> </li>
+                     <li> <a href="../product/pro_list?pcode=p010103">열매채소</a> </li>
                    </ul>
                  </li>
-                 <li> 과일류 
+                 <li> <a href="../product/pro_list?pcode=p0102">과일류</a> 
                    <ul class="so">
-                     <li> 수입과일 </li>
-                     <li> 국산과일 </li>
-                     <li> 통조림 </li>
+                     <li> <a href="../product/pro_list?pcode=p010201"></a>수입과일 </li>
+                     <li> <a href="../product/pro_list?pcode=p010202"></a>국산과일 </li>
+                     <li> <a href="../product/pro_list?pcode=p010203"></a>통조림 </li>
                    </ul>
                  </li>
-                 <li> 쌀잡곡 
+                 <li> <a href="../product/pro_list?pcode=p0103">쌀잡곡</a> 
                    <ul class="so">
-                     <li> 햅 쌀 </li>
-                     <li> 잡 곡 </li>
-                     <li> 수 입 </li>
+                     <li> <a href="../product/pro_list?pcode=p010301">햅 쌀</a> </li>
+                     <li> <a href="../product/pro_list?pcode=p010302">잡 곡</a> </li>
+                     <li> <a href="../product/pro_list?pcode=p010303">수 입</a> </li>
                    </ul>
                  </li>
                </ul>
              </li>
-             <li> 수산물 
+             <li> <a href="../product/pro_list?pcode=p02">수산물</a> 
                <ul class="jung">
-                 <li> 생 선 </li>
-                 <li> 해조류 </li>
-                 <li> 횟 감 </li>
+                 <li> <a href="../product/pro_list?pcode=p0201">생 선</a> </li>
+                 <li> <a href="../product/pro_list?pcode=p0202">해조류</a> </li>
+                 <li> <a href="../product/pro_list?pcode=p0203">횟 감</a> </li>
                </ul>
              </li>
-             <li> 축산물 
+             <li> <a href="../product/pro_list?pcode=p03">축산물</a>
                <ul class="jung">
-                 <li> 소고기 </li>
-                 <li> 돼지고기 </li>
-                 <li> 닭.오리 </li>
+                 <li> <a href="../product/pro_list?pcode=p0301">소고기</a> </li>
+                 <li> <a href="../product/pro_list?pcode=p0302">돼지고기</a> </li>
+                 <li> <a href="../product/pro_list?pcode=p0303">닭.오리</a> </li>
                </ul>
              </li>
-             <li> 가공품 
+             <li> <a href="../product/pro_list?pcode=p04">가공품</a> 
                <ul class="jung">
-                 <li> 건조식품 </li>
-                 <li> 통 조 림 </li>
-                 <li> 절임식품 </li>
+                 <li> <a href="../product/pro_list?pcode=p0401">건조식품</a> </li>
+                 <li> <a href="../product/pro_list?pcode=p0402">통 조 림</a> </li>
+                 <li> <a href="../product/pro_list?pcode=p0403">절임식품</a> </li>
                </ul>
              </li>
           </ul>

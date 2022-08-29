@@ -15,5 +15,6 @@ public interface ProductService {
 	public void getso(HttpServletRequest req, PrintWriter out);
 	public void getpcode(HttpServletRequest req, PrintWriter out);
 	public String pro_write_ok(HttpServletRequest req);
+	public String pro_list(HttpServletRequest req, Model model);
 	
 }

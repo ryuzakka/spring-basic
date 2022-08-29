@@ -27,5 +27,9 @@
 		values(#{pcode},#{pimg},#{cimg},#{title},#{price},#{made},#{halin},#{juk},#{su},#{baesong},#{baeday},now())
 	</insert>
 	
+	<select id="list" resultType="kr.co.shop.vo.ProductVO">
+		select * from product where pcode like concat(#{param1},'%')
+	</select>
+	
 
 </mapper>

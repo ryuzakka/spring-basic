@@ -14,5 +14,6 @@ public interface ProductMapper {
 	public ArrayList<SoVO> getso(String daejung);
 	public String getpcode(String daejungso);
 	public void pro_write_ok(ProductVO vo);
+	public ArrayList<ProductVO> list(String pcode);
 	
 }

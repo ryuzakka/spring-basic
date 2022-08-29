@@ -125,4 +125,11 @@ public class ProductServiceImpl implements ProductService {
 		return "/product/pro_list";
 	}
 	
+	@Override
+	public String pro_list(HttpServletRequest req, Model model) {
+		model.addAttribute("list", mapper.list(req.getParameter("pcode")));
+		return "/product/pro_list";
+	}
+	
+	
 }

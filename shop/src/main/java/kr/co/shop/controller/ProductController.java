@@ -46,6 +46,11 @@ public class ProductController {
 		service.pro_write_ok(req);
 	}
 	
+	@RequestMapping("/product/pro_list")
+	public String pro_list(HttpServletRequest req, Model model) {
+		return service.pro_list(req, model);
+	}
+	
 	
 	
 }
