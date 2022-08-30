@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:import url="/common/top" />
+
 
 <style>
 	#section {
@@ -15,7 +15,6 @@
 		margin:30px 0 60px 0;
 	}
 	#section table {
-		width:70%;
 		display:inline-block;
 		text-align:center;
 		border-spacing:0px;
@@ -213,7 +212,7 @@
 	<div id="inform">계정은 <strong>연락처 당 1개</strong>로 제한합니다.</div>
 	
 	<form name="inputForm" method="post" action="signup_ok">
-	<table>
+	<table align="center">
 		<tr>
 			<td width="100">아이디*</td>
 			<td width="600">
@@ -282,4 +281,3 @@
 
 </div>
 
-<c:import url="/common/bottom" />

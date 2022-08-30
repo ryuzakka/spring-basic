@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 회원가입 완료 -->
-<c:import url="/common/top" />
+
 <style>
 	#section {
 		width:800px;
@@ -61,4 +61,3 @@
 	
 	
 </div>
-<c:import url="/common/bottom" />

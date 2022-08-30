@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- ID찾기 -->
-<c:import url="/common/top" />
+
 <style>
 	#section {
 		width:800px;
@@ -125,4 +125,3 @@
 	</div>
 	
 </div>
-<c:import url="/common/bottom" />

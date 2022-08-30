@@ -2,8 +2,8 @@ package kr.co.shop.vo;
 
 public class ProductVO {
 
-	private int id, price, halin, juk, su, baesong, baeday, pstar;
-	private String pcode, pimg, cimg, title, made, writeday;
+	private int id, price, halin, juk, su, baesong, baeday, pstar, yoil;
+	private String pcode, pimg, cimg, title, made, writeday, baeday2;
 	
 	
 	public int getId() {
@@ -89,6 +89,18 @@ public class ProductVO {
 	}
 	public void setWriteday(String writeday) {
 		this.writeday = writeday;
+	}
+	public String getBaeday2() {
+		return baeday2;
+	}
+	public void setBaeday2(String baeday2) {
+		this.baeday2 = baeday2;
+	}
+	public int getYoil() {
+		return yoil;
+	}
+	public void setYoil(int yoil) {
+		this.yoil = yoil;
 	}
 	
 }

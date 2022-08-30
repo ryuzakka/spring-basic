@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/common/top" />
 <style>
 	#section {
 		width:auto;
@@ -11,7 +11,7 @@
 		text-align:center;
 	}
 	.list {
-		width:1200px;
+		width:900px;
 		margin:auto;
 		/* border:1px solid green; */
 		display:flex;
@@ -57,4 +57,3 @@
 	</div>
 
 </div>
-<c:import url="/common/bottom" />

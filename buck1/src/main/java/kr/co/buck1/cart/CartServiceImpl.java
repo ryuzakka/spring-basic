@@ -29,5 +29,27 @@ public class CartServiceImpl implements CartService {
 		mapper.delete(id);
 	}
 	
+	@Override
+	public void unit_minus(HttpServletRequest req) {
+		String id;
+		id = req.getParameter("id");
+		mapper.unit_minus(id);
+	}
+	
+	@Override
+	public void unit_plus(HttpServletRequest req) {
+		String id;
+		id = req.getParameter("id");
+		mapper.unit_plus(id);
+	}
+	
+	@Override
+	public String order(HttpServletRequest req, HttpSession session, Model model) {
+		model.addAttribute("cart", mapper.list(session.getAttribute("userid").toString()));
+		model.addAttribute("cost", req.getParameter("cost"));
+		return "/cart/cart_order";
+	}
+	
+	
 	
 }

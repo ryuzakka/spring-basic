@@ -26,6 +26,20 @@ public class CartController {
 		service.delete(req);
 	}
 	
+	@RequestMapping("/cart/unit_minus")
+	public void unit_minus(HttpServletRequest req) {
+		service.unit_minus(req);
+	}
+	
+	@RequestMapping("/cart/unit_plus")
+	public void unit_plus(HttpServletRequest req) {
+		service.unit_plus(req);
+	}
+	
+	@RequestMapping("/cart/cart_order")
+	public String cart_order(HttpServletRequest req, HttpSession session, Model model) {
+		return service.order(req, session, model);
+	}
 	
 	
 }

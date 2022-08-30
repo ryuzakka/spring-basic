@@ -9,6 +9,9 @@ public interface CartService {
 
 	public String list(HttpSession session, Model model);
 	public void delete(HttpServletRequest req);
+	public void unit_minus(HttpServletRequest req);
+	public void unit_plus(HttpServletRequest req);
+	public String order(HttpServletRequest req, HttpSession session, Model model);
 	
 	
 }

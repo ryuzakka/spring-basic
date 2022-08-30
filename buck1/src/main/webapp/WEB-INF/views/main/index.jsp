@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 메인 -->
-<c:import url="/common/top" />
+
 <style>
 	#section {
 		width:auto;
@@ -16,4 +16,3 @@
 <div id="section">
 	index
 </div>
-<c:import url="/common/bottom" />

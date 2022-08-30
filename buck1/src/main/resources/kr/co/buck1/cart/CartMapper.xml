@@ -15,5 +15,14 @@
 		update cart set state=9 where id=#{param1}
 	</update>
 	
+	<update id="unit_minus">
+		update cart set unit=unit-1, total_cost=(prod_cost*unit) where id=#{param1}
+	</update>
+	
+	<update id="unit_plus">
+		update cart set unit=unit+1, total_cost=(prod_cost*unit) where id=#{param1}
+	</update>
+	
+	
 	
 </mapper>

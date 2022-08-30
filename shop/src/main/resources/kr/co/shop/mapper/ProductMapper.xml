@@ -28,7 +28,11 @@
 	</insert>
 	
 	<select id="list" resultType="kr.co.shop.vo.ProductVO">
-		select * from product where pcode like concat(#{param1},'%')
+		select *
+		, adddate(curdate(),baeday) as baeday2
+		, dayofweek(adddate(curdate(),baeday)) as yoil
+		from product
+		where pcode like concat(#{param1},'%') limit 30
 	</select>
 	
 

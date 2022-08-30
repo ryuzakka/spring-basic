@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:if test="${userid == null}">
 	<%-- <c:redirect url="../common/warning/member_only.jsp" /> --%>
 </c:if>
-<c:import url="/common/top" />
+
 
 <style>
 	#section {
@@ -31,6 +31,15 @@
 		border-spacing:0px;
 		border:1px solid lightgreen;
 	}
+	#section #container table .arrowBtn {
+		display:inline-block;
+		width:20px;
+		height:30px;
+	}
+	#section #container table .arrowBtn img {
+		width:40%;
+		height:48%;
+	}
 	#section #bill {
 		margin:50px auto 20px auto;
 	}
@@ -53,11 +62,37 @@
 	function delrow(cartid) {
 		
 		var xhr = new XMLHttpRequest();
-		xhr.open("get", "cart_delete?id="+cartid);
+		xhr.open("get", "delete?id="+cartid);
 		xhr.send();
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4) {
 				window.location.reload();
+			}
+		}
+	}
+	function unitMinus(cartId,cartUnit) {
+		if(cartUnit > 1) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "unit_minus?id="+cartId);
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4) {
+					console.log("unit_minus ok");
+					window.location.reload();
+				}
+			}
+		}
+	}
+	function unitPlus(cartId,cartUnit) {
+		if(cartUnit < 20) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "unit_plus?id="+cartId);
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4) {
+					console.log("unit_minus ok");
+					window.location.reload();
+				}
 			}
 		}
 	}
@@ -74,7 +109,7 @@
 		</div>
 	</div>
 	
-	<form method="get" action="">
+	<form method="post" action="cart_order">
 		<div id="container">
 			<table width="1000" align="center" border="1">
 				<tr>
@@ -90,6 +125,8 @@
 					<td>담은날짜</td>
 					<td></td>
 				</tr>
+				<c:set var="unit" value="0" />
+				<c:set var="cost" value="0" />
 				<c:forEach items="${list}" var="cart">
 					<tr>
 						<input type="hidden" name="cartid" value="${cart.id}">
@@ -108,13 +145,23 @@
 							<c:when test="${cart.size == 3}">Grande</c:when>
 							<c:when test="${cart.size == 4}">Venti</c:when>
 						</c:choose></td>
-						<td>${cart.unit }</td>
-						<td>${cart.prod_cost }</td>
-						<td>${cart.total_cost }</td>
+						<td>
+							<div class="arrowBtn" onclick="unitMinus(${cart.id},${cart.unit})">
+								<img src="${pageContext.request.contextPath}/resources/images/arrow_l.png">
+							</div>
+							<span id="productUnit">${cart.unit}</span>
+							<div class="arrowBtn" onclick="unitPlus(${cart.id},${cart.unit})">
+								<img src="${pageContext.request.contextPath}/resources/images/arrow_r.png">
+							</div>
+						</td>
+						<td><fmt:formatNumber value="${cart.prod_cost}"/>원</td>
+						<td><fmt:formatNumber value="${cart.total_cost}"/>원</td>
 						<%-- <td>${cart.store_id }</td> --%>
 						<td>${cart.writeday }</td>
 						<td><input type="button" onclick="delrow(${cart.id})" value="삭제"></td>
 					</tr>
+					<c:set var="unit" value="${unit + cart.unit}" />
+					<c:set var="cost" value="${cost + cart.total_cost}" />
 				</c:forEach>
 			</table>
 		</div>
@@ -122,12 +169,12 @@
 	
 		<div id="bill">
 			<div>
-				<!-- <div>총 상품수량</div> -->
-				<!-- <div>총 결제금액 : </div> -->
+				<div>총 상품수량 : <fmt:formatNumber value="${unit}"/></div>
+				<div>총 결제금액 : <fmt:formatNumber value="${cost}"/>원</div>
+				<input type="hidden" name="cost" value="${cost}">
 			</div>
 			<input type="submit" value="결제하기">
 		</div>
 	</form>
 	
 </div>
-<c:import url="/common/bottom" />
