@@ -12,15 +12,12 @@ import org.springframework.ui.Model;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.buck1.admin.AdminMapper;
-import kr.co.buck1.admin.StoreVO;
-
 @Service
 @Qualifier("ss")
 public class StoreServiceImpl implements StoreService {
 
 	@Autowired
-	private AdminMapper mapper;
+	private StoreMapper mapper;
 	
 	@Override
 	public String store_write_ok(HttpServletRequest req) {
@@ -44,12 +41,23 @@ public class StoreServiceImpl implements StoreService {
 		vo.setLng(multi.getParameter("lng"));
 		
 		mapper.store_write(vo);
-		return "redirect:/admin/store/store_list";
+		return "redirect:/admin_store/store_list";
 	}
 	
 	@Override
 	public String store_list(Model model) {
 		model.addAttribute("list", mapper.store_list());
-		return "/admin/store/store_list";
+		return "/admin_store/store_list";
 	}
+	
+	@Override
+	public void store_state(HttpServletRequest req) {
+		String id, state;
+		id = req.getParameter("id");
+		state = req.getParameter("state");
+		mapper.store_state(state, id);
+	}
+	
+	
+	
 }

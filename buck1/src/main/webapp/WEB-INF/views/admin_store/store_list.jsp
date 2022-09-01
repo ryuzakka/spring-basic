@@ -35,12 +35,28 @@
 	section table tr td {
 		padding:8px 0px;
 	}
+	section table tr td:nth-child(3) {
+		text-align:center;
+	}
 	section table tr td img {
 		display:block;
 		width:120px;
 		margin:auto;
 	}
 </style>
+<script>
+	function stateChange(n, id) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "store_state?state="+n+"&id="+id);
+		xhr.send();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4) {
+				console.log("state change success");
+				window.location.reload();
+			}
+		}
+	}
+</script>
 </head>
 <body>
 	
@@ -62,13 +78,24 @@
 				<td> ${store.addr1}(${store.addr2}) </td>
 				<td>
 					<c:if test="${store.state == 0}">등록중</c:if>
-					<c:if test="${store.state == 1}">오픈공사중</c:if>
-					<c:if test="${store.state == 2}">오픈대기중</c:if>
-					<c:if test="${store.state == 3}">운영중</c:if>
+					<c:if test="${store.state == 1}">오픈대기중</c:if>
+					<c:if test="${store.state == 2}">운영중</c:if>
 					<c:if test="${store.state == 4}">임시 휴점</c:if>
 					<c:if test="${store.state == 7}">리뉴얼 준비중</c:if>
 					<c:if test="${store.state == 8}">보수공사중</c:if>
 					<c:if test="${store.state == 9}">폐점</c:if>
+					<p>
+					<select id="state" name="state" onchange="stateChange(this.value, ${store.id})">
+						<option> 상태변경 </option>
+						<option value="0">등록중</option>
+						<option value="1">오픈대기중</option>
+						<option value="2">운영중</option>
+						<option value="4">임시 휴점</option>
+						<option value="7">리뉴얼 준비중</option>
+						<option value="8">보수공사중</option>
+						<option value="9">폐점</option>
+						<option value="-1">삭제</option>
+					</select>
 				</td>
 				<td>
 					<c:if test="${store.storeimg != null}">

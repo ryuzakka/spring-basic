@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -15,19 +16,24 @@ public class StoreController {
 	@Qualifier("ss")
 	private StoreService service;
 	
-	@RequestMapping("/admin/store/store_write")
+	@RequestMapping("/admin_store/store_write")
 	public String store_write() {
-		return "/admin/store/store_write";
+		return "/admin_store/store_write";
 	}
 	
-	@RequestMapping("/admin/store/store_write_ok")
+	@RequestMapping("/admin_store/store_write_ok")
 	public String store_write_ok(HttpServletRequest req) {
 		return service.store_write_ok(req);
 	}
 	
-	@RequestMapping("/admin/store/store_list")
-	public String store_list() {
-		return "/admin/store/store_list";
+	@RequestMapping("/admin_store/store_list")
+	public String store_list(Model model) {
+		return service.store_list(model);
+	}
+	
+	@RequestMapping("/admin_store/store_state")
+	public void store_state(HttpServletRequest req) {
+		service.store_state(req);
 	}
 	
 	

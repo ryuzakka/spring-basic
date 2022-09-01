@@ -21,22 +21,12 @@ public class HomeController {
 	public String home() {
 		logger.info("Welcome home! The client locale is.");
 		
-		return "home";
+		return "redirect:/main/index";
 	}
 	
 	@RequestMapping({"/main", "/main/", "/main/index"})
 	public String main() {
 		return "/main/index";
-	}
-	
-	@RequestMapping("/common/top")
-	public String top() {
-		return "/common/top";
-	}
-	
-	@RequestMapping("/common/bottom")
-	public String bottom() {
-		return "/common/bottom";
 	}
 	
 }

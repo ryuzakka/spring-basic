@@ -12,7 +12,12 @@
 	</insert>
 	
 	<select id="store_list" resultType="kr.co.buck1.admin.store.StoreVO">
-		select * from store where state<![CDATA[>=]]>0
+		select * from store where state &gt;= 0
 	</select>
+	
+	<update id="store_state">
+		update store set state=#{param1} where id=#{param2}
+	</update>
+	
 	
 </mapper>
