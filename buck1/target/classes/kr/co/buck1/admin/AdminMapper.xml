@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.buck1.admin.AdminMapper">
+	
+	<insert id="store_write" parameterType="kr.co.buck1.admin.StoreVO">
+		insert into store
+		(storename,storeimg,addr1,addr2,lat,lng,writeday)
+		values(#{storename},#{storeimg},#{addr1},#{addr2},#{lat},#{lng},now())
+	</insert>
+	
+	<select id="store_list" resultType="kr.co.buck1.admin.StoreVO">
+		select * from store where state<![CDATA[>=]]>0
+	</select>
+	
+</mapper>

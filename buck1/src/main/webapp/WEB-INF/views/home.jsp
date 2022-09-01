@@ -14,6 +14,7 @@
 <P>  The time on the server is ${serverTime}. </P>
 <a href="main/">메인</a><p>
 <a href="menu/">메뉴</a><p>
-<a href="member/signin">로그인</a>
+<a href="member/signin">로그인</a><p>
+<a href="admin/store_write">매장등록</a><p>
 </body>
 </html>

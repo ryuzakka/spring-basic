@@ -197,8 +197,8 @@
 						<c:if test="${userid == 'admin'}">
 							<div>관리자모드</div>
 							<ul id="admin">
-								<li><a href="">주문관리</a></li>
-								<li><a href="">Gift관리</a></li>
+								<li><a href="../admin/order_list">주문관리</a></li>
+								<li><a href="../admin/store_list">매장관리</a></li>
 								<li><a href="">회원관리</a></li>
 								<li><a href="">새소식관리</a></li>
 								<li><a href="">신상품관리</a></li>

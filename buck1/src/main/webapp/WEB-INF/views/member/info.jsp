@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
+<c:if test="${userid == null}">
+	<%-- <c:redirect url="../common/warning/member_only.jsp" /> --%>
+</c:if>
 
 <style>
 	#section {
