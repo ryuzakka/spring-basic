@@ -19,5 +19,25 @@
 		update store set state=#{param1} where id=#{param2}
 	</update>
 	
+	<select id="store_content" resultType="kr.co.buck1.admin.store.StoreVO">
+		select * from store where id=#{param1}
+	</select>
+	
+	<update id="store_imgdel">
+		update store set storeimg=null where id=#{param1}
+	</update>
+	
+	<update id="store_update" parameterType="kr.co.buck1.admin.store.StoreVO">
+		update store set
+			storename = #{storename}
+			,storeimg = #{storeimg}
+			,addr1 = #{addr1}
+			,addr2 = #{addr2}
+			,lat = #{lat}
+			,lng = #{lng}
+			,writeday = now()
+		where id = #{id}
+	</update>
+	
 	
 </mapper>

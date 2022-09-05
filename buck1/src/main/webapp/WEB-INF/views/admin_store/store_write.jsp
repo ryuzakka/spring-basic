@@ -36,7 +36,11 @@
 		border-bottom:1px solid #DDD;
 		width:220px;
 	}
-	section table tr td input[type='button'], input[type='file'] {
+	section table tr:nth-child(3) td input[type='text'] {
+		width:91%;
+		text-align:center;
+	}
+	section table tr td input[type='button'] {
 		width:220px;
 		border-radius:10px;
 		border:0px;
@@ -45,9 +49,20 @@
 		padding:13px 0 13px 0;
 		vertical-align:center;
 	}
-	section table tr td input[type='button']:hover, input[type='file'] {
+	section table tr td input[type='button']:hover {
 		background:#006633;
 		color:white;
+	}
+	section table tr td .filebtn input[type=file]::file-selector-button {
+		width:70px;
+		height:30px;
+		margin:8px 5px 8px 3px;
+		/* padding-top:8px; */
+		background: #006633;
+		color:white;
+		border: 0px solid #006633;
+		border-radius: 10px;
+		cursor: pointer;
 	}
 	section input[type="submit"] {
 		width:100%;
@@ -63,6 +78,14 @@
 	section input[type="submit"]:hover {
 		background:#006633;
 		color:white;
+	}
+	section #listBtn {
+		text-align:center;
+	}
+	section #listBtn a {
+		text-decoration:none;
+		color:#555555;
+		font-size:12px;
 	}
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -131,7 +154,15 @@
         
     }
 </script>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){		
+		$("#file").on('change',function(){
+		  var fileName = $("#file").val();
+		  $(".upload-name").val(fileName);
+		});
+	});
+</script>
 
 </head>
 <body>
@@ -142,23 +173,24 @@
 		<form name="storeInput" method="post" action="store_write_ok" enctype="multipart/form-data">
 			<table align="center" border="0">
 				<tr>
-					<td><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"></td>
 					<td><input type="text" name="storename" placeholder="매장이름" required></td>
-					<td><input type="text" name="addr2" placeholder="동/면/읍 이름" ></td>
+					<td><input type="text" name="addr2" placeholder="동/면/읍" ></td>
+					<td><div class="filebtn">
+							<input type="file" name="storeimg">
+					</div></td>
 				</tr>
 				<tr>
-					<td><input type="text" id="addr1" name="addr1" placeholder="(자동입력 됩니다.)" readonly></td>
-					<td><input type="text" id="lat" name="lat" placeholder="(자동입력 됩니다.)" readonly></td>
-					<td><input type="text" id="lng" name="lng" placeholder="(자동입력 됩니다.)" readonly></td>
+					<td><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"></td>
+					<td><input type="text" id="lat" name="lat" placeholder="(좌표:위도)" readonly></td>
+					<td><input type="text" id="lng" name="lng" placeholder="(좌표:경도)" readonly></td>
 				</tr>
-				<tr><td colspan="4"><div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div></td></tr>
 				<tr>
-					<td><input type="file" name="storeimg"></td>
-					<td></td>
-					<td></td>
+					<td colspan="3"><input type="text" id="addr1" name="addr1" size="80" placeholder="(주소)" readonly></td>
 				</tr>
+				<tr><td colspan="3"><div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div></td></tr>
 			</table>
-			<input type="submit" value="등록하기">
+			<input type="submit" value="등록하기"> <br>
+			<div id="listBtn"><a href="store_list">목록</a></div>
 		</form>
 	</section>
 	

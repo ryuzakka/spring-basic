@@ -28,15 +28,23 @@
 		text-align:right;
 		padding: 8px 10px;
 	}
+	section table caption a {
+		text-decoration:none;
+		color:#006633;
+		font-size:14px;
+		font-weight:600;
+	}
+	section table tr td:nth-child(2) {
+		text-align:left;
+		padding-left:10px;
+	}
 	section table tr:first-child td {
 		font-weight:600;
 		text-align:center;
 	}
 	section table tr td {
-		padding:8px 0px;
-	}
-	section table tr td:nth-child(3) {
 		text-align:center;
+		padding:8px 0px;
 	}
 	section table tr td img {
 		display:block;
@@ -74,8 +82,8 @@
 		</tr>
 		<c:forEach items="${list}" var="store">
 			<tr>
-				<td> ${store.storename} </td>
-				<td> ${store.addr1}(${store.addr2}) </td>
+				<td onclick="javascript:location='store_update?id=${store.id}'" style="cursor: pointer;"> ${store.storename} </td>
+				<td onclick="javascript:location='store_update?id=${store.id}'" style="cursor: pointer;"> ${store.addr1} (${store.addr2}) </td>
 				<td>
 					<c:if test="${store.state == 0}">등록중</c:if>
 					<c:if test="${store.state == 1}">오픈대기중</c:if>
@@ -86,7 +94,7 @@
 					<c:if test="${store.state == 9}">폐점</c:if>
 					<p>
 					<select id="state" name="state" onchange="stateChange(this.value, ${store.id})">
-						<option> 상태변경 </option>
+						<option>- 상태변경 -</option>
 						<option value="0">등록중</option>
 						<option value="1">오픈대기중</option>
 						<option value="2">운영중</option>
@@ -94,10 +102,10 @@
 						<option value="7">리뉴얼 준비중</option>
 						<option value="8">보수공사중</option>
 						<option value="9">폐점</option>
-						<option value="-1">삭제</option>
+						<option value="-1" style="color:salmon;">목록에서 삭제</option>
 					</select>
 				</td>
-				<td>
+				<td onclick="javascript:location='store_update?id=${store.id}'" style="cursor: pointer;">
 					<c:if test="${store.storeimg != null}">
 						<img src="${pageContext.request.contextPath}/resources/storeimg/${store.storeimg}">
 					</c:if>

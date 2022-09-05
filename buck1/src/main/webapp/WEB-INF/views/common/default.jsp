@@ -112,8 +112,15 @@
 		#gnb #first #nav-menu #nav-menu-list #top-menu .drop-menu a:hover {
 			color:#669900;
 		}
-	
+		
 		/*  */
+		
+		h1, h2, h3, h4, h5, h6 {
+			text-align:center;
+		}
+		
+		/*  */
+		
 		
 		#footer {
 			position:relative;

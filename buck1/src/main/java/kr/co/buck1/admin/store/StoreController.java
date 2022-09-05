@@ -36,5 +36,20 @@ public class StoreController {
 		service.store_state(req);
 	}
 	
+	@RequestMapping("/admin_store/store_update")
+	public String store_update(HttpServletRequest req, Model model) {
+		return service.store_update(req, model);
+	}
+	
+	@RequestMapping("/admin_store/store_imgdel")
+	public void store_imgdel(HttpServletRequest req) {
+		service.store_imgdel(req);
+	}
+	
+	@RequestMapping("/admin_store/store_update_ok")
+	public String store_update_ok(HttpServletRequest req) {
+		return service.store_update_ok(req);
+	}
+	
 	
 }
