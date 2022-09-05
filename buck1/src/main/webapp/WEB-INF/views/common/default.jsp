@@ -228,7 +228,7 @@
 						<li id="top-menu" onmouseover="view(1)" onmouseout="hide(1)">
 							<div class="drop-menu-title">STORE</div>
 							<ul class="drop-menu">
-								<li><a href="">매장찾기</a></li>
+								<li><a href="../store/store_map">지도보기</a></li>
 								<li><a href="">지역검색</a></li>
 							</ul>
 						</li>
