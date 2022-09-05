@@ -6,10 +6,10 @@
 <mapper namespace="kr.co.buck1.store.FStoreMapper">
 	
 	<select id="keywordSearch" resultType="kr.co.buck1.store.FStoreVO">
-		select storename, lat, lng from store 
-		where storename like concat('%',#{param1},'%')
-		or addr1 like concat('%',#{param1},'%')
-		and state &gt;= 0
+		select * from store 
+		where state &gt;= 0 and 
+		(storename like concat('%',#{param1},'%')
+		or addr2 like concat('%',#{param1},'%'))
 	</select>
 	
 </mapper>

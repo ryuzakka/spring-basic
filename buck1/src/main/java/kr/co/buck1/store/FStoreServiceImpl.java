@@ -1,6 +1,8 @@
 package kr.co.buck1.store;
 
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,12 @@ public class FStoreServiceImpl implements FStoreService {
 	
 	@Override
 	public void keywordSearch(HttpServletRequest req, PrintWriter out) {
+		try {
+			req.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String key = req.getParameter("keyword");
 		ArrayList<FStoreVO> list = mapper.keywordSearch(key);
 		
@@ -33,7 +41,9 @@ public class FStoreServiceImpl implements FStoreService {
 		
 		String res2 = "";
 		for(int i=0; i<list.size(); i++) {
-			res2 += "" + list.get(i).getStorename() + "-";
+			res2 += "" + URLEncoder.encode(list.get(i).getStorename()) + "-";
+//			res2 += "" + list.get(i).getStorename() + "-";			
+//			res2 += "" + list.get(i).getWriteday() + "-";
 			res2 += "" + list.get(i).getLat() + "-";
 			res2 += "" + list.get(i).getLng() + ",";
 		}

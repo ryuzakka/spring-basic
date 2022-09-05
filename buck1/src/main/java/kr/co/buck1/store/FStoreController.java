@@ -23,7 +23,7 @@ public class FStoreController {
 		return "/store/store_map";
 	}
 	
-	@RequestMapping("/store/keyword_search")
+	@RequestMapping(value="/store/keyword_search", produces = "text/html; charset=utf-8")
 	public void keyword_search(HttpServletRequest req, PrintWriter out) {
 		service.keywordSearch(req, out);
 	}
