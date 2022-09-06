@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 @Service
-@Qualifier("ss")
+@Qualifier("fs")
 public class FStoreServiceImpl implements FStoreService {
 	
+//	@Autowired
+//	private FStoreMapper mapper;
 	@Autowired
 	private FStoreMapper mapper;
 	
@@ -30,25 +32,24 @@ public class FStoreServiceImpl implements FStoreService {
 		String key = req.getParameter("keyword");
 		ArrayList<FStoreVO> list = mapper.keywordSearch(key);
 		
-		String res = "";
-		res = "[";
-		for(int i=0; i<list.size(); i++) {
-			res += "{content:"+list.get(i).getStorename()+"},";
-			res += "{lat:"+list.get(i).getLat()+"},";
-			res += "{lat:"+list.get(i).getLng()+"}";
-		}
-		res += "]";
-		
 		String res2 = "";
 		for(int i=0; i<list.size(); i++) {
-			res2 += "" + URLEncoder.encode(list.get(i).getStorename()) + "-";
-//			res2 += "" + list.get(i).getStorename() + "-";			
-//			res2 += "" + list.get(i).getWriteday() + "-";
+			res2 += URLEncoder.encode(list.get(i).getStorename()) + "-";
+			res2 += URLEncoder.encode(list.get(i).getAddr1()) + "-";
 			res2 += "" + list.get(i).getLat() + "-";
 			res2 += "" + list.get(i).getLng() + ",";
 		}
 		
 		out.print(res2);
 	}
+	
+	
+	@Override
+	public String storeList(Model model) {
+		ArrayList<FStoreVO> list = mapper.storeList();
+		model.addAttribute("store", list);
+		return "/store/store_info";
+	}
+	
 	
 }

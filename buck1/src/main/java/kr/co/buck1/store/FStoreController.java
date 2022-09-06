@@ -1,7 +1,6 @@
 package kr.co.buck1.store;
 
 import java.io.PrintWriter;
-import java.io.Writer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FStoreController {
 
 	@Autowired
-	@Qualifier("ss")
+	@Qualifier("fs")
 	private FStoreService service;
 	
 	@RequestMapping("/store/store_map")
@@ -26,6 +25,11 @@ public class FStoreController {
 	@RequestMapping(value="/store/keyword_search", produces = "text/html; charset=utf-8")
 	public void keyword_search(HttpServletRequest req, PrintWriter out) {
 		service.keywordSearch(req, out);
+	}
+	
+	@RequestMapping("/store/store_info")
+	public String storeList(Model model) {
+		return service.storeList(model);
 	}
 	
 }

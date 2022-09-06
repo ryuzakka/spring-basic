@@ -9,4 +9,6 @@ import org.springframework.ui.Model;
 public interface FStoreService {
 
 	public void keywordSearch(HttpServletRequest req, PrintWriter out);
+	public String storeList(Model model);
+	
 }

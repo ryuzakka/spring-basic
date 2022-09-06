@@ -8,15 +8,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
-	h1 {
-	
+	section {
+		width:auto;
+		height:auto;
+		margin:80px auto 50px auto;
+		text-align:center;
 	}
-	section {}
-	#map div {
-/* 		width:120px; */
+	section #searchArea {
+		width:600px;
+		/* margin:60px auto; */
+		margin:160px auto;
+		padding-left:133px;
+	}
+	section #searchArea input[type='search'] {
+		padding:12px 0;
+		border:none;
+		border-bottom:1px solid #DDD;
+		border-radius:3px;
+		width:70%;
+		text-align:center;
+	}
+	section #searchArea input[type='submit'] {
+		width:20%;
+		border-radius:10px;
+		border:0px;
+		background:#006633;
+		color:white;
+		padding:13px 0 13px 0;
+		vertical-align:center;
 	}
 	#map div .infoWindow {
-		width:150px;
+		/* width:150px; */
+		width:200px;
 		height:30px;
 		background:#8C8279;
 		color:white;
@@ -29,10 +52,12 @@
 		border-radius:6px;
 		border: 1px solid #ccc;
 		border-bottom:2px solid #ddd;
-		float:left;
+		/* float:left; */
+		float:center;
 	}
 	.customoverlay:nth-of-type(n) {
-		border:0; box-shadow:0px 1px 2px #888;
+		border:0;
+		box-shadow:0px 1px 2px #888;
 	}
 	.customoverlay a {
 		display:block;
@@ -58,8 +83,10 @@
 	.customoverlay:after {
 		content:'';
 		position:absolute;
-		margin-left:-12px;
-		left:50%;
+		/* margin-left:-12px; */
+		margin-left:-20px;
+		/* left:50%; */
+		left:20%;
 		bottom:-12px;
 		width:22px;
 		height:12px;
@@ -71,20 +98,21 @@
 
 </head>
 <body>
-	
-	<h1> 매장 찾기 </h1>
-	
+		
 <section>
+	<h1> 지도 검색 </h1>
 	
-	<div>
-		<input type="search" id="keyword" placeholder="키워드 검색">
-		<input type="button" onclick="keySearch()" value="검색">
+	<div id="searchArea">
+		<input type="search" id="keyword" placeholder="키워드 검색 (매장명 또는 지역명)">
+		<input type="submit" onclick="keySearch()" value="검색">
 	</div>
 	
-	<div id="map" style="width:100%;height:600px;margin-top:60px;"></div>
-	
-	<div id="searchResult" >
+	<div id="noResult" style="width:100%;height:300px;margin-top:60px;margin-bottom:60px;display:none;">
+		<span style="display:inline-block;padding-top:120px;">검색 결과가 없습니다.</span>
 	</div>
+	
+	<div id="map" style="width:100%;height:600px;margin-top:30px;display:none;"></div>
+	
 </section>
 
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71ba7d59148fb1bf6a91e4fc5eada954&libraries=services"></script>
@@ -107,6 +135,8 @@
 	function keySearch() {
 		var key = document.getElementById('keyword').value;
 		
+		document.getElementById('searchArea').style.margin = "40px auto 25px auto";
+		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get", "keyword_search?keyword="+key);
 		xhr.setRequestHeader('Content-Type','charset=UTF-8');
@@ -126,33 +156,51 @@
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4) {
-				var xhrResponse = decodeURI(xhr.response);
+				//var xhrResponse = decodeURI(xhr.response);
+				var xhrResponse = decodeURI(xhr.responseText);
 		        
-		        var names = new Array();
-		        var lats = new Array();
-		        var lngs = new Array();
-		        
-		        var listObj = xhrResponse.split(',');
-		        
-		        var dataArr = new Array();
-		        for(var i in listObj) {
-		        	if(listObj[i] != "") {		        		
-				        var storeObj = listObj[i].split('-');			        	
-				        names[i] = storeObj[0];
-				        lats[i] = storeObj[1];
-				        lngs[i] = storeObj[2];
-						console.log(names[i], lats[i], lngs[i]);
-						
-				        var data = new Object();
-				        data.content = '<div class="infoWindow">'+names[i]+' 지점</div>';
-						//data.latlng = "new kakao.maps.LatLng("+lats[i]+","+lngs[i]+")";
-						data.lat = lats[i];
-						data.lng = lngs[i];
-						dataArr.push(data);
-		        	}
+		        if(xhrResponse == '') {
+		        	// 검색결과가 없을 경우
+		        	document.getElementById('noResult').style.display = "block";
+		        	document.getElementById('map').style.display = "none";
 		        }
-		        var jsonStr = JSON.stringify(dataArr);
-		        mapOpen(jsonStr);
+		        else {
+		        	// 검색결과가 있을 경우
+		        	document.getElementById('noResult').style.display = "none";
+		        	document.getElementById('map').style.display = "block";
+		        	
+		        	var listObj = xhrResponse.split(',');
+			        //console.log(listObj);
+		        	var names = new Array();
+			        var lats = new Array();
+			        var lngs = new Array();
+			        var addr = new Array();
+			        var dataArr = new Array();
+			        
+			        for(var i in listObj) {
+			        	if(listObj[i] != "") {		        		
+					        var storeObj = listObj[i].split('-');			        	
+					        names[i] = storeObj[0];
+					        addr[i] = storeObj[1].replaceAll('+', ' ');
+					        //console.log(storeObj[1].replaceAll('+', ' '));
+					        lats[i] = storeObj[2];
+					        lngs[i] = storeObj[3];
+							console.log(names[i], addr[i], lats[i], lngs[i]);
+							
+					        var data = new Object();
+					        data.content = '<div class="infoWindow">';
+					        data.content += names[i]+' 지점<br>';
+					        data.content += '<span style="font-size:10px">'+addr[i]+'</span>';
+					        data.content += '</div>';;
+							//data.latlng = "new kakao.maps.LatLng("+lats[i]+","+lngs[i]+")";
+							data.lat = lats[i];
+							data.lng = lngs[i];
+							dataArr.push(data);
+			        	}
+			        }
+			        var jsonStr = JSON.stringify(dataArr);
+			        mapOpen(jsonStr);
+		        }
 			}
 		}
 	}
@@ -204,6 +252,7 @@
 		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 		}
+		
 	}
 	
 </script>

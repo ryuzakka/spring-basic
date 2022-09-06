@@ -7,9 +7,14 @@
 	
 	<select id="keywordSearch" resultType="kr.co.buck1.store.FStoreVO">
 		select * from store 
-		where state &gt;= 0 and 
+		where state = 2 and 
 		(storename like concat('%',#{param1},'%')
 		or addr2 like concat('%',#{param1},'%'))
 	</select>
+	
+	<select id="storeList" resultType="kr.co.buck1.store.FStoreVO">
+		select * from store where state &gt;= 0
+	</select>
+	
 	
 </mapper>
