@@ -13,7 +13,7 @@
 <title>store list</title>
 <style>
 	section {
-		width:900px;
+		width:1200px;
 		margin:70px auto;
 	}
 	section h2 {
@@ -75,6 +75,7 @@
 	<table align="center" border="1">
 		<caption><a href="store_write">매장추가</a></caption>
 		<tr>
+			<th> No. </th>
 			<td> 매장이름 </td>
 			<td> 매장위치 </td>
 			<td> 매장상태 </td>
@@ -82,6 +83,7 @@
 		</tr>
 		<c:forEach items="${list}" var="store">
 			<tr>
+				<td> ${store.rnum} </td>
 				<td onclick="javascript:location='store_update?id=${store.id}'" style="cursor: pointer;"> ${store.storename} </td>
 				<td onclick="javascript:location='store_update?id=${store.id}'" style="cursor: pointer;"> ${store.addr1} (${store.addr2}) </td>
 				<td>

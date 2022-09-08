@@ -6,14 +6,40 @@
 <mapper namespace="kr.co.buck1.store.FStoreMapper">
 	
 	<select id="keywordSearch" resultType="kr.co.buck1.store.FStoreVO">
-		select * from store 
-		where state = 2 and 
-		(storename like concat('%',#{param1},'%')
-		or addr2 like concat('%',#{param1},'%'))
+		select * 
+		from store 
+		where 
+			state = 2 and (
+				storename like concat('%',#{param1},'%')
+				or addr2 like concat('%',#{param1},'%')
+			)
 	</select>
 	
 	<select id="storeList" resultType="kr.co.buck1.store.FStoreVO">
-		select * from store where state &gt;= 0
+		<!-- set @rownum:=0; -->
+		
+		select
+			*,
+			@rownum:=@rownum+1 as rnum 
+		from 
+			store, 
+			(select @rownum:=0) as r
+		where 
+			(state &gt;= 0) and (
+				storename like concat('%',#{param1},'%')
+				or addr1 like concat('%',#{param1},'%')
+				or addr2 like concat('%',#{param1},'%'))
+		limit #{param2},10
+	</select>
+	
+	<select id="getTotal" resultType="Integer">
+		select ceil(count(*)/10)
+		from store
+		where
+			(state &gt;= 0) and (
+				storename like concat('%',#{param1},'%')
+				or addr1 like concat('%',#{param1},'%')
+				or addr2 like concat('%',#{param1},'%'))
 	</select>
 	
 	

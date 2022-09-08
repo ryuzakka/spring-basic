@@ -17,8 +17,13 @@
 	section #searchArea {
 		width:600px;
 		/* margin:60px auto; */
-		margin:160px auto;
-		padding-left:133px;
+		margin:106px auto 160px auto;
+		/* padding-left:133px; */
+	}
+	section #searchArea fieldset {
+		border:none;
+		background:#f6f5ef;
+		padding:24px 0;
 	}
 	section #searchArea input[type='search'] {
 		padding:12px 0;
@@ -103,8 +108,10 @@
 	<h1> 지도 검색 </h1>
 	
 	<div id="searchArea">
-		<input type="search" id="keyword" placeholder="키워드 검색 (매장명 또는 지역명)">
-		<input type="submit" onclick="keySearch()" value="검색">
+		<fieldset>
+			<input type="search" id="keyword" placeholder="키워드 검색 (매장명 또는 지역명)">
+			<input type="submit" onclick="keySearch()" value="검색">
+		</fieldset>
 	</div>
 	
 	<div id="noResult" style="width:100%;height:300px;margin-top:60px;margin-bottom:60px;display:none;">
@@ -179,13 +186,13 @@
 			        
 			        for(var i in listObj) {
 			        	if(listObj[i] != "") {		        		
-					        var storeObj = listObj[i].split('-');			        	
+					        var storeObj = listObj[i].split('_');			        	
 					        names[i] = storeObj[0];
 					        addr[i] = storeObj[1].replaceAll('+', ' ');
 					        //console.log(storeObj[1].replaceAll('+', ' '));
 					        lats[i] = storeObj[2];
 					        lngs[i] = storeObj[3];
-							console.log(names[i], addr[i], lats[i], lngs[i]);
+							console.log(names[i], addr[i], "", lats[i], lngs[i]);
 							
 					        var data = new Object();
 					        data.content = '<div class="infoWindow">';

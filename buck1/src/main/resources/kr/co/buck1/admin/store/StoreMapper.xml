@@ -12,7 +12,9 @@
 	</insert>
 	
 	<select id="store_list" resultType="kr.co.buck1.admin.store.StoreVO">
-		select * from store where state &gt;= 0
+		select *, @rownum:=@rownum+1 as rnum 
+		from store, (select @rownum:=0) as r
+		where state &gt;= 0
 	</select>
 	
 	<update id="store_state">

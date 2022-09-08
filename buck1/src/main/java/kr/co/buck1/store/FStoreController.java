@@ -28,8 +28,8 @@ public class FStoreController {
 	}
 	
 	@RequestMapping("/store/store_info")
-	public String storeList(Model model) {
-		return service.storeList(model);
+	public String storeList(Model model, HttpServletRequest req) {
+		return service.storeList(model, req);
 	}
 	
 }

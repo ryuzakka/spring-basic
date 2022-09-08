@@ -12,7 +12,8 @@
 		padding-bottom:85px;
 		text-align:left;
 	}
-	h2 {
+	#section h2,h3 {
+		text-align:left;
 		margin:102px 0 71px 0;
 	}
 	#welcome {

@@ -2,7 +2,7 @@ package kr.co.buck1.admin.store;
 
 public class StoreVO {
 
-	private int id, state;
+	private int id, state, rnum;
 	private String storename,storeimg,zip,addr1,addr2,lat,lng,writeday;
 	
 	public int getId() {
@@ -64,6 +64,12 @@ public class StoreVO {
 	}
 	public void setWriteday(String writeday) {
 		this.writeday = writeday;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	
 }
