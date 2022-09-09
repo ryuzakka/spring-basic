@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.buck1.whatsnew.WhatsNewMapper">
+
+	<!-- notice -->
+	<insert id="notice_write_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
+		insert into notice
+		(title, content, writeday)
+		values (#{title}, #{content}, now())
+	</insert>
+	
+	<select id="notice_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select *
+		from notice
+		where title like concat('%',#{param1},'%')
+		order by id desc
+		limit #{param2},10
+	</select>
+	
+	<select id="notice_view" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select * 
+		from notice 
+		where id=#{param1}
+	</select>
+	
+	<update id="notice_viewcnt">
+		update notice
+		set viewcnt = viewcnt+1
+		where id=#{param1}
+	</update>
+	
+	<select id="getTotal" resultType="Integer">
+		select ceil(count(*)/10)
+		from notice
+		where title like concat('%',#{param1},'%')
+	</select>
+	
+	<delete id="notice_delete">
+		delete from notice
+		where id=#{param1}
+	</delete>
+	
+	<update id="notice_update_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
+		update notice
+		set title = #{title},
+		content = #{content},
+		writeday = now()
+		where id = #{id}
+	</update>
+	
+	
+	<!-- news -->
+	
+
+</mapper>

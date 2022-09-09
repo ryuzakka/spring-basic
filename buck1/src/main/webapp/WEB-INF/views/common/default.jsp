@@ -207,9 +207,9 @@
 								<li><a href="../admin_order/order_list">주문관리</a></li>
 								<li><a href="../admin_store/store_list">매장관리</a></li>
 								<li><a href="../admin_member/member_list">회원관리</a></li>
-								<li><a href="">새소식관리</a></li>
-								<li><a href="">신상품관리</a></li>
-								<li><a href="">이벤트관리</a></li>
+								<li><a href="../whatsnew/notice_list">공지관리</a></li>
+								<li><a href="../whatsnew/news_list">신상품관리</a></li>
+								<li><a href="../whatsnew/campaign_list">이벤트관리</a></li>
 								<li><a href="../member/logout">로그아웃</a></li>
 							</ul>
 						</c:if>
@@ -242,9 +242,9 @@
 						<li id="top-menu" onmouseover="view(3)" onmouseout="hide(3)">
 							<div class="drop-menu-title">WHAT'S NEW</div>
 							<ul class="drop-menu">
-								<li><a href="">새소식</a></li>
-								<li><a href="">신상품</a></li>
-								<li><a href="">이벤트</a></li>
+								<li><a href="../whatsnew/notice_list">공지사항</a></li>
+								<li><a href="../whatsnew/news_list">신상품</a></li>
+								<li><a href="../whatsnew/campaign_list">이벤트</a></li>
 							</ul>
 						</li>
 					</ul>
