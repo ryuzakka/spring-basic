@@ -48,16 +48,16 @@ public class WhatsNewVO {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	public int getRank() {
-		return rank;
-	}
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
 	public String getThumbnail() {
 		return thumbnail;
 	}
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+	public int getRank() {
+		return rank;
 	}
 }

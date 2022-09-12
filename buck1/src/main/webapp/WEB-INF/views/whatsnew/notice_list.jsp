@@ -26,7 +26,7 @@
 	
 	<div class="container">
 		<div id="searchArea">
-			<form name="search" method="get" action="store_info" onsubmit="return check(this)">
+			<form name="search" method="get" action="notice_list" onsubmit="return check(this)">
 				<fieldset>
 					<!-- <legend> 키워드 검색 </legend> -->
 					<input type="hidden" name="page" value="1">

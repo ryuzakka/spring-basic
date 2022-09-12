@@ -17,7 +17,10 @@ public interface WhatsNewService {
 	
 	
 	// news
-	
+	public String news_write_ok(HttpServletRequest req);
+	public String news_list(Model model, HttpServletRequest req);
+	public String news_view(HttpServletRequest req, Model model);
+	public String news_viewcnt(HttpServletRequest req);
 	
 	//campaign
 	

@@ -53,6 +53,39 @@
 	
 	
 	<!-- news -->
+	<insert id="news_write_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
+		insert into news
+		(category, rank, thumbnail, title, content, writeday)
+		values(#{category},#{rank},#{thumbnail},#{title},#{content},now())
+	</insert>
 	
+	<select id="news_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select *
+		from news
+		where rank = 0
+		order by id desc
+	</select>
+	
+	<select id="news_rankList" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select * 
+		from news
+		where rank = 1
+		order by id desc
+	</select>
+	
+	<select id="news_view" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select *
+		from news
+		where id=#{param1}
+	</select>
+	
+	<update id="news_viewcnt">
+		update news
+		set viewcnt = viewcnt+1
+		where id=#{param1}
+	</update>
+	
+	
+	<!-- campaign -->
 
 </mapper>

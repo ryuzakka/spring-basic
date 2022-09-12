@@ -14,6 +14,11 @@ public interface WhatsNewMapper {
 	public void notice_update_ok(WhatsNewVO vo);
 	
 	// news
+	public void news_write_ok(WhatsNewVO vo);
+	public ArrayList<WhatsNewVO> news_list();
+	public ArrayList<WhatsNewVO> news_rankList();
+	public WhatsNewVO news_view(String id);
+	public void news_viewcnt(String id);
 	
 	
 	// campaign

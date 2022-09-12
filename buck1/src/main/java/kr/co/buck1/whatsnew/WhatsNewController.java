@@ -67,6 +67,25 @@ public class WhatsNewController {
 		return "/whatsnew/news_write";
 	}
 	
+	@RequestMapping("/whatsnew/news_write_ok")
+	public String news_write_ok(HttpServletRequest req) {
+		return service.news_write_ok(req);
+	}
+	@RequestMapping("/whatsnew/news_list")
+	public String news_list(Model model, HttpServletRequest req) {
+		return service.news_list(model, req);
+	}
+	
+	@RequestMapping("/whatsnew/news_view")
+	public String news_view(HttpServletRequest req, Model model) {
+		return service.news_view(req, model);
+	}
+	
+	@RequestMapping("/whatsnew/news_viewcnt")
+	public String news_viewcnt(HttpServletRequest req) {
+		return service.news_viewcnt(req);
+	}
+	
 	
 	/*
 	 * campaign
