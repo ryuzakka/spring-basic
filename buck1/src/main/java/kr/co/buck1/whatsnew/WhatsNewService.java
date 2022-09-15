@@ -21,8 +21,17 @@ public interface WhatsNewService {
 	public String news_list(Model model, HttpServletRequest req);
 	public String news_view(HttpServletRequest req, Model model);
 	public String news_viewcnt(HttpServletRequest req);
+	public String news_delete(HttpServletRequest req);
+	public String news_update(HttpServletRequest req, Model model);
+	public String news_update_ok(HttpServletRequest req);
 	
 	//campaign
-	
+	public String campaign_write_ok(HttpServletRequest req);
+	public String campaign_list(Model model, HttpServletRequest req);
+	public String campaign_viewcnt(HttpServletRequest req);
+	public String campaign_view(Model model, HttpServletRequest req);
+	public String campaign_delete(HttpServletRequest req);
+	public String campaign_update(HttpServletRequest req, Model model);
+	public String campaign_update_ok(HttpServletRequest req);
 	
 }

@@ -76,14 +76,29 @@ public class WhatsNewController {
 		return service.news_list(model, req);
 	}
 	
+	@RequestMapping("/whatsnew/news_viewcnt")
+	public String news_viewcnt(HttpServletRequest req) {
+		return service.news_viewcnt(req);
+	}
+	
 	@RequestMapping("/whatsnew/news_view")
 	public String news_view(HttpServletRequest req, Model model) {
 		return service.news_view(req, model);
 	}
 	
-	@RequestMapping("/whatsnew/news_viewcnt")
-	public String news_viewcnt(HttpServletRequest req) {
-		return service.news_viewcnt(req);
+	@RequestMapping("/whatsnew/news_delete")
+	public String news_delete(HttpServletRequest req) {
+		return service.news_delete(req);
+	}
+	
+	@RequestMapping("/whatsnew/news_update")
+	public String news_update(HttpServletRequest req, Model model) {
+		return service.news_update(req, model);
+	}
+	
+	@RequestMapping("/whatsnew/news_update_ok")
+	public String news_update_ok(HttpServletRequest req) {
+		return service.news_update_ok(req);
 	}
 	
 	
@@ -94,6 +109,33 @@ public class WhatsNewController {
 	public String campaign_write() {
 		return "/whatsnew/campaign_write";
 	}
-	
+	@RequestMapping("/whatsnew/campaign_write_ok")
+	public String campaign_write_ok(HttpServletRequest req) {
+		return service.campaign_write_ok(req);
+	}
+	@RequestMapping("/whatsnew/campaign_list")
+	public String campaign_list(Model model, HttpServletRequest req) {
+		return service.campaign_list(model, req);
+	}
+	@RequestMapping("/whatsnew/campaign_viewcnt")
+	public String campaign_viewcnt(HttpServletRequest req) {
+		return service.campaign_viewcnt(req);
+	}
+	@RequestMapping("/whatsnew/campaign_view")
+	public String campaign_view(Model model, HttpServletRequest req) {
+		return service.campaign_view(model, req);
+	}
+	@RequestMapping("/whatsnew/campaign_delete")
+	public String campaign_delete(HttpServletRequest req) {
+		return service.campaign_delete(req);
+	}
+	@RequestMapping("/whatsnew/campaign_update")
+	public String campaign_update(HttpServletRequest req, Model model) {
+		return service.campaign_update(req, model);
+	}
+	@RequestMapping("/whatsnew/campaign_update_ok")
+	public String campaign_update_ok(HttpServletRequest req) {
+		return service.campaign_update_ok(req);
+	}
 	
 }

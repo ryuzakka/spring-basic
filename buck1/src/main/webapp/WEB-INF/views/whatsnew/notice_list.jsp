@@ -28,16 +28,8 @@
 		<div id="searchArea">
 			<form name="search" method="get" action="notice_list" onsubmit="return check(this)">
 				<fieldset>
-					<!-- <legend> 키워드 검색 </legend> -->
 					<input type="hidden" name="page" value="1">
-					<input type="search" name="keyword" list="rec" value="${keyword}" placeholder="검색어를 입력해 주세요." size="30">
-					<!-- <datalist id="rec">
-						<option value="대화동">대화동</option>
-						<option value="주엽동">주엽동</option>
-						<option value="일산동">일산동</option>
-						<option value="덕이동">덕이동</option>
-						<option value="탄현동">탄현동</option>
-					</datalist> -->
+					<input type="search" name="keyword" value="${keyword}" placeholder="검색어를 입력해 주세요." size="30">
 					<input type="submit" value="검색">
 				</fieldset>
 			</form>
@@ -68,20 +60,21 @@
 			</c:if>
 		</main>
 		
+		<!-- 페이징 : 일반게시글 10개씩 1페이지 / 페이지는 10페이지씩 노출 -->
 		<div id="pager">
 			<!-- 처음으로 이동 -->
 			<c:if test="${page != 1}">
-				<a href="store_info?page=1&keyword=${keyword}"><input type="button" value="처음"></a>
+				<a href="notice_list?page=1&keyword=${keyword}"><input type="button" value="처음"></a>
 			</c:if>
 			
 			<!-- 이전 10 페이지 -->
 			<c:if test="${pstart > 10}">
-				<a href="store_info?page=${pstart-1}&keyword=${keyword}"><input type="button" value="이전"></a>
+				<a href="notice_list?page=${pstart-1}&keyword=${keyword}"><input type="button" value="이전"></a>
 			</c:if>
 			
 			<!-- 이전 1 페이지 -->
 			<c:if test="${page != 1}">
-				<a href="store_info?page=${page-1}&keyword=${keyword}"><input type="button" value="&lt;"></a>
+				<a href="notice_list?page=${page-1}&keyword=${keyword}"><input type="button" value="&lt;"></a>
 			</c:if>
 			
 			<c:if test="${pend >= total}">
@@ -89,25 +82,26 @@
 			</c:if>
 			<c:forEach var="i" begin="${pstart}" end="${pend}">
 				<c:if test="${i == page}">${i}</c:if>
-				<c:if test="${i != page}"><a href="store_info?page=${i}&keyword=${keyword}">${i}</a></c:if>
+				<c:if test="${i != page}"><a href="notice_list?page=${i}&keyword=${keyword}">${i}</a></c:if>
 			</c:forEach>
 			
 			<!-- 다음 1 페이지 -->
 			<c:if test="${page < total}">
-				<a href="store_info?page=${page+1}&keyword=${keyword}"><input type="button" value="&gt;"></a>
+				<a href="notice_list?page=${page+1}&keyword=${keyword}"><input type="button" value="&gt;"></a>
 			</c:if>
 			
 			<!-- 다음 10 페이지 -->
 			<c:if test="${pend < total}">
-				<a href="store_info?page=${pend+1}&keyword=${keyword}"><input type="button" value="다음"></a>
+				<a href="notice_list?page=${pend+1}&keyword=${keyword}"><input type="button" value="다음"></a>
 			</c:if>
 			
 			<!-- 끝으로 이동 -->
 			<c:if test="${page < total}">
-				<a href="store_info?page=${total}&keyword=${keyword}"><input type="button" value="끝"></a>
+				<a href="notice_list?page=${total}&keyword=${keyword}"><input type="button" value="끝"></a>
 			</c:if>
 		</div>
 		
+		<!-- 페이징 파라메터 값 확인용 -->
 		<div style="display:none;">
 			page:${page}<br>
 			pstart:${pstart}<br>

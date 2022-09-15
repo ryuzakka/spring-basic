@@ -32,7 +32,7 @@
 		where id=#{param1}
 	</update>
 	
-	<select id="getTotal" resultType="Integer">
+	<select id="noticeGetTotal" resultType="Integer">
 		select ceil(count(*)/10)
 		from notice
 		where title like concat('%',#{param1},'%')
@@ -45,9 +45,9 @@
 	
 	<update id="notice_update_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
 		update notice
-		set title = #{title},
-		content = #{content},
-		writeday = now()
+			set title = #{title},
+			content = #{content},
+			writeday = now()
 		where id = #{id}
 	</update>
 	
@@ -63,13 +63,16 @@
 		select *
 		from news
 		where rank = 0
+			and title like concat('%',#{param1},'%')
 		order by id desc
+		limit #{param2},5
 	</select>
 	
 	<select id="news_rankList" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
 		select * 
 		from news
 		where rank = 1
+			and title like concat('%',#{param1},'%')
 		order by id desc
 	</select>
 	
@@ -85,7 +88,76 @@
 		where id=#{param1}
 	</update>
 	
+	<delete id="news_delete">
+		delete
+		from news
+		where id = #{param1}
+	</delete>
+	
+	<update id="news_update_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
+		update news
+		set category = #{category},
+			rank = #{rank},
+			thumbnail = #{thumbnail},
+			title = #{title},
+			content = #{content},
+			writeday = now()
+		where id=#{id}
+	</update>
+	
+	<select id="newsGetTotal" resultType="Integer">
+		select ceil(count(*)/5)
+		from news
+		where title like concat('%',#{param1},'%')
+	</select>
+	
+	
+	
 	
 	<!-- campaign -->
+	<insert id="campaign_write_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
+		insert into campaign
+		(category, thumbnail, title, content, startdate, enddate, writeday)
+		values(#{category},#{thumbnail},#{title},#{content},#{startdate},#{enddate},now())
+	</insert>
+	
+	<select id="campaign_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select *
+		from campaign
+		where
+			now() &gt;= startdate
+			and now() &lt;= enddate
+			and title like concat('%',#{param1},'%')
+		order by id desc
+	</select>
+	
+	<update id="campaign_viewcnt">
+		update campaign
+		set viewcnt = viewcnt+1
+		where id = #{param1}
+	</update>
+	
+	<select id="campaign_view" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		select *
+		from campaign
+		where id = #{param1}
+	</select>
+	
+	<delete id="campaign_delete">
+		delete from campaign
+		where id = #{param1}
+	</delete>
+	
+	<update id="campaign_update_ok" parameterType="kr.co.buck1.whatsnew.WhatsNewVO">
+		update campaign
+		set category = #{category},
+			thumbnail = #{thumbnail},
+			title = #{title},
+			content = #{content},
+			startdate = #{startdate},
+			enddate = #{enddate},
+			writeday = now()
+		where id = #{id}
+	</update>
 
 </mapper>

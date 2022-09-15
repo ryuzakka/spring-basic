@@ -7,9 +7,49 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-	
+	section {
+		width:1200px;
+		height:auto;
+		margin:80px auto 50px auto;
+		text-align:center;
+	}
+	section h1 {
+		font-size:2em;
+	}
+	section table {
+		border-spacing:0px;
+		text-align:center;
+		width:600px;
+		margin:20px auto;
+	}
+	section table tr th {
+		border-bottom:1px solid #dddddd;		
+	}
+	section table tr td {
+		padding:10px 0px;
+		text-align:left;
+		padding-left:20px;
+		border-bottom:1px solid #dddddd;
+	}
+	section input[type='submit'] {
+		padding:12px 0;
+		border:none;
+		color:white;
+		background:#006633;
+		border-bottom:1px solid #dddddd;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
+	section input[type='button'] {
+		padding:12px 0;
+		border:none;
+		border-bottom:1px solid #DDD;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
 </style>
 </head>
 <body>
@@ -28,47 +68,50 @@
 	
 <section>
 
-	<h2>뉴스</h2>
+	<h1> 뉴 스 </h1>
 	
 	<form name="newsWriteForm" method="post" action="news_write_ok" enctype="multipart/form-data">
-		<table align="center" border="1">
+		<fieldset style="width:600px;text-align:left;margin:auto;font-size:13px;">
+			<p>
+			<input type="radio" name="category" id="1" value="1"><label for="1">상품 출시</label>
+			<input type="radio" name="category" id="2" value="2"><label for="2">스타벅스와 문화</label>
+			<input type="radio" name="category" id="3" value="3"><label for="3">스타벅스 사회공헌</label>
+			<input type="radio" name="category" id="4" value="4"><label for="4">스타벅스 카드 출시</label>
+			</p>
+			<input type="checkbox" name="rank" id="rank" /><label for="rank">공지(상단 고정)</label><p>
+			
+		</fieldset>
+		<table align="center" border="0">
 			<tr>
-				<fieldset style="width:600px;text-align:left;margin:auto;">
-					<p>
-					<input type="radio" name="category" id="1" value="1"><label for="1">상품 출시</label>
-					<input type="radio" name="category" id="2" value="2"><label for="2">스타벅스와 문화</label>
-					<input type="radio" name="category" id="3" value="3"><label for="3">스타벅스 사회공헌</label>
-					<input type="radio" name="category" id="4" value="4"><label for="4">스타벅스 카드 출시</label>
-					</p>
-					<input type="checkbox" name="rank" id="rank" /><label for="rank">상단 고정</label><p>
+				<th width="50"> 썸네일 </th>
+				<td>
 					<input type="file" name="thumbnail" id="thumbnail" /><br>
-					<img id="thumbEx" />
-				</fieldset>
+					<img id="thumbEx" width="300" />
+				</td>
 			</tr>
 			<tr>
 				<th> <label for="title">제 목</label> </th>
 				<td> <input type="text" name="title" id="title" size="63" required /> </td>
 			</tr>
 			<tr>
-				<th rowspan="2"> <label for="content">내 용</label> </th>
-				<td> <input type="file" name="content" id="content" multiple /> </td>
-			</tr>
-			<tr>
+				<th style="vertical-align:top;padding-top:11px;"> <label for="content">내 용</label> </th>
 				<td>
+					<input type="hidden" name="wholecontent" id="wholecontent" />
+					<input type="file" name="content" id="content" multiple />
 					<div id="contents" width="500"></div>
-					<!-- <img id="contents" /> -->
 				</td>
 			</tr>
 		</table>
 		
-		<div>
+		<div style="display:inline-block;margin-top:20px;">
 			<input type="submit" value="작성완료" />
-			<button onclick="javascript:location='news_list'">목록</button>
+			<input type="button" onclick="javascript:location='news_list'" value="목록" />
 		</div>
 	</form>
 	
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(function(){
 		/* 썸네일 표시 */
@@ -87,12 +130,14 @@
 		var con = document.getElementById('content');
 		con.onchange = function(e) {
 			var files = e.target.files;
-			//console.log(files);
+			//console.log('files',files);
 			//console.log(files[0]);
 			//fileReader.readAsDataURL(e.target.files[0]);
 			var str = "";
-			console.log(files.length);
-			for(var i=0; i<files.length; i++) {				
+			var imgList = "";
+			//console.log(files.length);
+			for(var i=0; i<files.length; i++) {
+				imgList += e.target.files[i].name + ",";
 				var fileReader2 = new FileReader();
 				fileReader2.readAsDataURL(e.target.files[i]);
 				fileReader2.onload = function(e) {
@@ -100,6 +145,8 @@
 					document.getElementById('contents').innerHTML += '<img width="500" src="'+ e.target.result +'" /><br>';
 				}
 			}
+			//console.log('e.target.files[i].name',imgList);
+			document.getElementById('wholecontent').value = imgList;
 		}
 		
 		/* 공지 체크 처리 */

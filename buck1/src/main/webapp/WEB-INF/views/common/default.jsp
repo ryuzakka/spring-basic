@@ -115,8 +115,12 @@
 		
 		/*  */
 		
-		h1, h2, h3, h4, h5, h6 {
+		/* h1, h2, h3, h4, h5, h6 {
 			text-align:center;
+		} */
+		
+		section h1 {
+			font-size:2em;
 		}
 		
 		/*  */
@@ -208,7 +212,7 @@
 								<li><a href="../admin_store/store_list">매장관리</a></li>
 								<li><a href="../admin_member/member_list">회원관리</a></li>
 								<li><a href="../whatsnew/notice_list">공지관리</a></li>
-								<li><a href="../whatsnew/news_list">신상품관리</a></li>
+								<li><a href="../whatsnew/news_list">뉴스관리</a></li>
 								<li><a href="../whatsnew/campaign_list">이벤트관리</a></li>
 								<li><a href="../member/logout">로그아웃</a></li>
 							</ul>
@@ -243,7 +247,7 @@
 							<div class="drop-menu-title">WHAT'S NEW</div>
 							<ul class="drop-menu">
 								<li><a href="../whatsnew/notice_list">공지사항</a></li>
-								<li><a href="../whatsnew/news_list">신상품</a></li>
+								<li><a href="../whatsnew/news_list">뉴스</a></li>
 								<li><a href="../whatsnew/campaign_list">이벤트</a></li>
 							</ul>
 						</li>

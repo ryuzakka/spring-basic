@@ -8,21 +8,91 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
+<!-- 
+	[공지사항] 
+	목록: 번호 / 제목 / 날짜 / 조회수
+	상세: 제목 / 내용 / 윗글  /아랫글
+	[이벤트]
+	목록: 카테고리 / 썸네일 / 제목 / 기간(시작일-종료일)
+	상세: 제목 / 이미지 / 진행이벤트(롤링)
+	[뉴스]
+	목록: 카테고리 / 번호 / 썸네일 / 제목 / 등록일 / 공지여부
+	상세: 제목 / 이미지 / 윗글 / 아랫글
+-->
 	
-	<!-- 
-		[공지사항] 
-		목록: 번호 / 제목 / 날짜 / 조회수
-		상세: 제목 / 내용 / 윗글  /아랫글
-		[이벤트]
-		목록: 카테고리 / 썸네일 / 제목 / 기간(시작일-종료일)
-		상세: 제목 / 이미지 / 진행이벤트(롤링)
-		[뉴스]
-		목록: 카테고리 / 번호 / 썸네일 / 제목 / 등록일 / 공지여부
-		상세: 제목 / 이미지 / 윗글 / 아랫글
-	-->
+<section>
+	<h1>이벤트</h1>
 	
-	
-	
+	<form name="campWriteForm" method="post" action="campaign_write_ok" enctype="multipart/form-data">
+		<fieldset style="width:600px;text-align:left;margin:auto;font-size:13px;">
+			<input type="radio" name="category" id="0" value="0"><label for="0">선택 없음</label>
+			<input type="radio" name="category" id="1" value="1"><label for="1">스타벅스 카드</label>
+			<input type="radio" name="category" id="2" value="2"><label for="2">스타벅스 리워드</label>
+			<input type="radio" name="category" id="3" value="3"><label for="3">온라인</label>
+			<p>
+			<input type="date" name="startdate" />
+			<input type="date" name="enddate" />
+		</fieldset>
+		
+		<table align="center" border="0">
+			<tr>
+				<th width="50"> 썸네일 </th>
+				<td>
+					<input type="file" name="thumbnail" id="thumbnail" /><br>
+					<img id="thumbEx" width="300" />
+				</td>
+			</tr>
+			<tr>
+				<th> <label for="title">제 목</label> </th>
+				<td> <input type="text" name="title" id="title" size="63" required /> </td>
+			</tr>
+			<tr>
+				<th style="vertical-align:top;padding-top:11px;"> <label for="content">내 용</label> </th>
+				<td>
+					<input type="file" name="content" id="content" /><br>
+					<img id="contents" width="500" />
+				</td>
+			</tr>
+		</table>
+		
+		<div style="display:inline-block;margin-top:20px;">
+			<input type="submit" value="작성완료" />
+			<input type="button" onclick="javascript:location='news_list'" value="목록" />
+		</div>
+	</form>
+
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function(){
+		/* 썸네일 표시 */
+		var thumb = document.getElementById('thumbnail');
+		thumb.onchange = function(e) {
+			var thumbnail = e.target.files;
+			//console.log(thumbnail);
+			var fileReader = new FileReader();
+			fileReader.readAsDataURL(e.target.files[0]);
+			fileReader.onload = function(e) {
+				document.getElementById('thumbEx').src = e.target.result;
+			}
+		}
+		
+		/* 내용 이미지 표시 */
+		var con = document.getElementById('content');
+		con.onchange = function(e) {
+			var files = e.target.files;
+			var fileReader = new FileReader();
+			fileReader.readAsDataURL(e.target.files[0]);
+			fileReader.onload = function(e) {
+				//console.log(e.target.result);
+				document.getElementById('contents').src = e.target.result;
+			}
+		}
+		
+	});
+</script>
+
 </body>
 </html>

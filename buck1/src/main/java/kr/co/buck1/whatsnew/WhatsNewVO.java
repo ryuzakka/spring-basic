@@ -10,6 +10,8 @@ public class WhatsNewVO {
 	private int category, rank;
 	private String thumbnail;
 	
+	// campaign
+	private String startdate, enddate;
 	
 	
 	public int getId() {
@@ -59,5 +61,17 @@ public class WhatsNewVO {
 	}
 	public int getRank() {
 		return rank;
+	}
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
 	}
 }
