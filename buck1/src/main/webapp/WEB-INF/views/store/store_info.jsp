@@ -46,23 +46,49 @@
 		width:90%;
 		border-spacing:0px;
 		margin:30px auto 40px auto;
+		font-size:14px;
+	}
+	section table tr th {
+		font-size:15px;
+		border-top:1px solid black;
+		border-bottom:1px solid black;
+		padding-top:17px;
+		padding-bottom:17px;
 	}
 	section table tr td:nth-child(2) {
 		text-align:left;
 		padding-left:10px;
 	}
-	section table tr:first-child td {
-		font-weight:600;
-		text-align:center;
-	}
 	section table tr td {
 		text-align:center;
 		padding:8px 0px;
+		/* padding-top:20px;
+		padding-bottom:20px; */
+		border-bottom:1px solid #dddddd;
 	}
 	section table tr td img {
 		display:block;
 		width:120px;
 		margin:auto;
+	}
+	section #pager {
+		margin-top:35px;
+	}
+	section #pager a {
+		text-decoration:none;
+		color:black;
+	}
+	section #pager a:hover {
+		text-decoration:underline;
+		color:#036;
+		cursor:pointer;
+	}
+	section #pager input {
+		border:none;
+		padding:8px;
+	}
+	section #pager input:hover {
+		text-decoration:underline;
 	}
 </style>
 
@@ -99,7 +125,7 @@
 		</form>
 	</div>
 	
-	<table align="center" border="1">
+	<table align="center" border="0">
 		<tr>
 			<!-- <th> No. </th> -->
 			<th> 매장이름 </th>
@@ -128,17 +154,20 @@
 				</td>
 			</tr>		
 		</c:forEach>
+		<c:if test="${total eq 0}">
+			<tr><td colspan="4"><span>조회된 결과가 없습니다.</span></td></tr>
+		</c:if>
 	</table>
 	
 	<div id="pager">
 		<!-- 처음으로 이동 -->
 		<c:if test="${page != 1}">
-			<a href="store_info?page=1&keyword=${keyword}"><input type="button" value="처음"></a>
+			<a href="store_info?page=1&keyword=${keyword}"><input type="button" value="1st"></a>
 		</c:if>
 		
 		<!-- 이전 10 페이지 -->
 		<c:if test="${pstart > 10}">
-			<a href="store_info?page=${pstart-1}&keyword=${keyword}"><input type="button" value="이전"></a>
+			<a href="store_info?page=${pstart-1}&keyword=${keyword}"><input type="button" value="Prev"></a>
 		</c:if>
 		
 		<!-- 이전 1 페이지 -->
@@ -150,7 +179,7 @@
 			<c:set var="pend" value="${total}" />
 		</c:if>
 		<c:forEach var="i" begin="${pstart}" end="${pend}">
-			<c:if test="${i == page}">${i}</c:if>
+			<c:if test="${i == page}"><span style="color:#036;font-weight:bold;">${i}</span></c:if>
 			<c:if test="${i != page}"><a href="store_info?page=${i}&keyword=${keyword}">${i}</a></c:if>
 		</c:forEach>
 		
@@ -161,12 +190,12 @@
 		
 		<!-- 다음 10 페이지 -->
 		<c:if test="${pend < total}">
-			<a href="store_info?page=${pend+1}&keyword=${keyword}"><input type="button" value="다음"></a>
+			<a href="store_info?page=${pend+1}&keyword=${keyword}"><input type="button" value="Next"></a>
 		</c:if>
 		
 		<!-- 끝으로 이동 -->
 		<c:if test="${page < total}">
-			<a href="store_info?page=${total}&keyword=${keyword}"><input type="button" value="끝"></a>
+			<a href="store_info?page=${total}&keyword=${keyword}"><input type="button" value="Last"></a>
 		</c:if>
 	</div>
 	

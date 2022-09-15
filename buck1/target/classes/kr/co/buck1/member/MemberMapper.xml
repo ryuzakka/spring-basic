@@ -39,7 +39,11 @@
 		update member set nickname=#{param1}, email=#{param2} where id=#{param3}
 	</update>
 	
-	
+	<update id="withdrawal">
+		update member
+		set state = 9
+		where userid = #{param1}
+	</update>
 	
 </mapper>
 

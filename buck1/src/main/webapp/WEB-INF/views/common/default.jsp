@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Starbucks</title>
+<title>Stanbucks</title>
 	<style>
 		body, div {
 			vertical-align:baseline;
@@ -208,9 +208,9 @@
 						<c:if test="${userid == 'admin'}">
 							<div>관리자모드</div>
 							<ul id="admin">
-								<li><a href="../admin_order/order_list">주문관리</a></li>
+								<li><a href="../admin/order">주문관리</a></li>
 								<li><a href="../admin_store/store_list">매장관리</a></li>
-								<li><a href="../admin_member/member_list">회원관리</a></li>
+								<li><a href="../admin/member">회원정보</a></li>
 								<li><a href="../whatsnew/notice_list">공지관리</a></li>
 								<li><a href="../whatsnew/news_list">뉴스관리</a></li>
 								<li><a href="../whatsnew/campaign_list">이벤트관리</a></li>
@@ -239,8 +239,8 @@
 						<li id="top-menu" onmouseover="view(2)" onmouseout="hide(2)">
 							<div class="drop-menu-title">REWARDS</div>
 							<ul class="drop-menu">
-								<li><a href="">리워드 소개</a></li>
-								<li><a href="">e-Gift 소개</a></li>
+								<li><a href="https://www.starbucks.co.kr/msr/msreward/about.do" target="_blank">리워드 소개</a></li>
+								<li><a href="https://www.starbucks.co.kr/msr/sceGift/egift_information.do" target="_blank">e-Gift 소개</a></li>
 							</ul>
 						</li>
 						<li id="top-menu" onmouseover="view(3)" onmouseout="hide(3)">

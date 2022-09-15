@@ -122,6 +122,12 @@ public class MemberServiceImpl implements MemberService {
 		return "redirect:/member/info";
 	}
 	
+	@Override
+	public String withdrawal(HttpSession session) {
+		mapper.withdrawal(session.getAttribute("userid").toString());
+		session.invalidate();
+		return "redirect:/member/withdrawal_ok";
+	}
 	
 	
 }

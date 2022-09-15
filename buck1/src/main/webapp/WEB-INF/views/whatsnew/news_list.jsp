@@ -114,6 +114,13 @@
 		text-decoration:underline;
 	}
 </style>
+<script>
+	function check(my) {
+		var len = my.keyword.value.trim().length;
+		//console.log(len);
+		len != 0 ? true : false;
+	}
+</script>
 </head>
 <body>
 <!-- 

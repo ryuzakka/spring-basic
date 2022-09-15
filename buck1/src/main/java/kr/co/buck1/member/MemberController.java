@@ -94,6 +94,14 @@ public class MemberController {
 		return service.info_update_ok(req);
 	}
 	
+	@RequestMapping("/member/withdrawal")
+	public String withdrawal(HttpSession session) {
+		return service.withdrawal(session);
+	}
 	
+	@RequestMapping("/member/withdrawal_ok")
+	public String withdrawal_ok() {
+		return "/member/withdrawal_ok";
+	}
 	
 }

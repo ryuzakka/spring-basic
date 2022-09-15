@@ -60,6 +60,15 @@
 		display:none;
 	}
 </style>
+<script>
+	function withdrawal() {
+		var chk = confirm("정말 탈퇴하시겠습니까?");
+		if(chk)
+			location = "withdrawal";
+		else
+			return false;
+	}
+</script>
 
 <div id="section">
 	
@@ -106,6 +115,6 @@
 	</table>
 	<p>
 	<input type="button" onclick="javascript:location='info_update?userid=${my.userid}'" value="정보 수정">
-
+	<p><input type="button" onclick="withdrawal()" value="회원탈퇴" /></p>
 </div>
 

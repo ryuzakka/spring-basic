@@ -14,6 +14,6 @@ public interface MemberMapper {
 	public String search_id(String phone);
 	public MemberVO search_pwd(String userid, String phone);
 	public void info_update_ok(String nick, String email, String id);
-	
+	public void withdrawal(String userid);
 	
 }

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <style>
 	#section {
 		width:800px;
@@ -71,6 +70,11 @@
 		color:red;
 	}
 </style>
+<script>
+	window.onload = () => {
+		document.getElementById('userid').focus();
+	}
+</script>
 
 <div id="section">
 	
@@ -89,8 +93,8 @@
 	
 	<div id="signin-form">
 	<form method="post" action="signin_ok">
-		<c:if test="${param.userid == null}"><input type="text" name="userid" placeholder="아이디" required></c:if>
-		<c:if test="${param.userid != null}"><input type="text" name="userid" value="${param.userid}" required></c:if>
+		<c:if test="${param.userid == null}"><input type="text" name="userid" id="userid" placeholder="아이디" required></c:if>
+		<%-- <c:if test="${param.userid != null}"><input type="text" name="userid" value="${param.userid}" required></c:if> --%>
 		<p>
 		<input type="password" name="pwd" placeholder="비밀번호" required><p>
 		<ul id="support-btn">
