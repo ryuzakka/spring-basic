@@ -65,6 +65,9 @@
 		text-align:center;
 		margin:0px;
 	}
+	section .btn button:hover {
+		text-decoration:underline;
+	}
 </style>
 <script>
 	function delCheck(id) {

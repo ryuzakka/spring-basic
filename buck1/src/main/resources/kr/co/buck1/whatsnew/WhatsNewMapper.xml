@@ -131,6 +131,15 @@
 		order by id desc
 	</select>
 	
+	<select id="campaignGetTotal" resultType="Integer">
+		select count(*) 
+		from campaign
+		where
+			now() &gt;= startdate
+			and now() &lt;= enddate
+			and title like concat('%',#{param1},'%')
+	</select>
+	
 	<update id="campaign_viewcnt">
 		update campaign
 		set viewcnt = viewcnt+1

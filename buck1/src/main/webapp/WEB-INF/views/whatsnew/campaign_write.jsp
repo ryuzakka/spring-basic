@@ -7,6 +7,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	section {
+		width:1200px;
+		height:auto;
+		margin:80px auto 50px auto;
+		text-align:center;
+	}
+	section h1 {
+		font-size:2em;
+	}
+	section table {
+		border-spacing:0px;
+		text-align:center;
+		width:600px;
+		margin:20px auto;
+	}
+	section table tr th {
+		border-bottom:1px solid #dddddd;		
+	}
+	section table tr td {
+		padding:10px 0px;
+		text-align:left;
+		padding-left:20px;
+		border-bottom:1px solid #dddddd;
+	}
+	section input[type='submit'] {
+		padding:12px 0;
+		border:none;
+		color:white;
+		background:#006633;
+		border-bottom:1px solid #dddddd;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
+	section input[type='button'] {
+		padding:12px 0;
+		border:none;
+		border-bottom:1px solid #DDD;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
+	section input[type='submit']:hover , input[type='button']:hover {
+		text-decoration:underline;
+	}
+</style>
 </head>
 <body>	
 <!-- 
@@ -26,6 +73,7 @@
 	
 	<form name="campWriteForm" method="post" action="campaign_write_ok" enctype="multipart/form-data">
 		<fieldset style="width:600px;text-align:left;margin:auto;font-size:13px;">
+			<p>
 			<input type="radio" name="category" id="0" value="0"><label for="0">선택 없음</label>
 			<input type="radio" name="category" id="1" value="1"><label for="1">스타벅스 카드</label>
 			<input type="radio" name="category" id="2" value="2"><label for="2">스타벅스 리워드</label>
@@ -58,7 +106,7 @@
 		
 		<div style="display:inline-block;margin-top:20px;">
 			<input type="submit" value="작성완료" />
-			<input type="button" onclick="javascript:location='news_list'" value="목록" />
+			<input type="button" onclick="javascript:location='campaign_list'" value="목록" />
 		</div>
 	</form>
 

@@ -26,6 +26,7 @@ public interface WhatsNewMapper {
 	// campaign
 	public void campaign_write_ok(WhatsNewVO vo);
 	public ArrayList<WhatsNewVO> campaign_list(String keword);
+	public Integer campaignGetTotal(String keyword);
 	public void campaign_viewcnt(String id);
 	public WhatsNewVO campaign_view(String id);
 	public void campaign_delete(String id);

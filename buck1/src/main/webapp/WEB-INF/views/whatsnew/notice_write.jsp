@@ -9,15 +9,49 @@
 <title>Insert title here</title>
 <style>
 	section {
-		width:600px;
+		width:1200px;
 		height:auto;
 		margin:80px auto 50px auto;
 		text-align:center;
 	}
+	section h1 {
+		font-size:2em;
+	}
 	section table {
-		width:90%;
 		border-spacing:0px;
-		margin:30px auto 40px auto;
+		text-align:center;
+		width:800px;
+		margin:20px auto;
+	}
+	section table tr th {
+		border-bottom:1px solid #dddddd;		
+	}
+	section table tr td {
+		padding:10px 0px;
+		text-align:left;
+		padding-left:20px;
+		border-bottom:1px solid #dddddd;
+	}
+	section input[type='submit'] {
+		padding:12px 0;
+		border:none;
+		color:white;
+		background:#006633;
+		border-bottom:1px solid #dddddd;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
+	section input[type='button'] {
+		padding:12px 0;
+		border:none;
+		border-bottom:1px solid #DDD;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
+	section input[type='submit']:hover , input[type='button']:hover {
+		text-decoration:underline;
 	}
 </style>
 </head>
@@ -40,20 +74,20 @@
 	<h2>공지사항</h2>
 	
 	<form method="post" action="notice_write_ok">
-		<table align="center" border="1">
+		<table align="center" border="0">
 			<tr>
-				<th> <label for="title">제 목</label> </th>
-				<td> <input type="text" name="title" id="title" size="63" required /> </td>
+				<th width="50"> <label for="title">제 목</label> </th>
+				<td> <input type="text" name="title" id="title" size="98" required /> </td>
 			</tr>
 			<tr>
-				<th> <label for="content">내 용</label> </th>
-				<td> <textarea rows="15" cols="65" name="content" id="content"></textarea> </td>
+				<th style="vertical-align:top;padding-top:11px;"> <label for="content">내 용</label> </th>
+				<td> <textarea rows="12" cols="100" name="content" id="content"></textarea> </td>
 			</tr>
 		</table>
 		
 		<div>
 			<input type="submit" value="작성완료" />
-			<button onclick="javascript:location='notice_list'">목록</button>
+			<input type="button" onclick="javascript:location='notice_list'" value="목록" />
 		</div>
 	</form>
 	

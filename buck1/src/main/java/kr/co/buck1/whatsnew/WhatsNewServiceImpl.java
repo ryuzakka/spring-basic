@@ -326,6 +326,10 @@ public class WhatsNewServiceImpl implements WhatsNewService {
 		else
 			keyword = req.getParameter("keyword");
 		
+		// 검색어에 대한 검색 결과 수
+		int total = mapper.campaignGetTotal(keyword);
+		model.addAttribute("total", total);
+		
 		model.addAttribute("list", mapper.campaign_list(keyword));
 		model.addAttribute("keyword", keyword);
 		

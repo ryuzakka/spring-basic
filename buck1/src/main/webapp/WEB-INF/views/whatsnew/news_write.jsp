@@ -50,6 +50,9 @@
 		width:70px;
 		text-align:center;
 	}
+	section input[type='submit']:hover , input[type='button']:hover {
+		text-decoration:underline;
+	} 
 </style>
 </head>
 <body>

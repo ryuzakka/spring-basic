@@ -10,7 +10,7 @@
 	section {
 		width:1200px;
 		height:auto;
-		margin:80px auto 50px auto;
+		margin:80px auto 70px auto;
 		text-align:center;
 	}
 	section h1 {
@@ -42,6 +42,9 @@
 		padding:13px 0 13px 0;
 		vertical-align:center;
 	}
+	section #searchArea input[type='submit']:hover {
+		text-decoration:underline;
+	}
 	section button {
 		padding:12px 0;
 		border:none;
@@ -53,10 +56,19 @@
 	section button:hover {
 		color:white;
 		background:#006633;
+		text-decoration:underline;
 	}
 	section main {
 		width:1100px;
 		margin:auto;
+	}
+	section main a {
+		color:black;
+		text-decoration:none;
+		cursor:pointer;
+	}
+	section main a:hover {
+		text-decoration:underline;
 	}
 	section main table {
 		width:100%;
@@ -81,6 +93,25 @@
 	}
 	section main button {
 		margin:30px auto;
+	}
+	section #pager {
+		margin-top:35px;
+	}
+	section #pager a {
+		text-decoration:none;
+		color:black;
+	}
+	section #pager a:hover {
+		text-decoration:underline;
+		color:#036;
+		cursor:pointer;
+	}
+	section #pager input {
+		border:none;
+		padding:8px;
+	}
+	section #pager input:hover {
+		text-decoration:underline;
 	}
 </style>
 </head>
@@ -130,21 +161,21 @@
 				<c:forEach items="${rank}" var="rank">
 					<tr>
 						<%-- <td> ${rank.id} </td> --%>
-						<td> <img src="${pageContext.request.contextPath}/resources/newsimg/${rank.thumbnail}" width="260" /> </td>
+						<td> <a href="news_viewcnt?id=${rank.id}"><img src="${pageContext.request.contextPath}/resources/newsimg/${rank.thumbnail}" width="260" /></a> </td>
 						<td>
 							<c:if test="${rank.category == 1}">상품 출시</c:if>
 							<c:if test="${rank.category == 2}">스타벅스와 문화</c:if>
 							<c:if test="${rank.category == 3}">스타벅스 사회공헌</c:if>
 							<c:if test="${rank.category == 4}">스타벅스 카드 출시</c:if>
 						</td>
-						<td><a href="news_viewcnt?id=${rank.id}"> <img src="${pageContext.request.contextPath}/resources/images/icon_whats_new_pin.png" width="16" />${rank.title} </a></td>
+						<td> <a href="news_viewcnt?id=${rank.id}"><img src="${pageContext.request.contextPath}/resources/images/icon_whats_new_pin.png" width="16" />${rank.title}</a> </td>
 						<td> ${rank.writeday} </td>
 					</tr>
 				</c:forEach>
 				<c:forEach items="${list}" var="list">
 					<tr>
 						<%-- <td> ${list.id} </td> --%>
-						<td> <img src="${pageContext.request.contextPath}/resources/newsimg/${list.thumbnail}" width="260" /> </td>
+						<td> <a href="news_viewcnt?id=${list.id}"><img src="${pageContext.request.contextPath}/resources/newsimg/${list.thumbnail}" width="260" /></a> </td>
 						<td>
 							<c:if test="${list.category == 1}">상품 출시</c:if>
 							<c:if test="${list.category == 2}">스타벅스와 문화</c:if>
@@ -155,6 +186,9 @@
 						<td> ${list.writeday} </td>
 					</tr>
 				</c:forEach>
+				<c:if test="${total eq 0}">
+					<tr><td colspan="4"><span>조회된 결과가 없습니다.</span></td></tr>
+				</c:if>
 				</tbody>
 			</table>
 		</main>
@@ -163,12 +197,12 @@
 		<div id="pager">
 			<!-- 처음으로 이동 -->
 			<c:if test="${page != 1}">
-				<a href="news_list?page=1&keyword=${keyword}"><input type="button" value="처음"></a>
+				<a href="news_list?page=1&keyword=${keyword}"><input type="button" value="1st"></a>
 			</c:if>
 			
 			<!-- 이전 10 페이지 -->
 			<c:if test="${pstart > 10}">
-				<a href="news_list?page=${pstart-1}&keyword=${keyword}"><input type="button" value="이전"></a>
+				<a href="news_list?page=${pstart-1}&keyword=${keyword}"><input type="button" value="Prev"></a>
 			</c:if>
 			
 			<!-- 이전 1 페이지 -->
@@ -180,7 +214,7 @@
 				<c:set var="pend" value="${total}" />
 			</c:if>
 			<c:forEach var="i" begin="${pstart}" end="${pend}">
-				<c:if test="${i == page}">${i}</c:if>
+				<c:if test="${i == page}"><span style="color:#036;font-weight:bold;">${i}</span></c:if>
 				<c:if test="${i != page}"><a href="news_list?page=${i}&keyword=${keyword}">${i}</a></c:if>
 			</c:forEach>
 			
@@ -191,12 +225,12 @@
 			
 			<!-- 다음 10 페이지 -->
 			<c:if test="${pend < total}">
-				<a href="news_list?page=${pend+1}&keyword=${keyword}"><input type="button" value="다음"></a>
+				<a href="news_list?page=${pend+1}&keyword=${keyword}"><input type="button" value="Next"></a>
 			</c:if>
 			
 			<!-- 끝으로 이동 -->
 			<c:if test="${page < total}">
-				<a href="news_list?page=${total}&keyword=${keyword}"><input type="button" value="끝"></a>
+				<a href="news_list?page=${total}&keyword=${keyword}"><input type="button" value="Last"></a>
 			</c:if>
 		</div>
 		

@@ -46,6 +46,9 @@
 		padding:13px 0 13px 0;
 		vertical-align:center;
 	}
+	section #searchArea input[type='submit']:hover {
+		text-decoration:underline;
+	}
 	section button {
 		padding:12px 0;
 		border:none;
@@ -57,6 +60,7 @@
 	section button:hover {
 		color:white;
 		background:#006633;
+		text-decoration:underline;
 	}
 	section main {
 		width:1100px;
@@ -144,6 +148,9 @@
 						</a>
 					</li>
 				</c:forEach>
+				<c:if test="${total eq 0}">
+					<li style="margin:60px auto;"><span>조회된 결과가 없습니다.</span></li>
+				</c:if>
 			</ul>
 		</main>
 		
