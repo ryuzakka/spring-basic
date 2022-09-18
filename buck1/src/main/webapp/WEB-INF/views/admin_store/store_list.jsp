@@ -15,9 +15,38 @@
 	section {
 		width:1200px;
 		margin:70px auto;
+		text-align:center;
 	}
 	section h2 {
 		text-align:center;
+	}
+	section #searchArea {
+		width:600px;
+		/* margin:60px auto; */
+		margin:40px auto;
+		/* padding-left:133px; */
+	}
+	section #searchArea fieldset {
+		border:none;
+		background:#f6f5ef;
+		padding:24px 0;
+	}
+	section #searchArea input[type='search'] {
+		padding:12px 0;
+		border:none;
+		border-bottom:1px solid #DDD;
+		border-radius:3px;
+		width:70%;
+		text-align:center;
+	}
+	section #searchArea input[type='submit'] {
+		width:20%;
+		border-radius:10px;
+		border:0px;
+		background:#006633;
+		color:white;
+		padding:13px 0 13px 0;
+		vertical-align:center;
 	}
 	section button {
 		padding:12px 0;
@@ -70,6 +99,26 @@
 		width:120px;
 		margin:auto;
 	}
+	
+	section #pager {
+		margin-top:35px;
+	}
+	section #pager a {
+		text-decoration:none;
+		color:black;
+	}
+	section #pager a:hover {
+		text-decoration:underline;
+		color:#036;
+		cursor:pointer;
+	}
+	section #pager input {
+		border:none;
+		padding:8px;
+	}
+	section #pager input:hover {
+		text-decoration:underline;
+	}
 </style>
 <script>
 	function stateChange(n, id) {
@@ -89,6 +138,24 @@
 	
 <section>
 	<h2>매장 목록</h2>
+	
+	<div id="searchArea">
+		<form name="search" method="get" action="store_info" onsubmit="return check(this)">
+			<fieldset>
+				<!-- <legend> 키워드 검색 </legend> -->
+				<input type="hidden" name="page" value="1">
+				<input type="search" name="keyword" list="rec" value="${keyword}" placeholder="키워드 검색 (매장명 또는 지역명)" size="30">
+				<datalist id="rec">
+					<option value="대화동">대화동</option>
+					<option value="주엽동">주엽동</option>
+					<option value="일산동">일산동</option>
+					<option value="덕이동">덕이동</option>
+					<option value="탄현동">탄현동</option>
+				</datalist>
+				<input type="submit" value="검색">
+			</fieldset>
+		</form>
+	</div>
 	
 	<div style="display:inline-block;float:right;padding:0px 80px 20px 80px;">
 		<button onclick="javascript:location='store_write'">매장추가</button>
@@ -141,6 +208,55 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<div id="pager">
+		<!-- 처음으로 이동 -->
+		<c:if test="${page != 1}">
+			<a href="store_list?page=1&keyword=${keyword}"><input type="button" value="1st"></a>
+		</c:if>
+		
+		<!-- 이전 10 페이지 -->
+		<c:if test="${pstart > 10}">
+			<a href="store_list?page=${pstart-1}&keyword=${keyword}"><input type="button" value="Prev"></a>
+		</c:if>
+		
+		<!-- 이전 1 페이지 -->
+		<c:if test="${page != 1}">
+			<a href="store_list?page=${page-1}&keyword=${keyword}"><input type="button" value="&lt;"></a>
+		</c:if>
+		
+		<c:if test="${pend >= total}">
+			<c:set var="pend" value="${total}" />
+		</c:if>
+		<c:forEach var="i" begin="${pstart}" end="${pend}">
+			<c:if test="${i == page}"><span style="color:#036;font-weight:bold;">${i}</span></c:if>
+			<c:if test="${i != page}"><a href="store_list?page=${i}&keyword=${keyword}">${i}</a></c:if>
+		</c:forEach>
+		
+		<!-- 다음 1 페이지 -->
+		<c:if test="${page < total}">
+			<a href="store_list?page=${page+1}&keyword=${keyword}"><input type="button" value="&gt;"></a>
+		</c:if>
+		
+		<!-- 다음 10 페이지 -->
+		<c:if test="${pend < total}">
+			<a href="store_list?page=${pend+1}&keyword=${keyword}"><input type="button" value="Next"></a>
+		</c:if>
+		
+		<!-- 끝으로 이동 -->
+		<c:if test="${page < total}">
+			<a href="store_list?page=${total}&keyword=${keyword}"><input type="button" value="Last"></a>
+		</c:if>
+	</div>
+	
+	<div style="display:none;">
+		page:${page}<br>
+		pstart:${pstart}<br>
+		pend:${pend}<br>
+		total:${total}<br>
+		keyword:${keyword}<br>
+	</div>
+	
 </section>
 	
 </body>

@@ -127,7 +127,7 @@
 	
 	<table align="center" border="0">
 		<tr>
-			<!-- <th> No. </th> -->
+			<th> No. </th>
 			<th> 매장이름 </th>
 			<th> 매장위치 </th>
 			<th> 매장상태 </th>
@@ -135,7 +135,7 @@
 		</tr>
 		<c:forEach items="${store}" var="store">
 			<tr>
-				<%-- <td> ${store.rnum} </td> --%>
+				<td> ${store.rnum} </td>
 				<td> ${store.storename} </td>
 				<td> ${store.addr1} (${store.addr2}) </td>
 				<td>

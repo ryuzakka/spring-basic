@@ -126,7 +126,7 @@
 		from campaign
 		where
 			now() &gt;= startdate
-			and now() &lt;= enddate
+			and now() &lt;= enddate+1
 			and title like concat('%',#{param1},'%')
 		order by id desc
 	</select>

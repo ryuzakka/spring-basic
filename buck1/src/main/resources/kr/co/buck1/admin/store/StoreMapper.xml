@@ -12,9 +12,26 @@
 	</insert>
 	
 	<select id="store_list" resultType="kr.co.buck1.admin.store.StoreVO">
-		select *, @rownum:=@rownum+1 as rnum 
-		from store, (select @rownum:=0) as r
-		where state &gt;= 0
+		<!-- select
+			*,
+			@rownum:=@rownum+1 as rnum 
+		from 
+			store, 
+			(select @rownum:=0) as r
+		where 
+			state &gt;= 0 -->
+		select
+			*,
+			@rownum:=@rownum+1 as rnum 
+		from 
+			store, 
+			(select @rownum:=#{param2}) as r
+		where 
+			(state &gt;= 0) and (
+				storename like concat('%',#{param1},'%')
+				or addr1 like concat('%',#{param1},'%')
+				or addr2 like concat('%',#{param1},'%'))
+		limit #{param2},10
 	</select>
 	
 	<update id="store_state">
@@ -40,6 +57,16 @@
 			,writeday = now()
 		where id = #{id}
 	</update>
+	
+	<select id="getTotal" resultType="Integer">
+		select ceil(count(*)/10)
+		from store
+		where
+			(state &gt;= 0) and (
+			storename like concat('%',#{param1},'%')
+			or addr1 like concat('%',#{param1},'%')
+			or addr2 like concat('%',#{param1},'%'))
+	</select>
 	
 	
 </mapper>

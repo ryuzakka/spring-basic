@@ -23,7 +23,7 @@
 			@rownum:=@rownum+1 as rnum 
 		from 
 			store, 
-			(select @rownum:=0) as r
+			(select @rownum:=#{param2}) as r
 		where 
 			(state &gt;= 0) and (
 				storename like concat('%',#{param1},'%')

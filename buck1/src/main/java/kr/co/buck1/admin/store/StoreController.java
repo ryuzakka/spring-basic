@@ -27,8 +27,8 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/admin_store/store_list")
-	public String store_list(Model model) {
-		return service.store_list(model);
+	public String store_list(Model model, HttpServletRequest req) {
+		return service.store_list(model, req);
 	}
 	
 	@RequestMapping("/admin_store/store_state")
