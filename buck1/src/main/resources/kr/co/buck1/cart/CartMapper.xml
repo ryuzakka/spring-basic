@@ -23,6 +23,8 @@
 		update cart set unit=unit+1, total_cost=(prod_cost*unit) where id=#{param1}
 	</update>
 	
-	
+	<select id="getInfo" resultType="kr.co.buck1.member.MemberVO">
+		select * from member where userid=#{param1}
+	</select>
 	
 </mapper>

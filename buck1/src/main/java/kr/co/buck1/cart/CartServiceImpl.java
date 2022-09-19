@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import kr.co.buck1.member.MemberMapper;
+import kr.co.buck1.member.MemberVO;
+
 @Service
 @Qualifier("cs")
 public class CartServiceImpl implements CartService {
@@ -45,7 +48,11 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public String order(HttpServletRequest req, HttpSession session, Model model) {
-		model.addAttribute("cart", mapper.list(session.getAttribute("userid").toString()));
+		String userid = session.getAttribute("userid").toString();
+		
+		MemberVO vo = mapper.getInfo(userid);
+		model.addAttribute("member", vo);
+		model.addAttribute("cart", mapper.list(userid));
 		model.addAttribute("cost", req.getParameter("cost"));
 		return "/cart/cart_order";
 	}

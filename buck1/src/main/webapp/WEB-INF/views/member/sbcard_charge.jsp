@@ -41,6 +41,52 @@
 	section #container table input[type='button']:hover {
 		text-decoration:underline;
 	}
+	section #container fieldset {
+		width:300px;
+		margin:auto;
+		border:1px solid #ddd;
+	}
+	section #container fieldset input[type='radio'] {
+		display:none;
+	}
+	section #container fieldset input[type='radio']+label {
+		display:inline-block;
+	    cursor:pointer;
+	    /* height:24px; */
+	    width:90px;
+	    padding:6px 0px;
+	    border:1px solid #333;
+	    border-radius:3px;
+	    line-height:24px;
+	    text-align:center;
+	    font-weight:bold;
+	    font-size:13px;
+	    background-color:#fff;
+    	color:#333;
+	}
+	section #container fieldset input[type='radio']:checked+label {
+		border:1px solid #006633;
+		background-color:#006633;
+    	color:#fff;
+	}
+	section #container fieldset input[type="submit"] {
+		display:inline-block;
+	    cursor:pointer;
+	    width:90%;
+	    margin-top:10px;
+	    padding:6px 0px;
+	    border:1px solid #006633;
+	    border-radius:3px;
+	    line-height:24px;
+	    text-align:center;
+	    font-weight:bold;
+	    font-size:13px;
+	    background-color:#006633;
+    	color:#fff;
+	}
+	section #container fieldset input[type="submit"]:hover {
+		text-decoration:underline;
+	}
 </style>
 
 </head>
@@ -66,10 +112,26 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="button" onclick="" value="충전하기" /></td>
+					<td colspan="2"></td>
 				</tr>
 			</tbody>
 		</table>
+		
+		<form name="rechargeForm" action="sbcard_recharge">
+			<input type="hidden" name="userid" value="${userid}" />
+			<fieldset>
+				<legend>일반 충전</legend>
+				<p>
+				<input type="radio" id="1만원" name="fare" value="10000" /><label for="1만원">1만원</label>
+				<input type="radio" id="3만원" name="fare" value="30000" /><label for="3만원">3만원</label>
+				<input type="radio" id="5만원" name="fare" value="50000" /><label for="5만원">5만원</label>
+				<p>
+				<input type="radio" id="7만원" name="fare" value="70000" /><label for="7만원">7만원</label>
+				<input type="radio" id="10만원" name="fare" value="100000" /><label for="10만원">10만원</label>
+				<p>
+				<input type="submit" value="충전하기" />
+			</fieldset>
+		</form>
 	</div>
 </section>
 

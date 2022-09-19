@@ -108,5 +108,9 @@ public class MemberController {
 	public String sbcard_charge(HttpSession session, Model model) {
 		return service.sbcard_charge(session, model);
 	}
+	@RequestMapping("/member/sbcard_recharge")
+	public String sbcard_recharge(HttpServletRequest req) {
+		return service.sbcard_recharge(req);
+	}
 	
 }

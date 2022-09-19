@@ -78,14 +78,18 @@
 				<div><img src="${pageContext.request.contextPath}/resources/images/e_gold_card.png"></div>
 				<div>
 					<span>스타벅스 카드</span><br>
-					<span>충전금액</span>
+					<div>
+						<span>충전금액</span><br>
+						<span><fmt:formatNumber type="number" maxFractionDigits="3" pattern="###,###원" value="${member.sbcard}" /></span>
+					</div>
+					
 				</div>
 			</div>
 			<div id="creditCard" class="selectedPayment" style="display:none">
 				<div><img src="${pageContext.request.contextPath}/resources/images/credit01.png"></div>
 				<div>
 					<span>신용카드</span><br>
-					<span>??</span>
+					<span>1234-1234-1234-1234</span>
 				</div>
 			</div>
 			<div id="ssgPay" class="selectedPayment" style="display:none">
@@ -125,19 +129,14 @@
 		<!-- 현금영수증 선택 -->
 		<div id="receipts">
 			<h4>현금영수증</h4>
-			<input type="radio" name="receipt" id="신청안함" value="신청안함" checked>
-			<label for="신청안함">신청안함</label>
-			<input type="radio" name="receipt" id="personnelReceipt" value="개인소득공제">
-			<label for="personnelReceipt">개인소득공제</label>
-			<input type="radio" name="receipt" id="corporateReceipt" value="사업자증빙용">
-			<label for="corporateReceipt">사업자증빙용</label>
+			<input type="radio" name="receipt" id="신청안함" value="신청안함" checked><label for="신청안함">신청안함</label>
+			<input type="radio" name="receipt" id="personnelReceipt" value="개인소득공제"><label for="personnelReceipt">개인소득공제</label>
+			<input type="radio" name="receipt" id="corporateReceipt" value="사업자증빙용"><label for="corporateReceipt">사업자증빙용</label>
 			<div class="receiptType">
-				<label for="personnel">휴대폰 번호</label>
-				<input type="phone" name="personnelReceipt" id="personnelReceipt" />
+				<input type="phone" name="personnelReceipt" id="personnelReceipt" /><label for="personnelReceipt">휴대폰 번호</label>
 			</div>
 			<div class="receiptType">
-				<label for="corporate">휴대폰 번호</label>
-				<input type="phone" name="corporateReceipt" id="corporateReceipt" />
+				<input type="phone" name="corporateReceipt" id="corporateReceipt" /><label for="corporateReceipt">사업자 번호</label>
 			</div>
 		</div>
 		

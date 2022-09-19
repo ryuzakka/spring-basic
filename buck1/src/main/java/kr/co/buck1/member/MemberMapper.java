@@ -1,9 +1,5 @@
 package kr.co.buck1.member;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-
 public interface MemberMapper {
 
 	public int signin_ok(MemberVO vo);
@@ -16,5 +12,6 @@ public interface MemberMapper {
 	public void info_update_ok(String nick, String email, String id);
 	public void withdrawal(String userid);
 	public int sbcard_charge(String userid);
+	public void sbcard_recharge(String fare, String userid);
 	
 }

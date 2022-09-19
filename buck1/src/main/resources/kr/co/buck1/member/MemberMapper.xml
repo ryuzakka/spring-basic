@@ -53,6 +53,12 @@
 		where userid = #{param1}
 	</select>
 	
+	<update id="sbcard_recharge">
+		update member
+		set sbcard = sbcard + #{param1}
+		where userid = #{param2}
+	</update>
+	
 </mapper>
 
 

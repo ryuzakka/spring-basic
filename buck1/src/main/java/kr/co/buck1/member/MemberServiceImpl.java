@@ -136,4 +136,12 @@ public class MemberServiceImpl implements MemberService {
 		return "/member/sbcard_charge";
 	}
 	
+	@Override
+	public String sbcard_recharge(HttpServletRequest req) {
+		String rechargeFare = req.getParameter("fare");
+		String userid = req.getParameter("userid");
+		mapper.sbcard_recharge(rechargeFare, userid);
+		return "/member/sbcard_recharge";
+	}
+	
 }
