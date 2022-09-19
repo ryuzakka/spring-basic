@@ -60,8 +60,21 @@
 		background:#006633;
 		color:white;
 	}
-	
 </style>
+<script>
+	
+	function userCheck(user,menu) {
+		if(user == "") {
+			//confirm('login gogo');
+			var position = "left=200,top=80,width=500,height=580";
+			var loginSon = window.open("popup_login?menu="+menu,"login",position);
+			//console.log(menu);
+		} else {
+			location = 'drink_order?name=' + menu;
+		}
+	}
+</script>
+
 <div id="section">
 	
 	<h2>${category}</h2>
@@ -99,7 +112,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<p><input type="button" onclick="javascript:location='drink_order?name=${param.name}'" value="주문하기"></p>
+			<p><input type="button" onclick="userCheck('${userid}','${param.name}')" value="주문하기"></p>
 		</div>
 	</div>
 	

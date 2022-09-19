@@ -7,29 +7,43 @@
 <mapper namespace="kr.co.buck1.menu.MenuMapper">
 	
 	<select id="drink_list" resultType="kr.co.buck1.menu.MenuVO">
-		select distinct name from menu where cate1=01 and state=1
+		select distinct name 
+		from menu 
+		where cate1=01 and state=1
 	</select>
 	
 	<select id="getOption" resultType="kr.co.buck1.menu.MenuVO">
-		select * from menu where name=#{param1} and state=1
+		select * 
+		from menu 
+		where name=#{param1} and state=1
 	</select>
 	
 	<select id="getCate" resultType="kr.co.buck1.menu.MenuVO">
-		select * from menu where name=#{param1} limit 1
+		select * 
+		from menu 
+		where name=#{param1} limit 1
 	</select>
 	
 	<select id="getCatename" resultType="String">
-		select B.catename from menu A, menu_cate B
-		where B.cate1=#{param1} and B.cate2=#{param2} and A.name=#{param3}
+		select B.catename 
+		from menu A, menu_cate B
+		where 
+			B.cate1=#{param1} and 
+			B.cate2=#{param2} and 
+			A.name=#{param3}
 		limit 1
 	</select>
 	
 	<select id="getPrice" resultType="Integer">
-		select price from menu where name=#{param1} and size=#{param2}
+		select price 
+		from menu 
+		where name=#{param1} and size=#{param2}
 	</select>
 	
 	<select id="getCode" resultType="String">
-		select code from menu where name=#{param1} and size=#{param2}
+		select code 
+		from menu 
+		where name=#{param1} and size=#{param2}
 	</select>
 	
 	<insert id="insertCart" parameterType="kr.co.buck1.cart.CartVO">
@@ -37,5 +51,19 @@
 		(userid,code,unit,prod_cost,total_cost,writeday)
 		values(#{userid},#{code},#{unit},#{prod_cost},#{total_cost},now())
 	</insert>
+	
+	<select id="login_ok" resultType="Integer">
+		select count(*)
+		from member
+		where
+			userid = #{param1} and
+			pwd = #{param2}
+	</select>
+	
+	<select id="getInfo" resultType="kr.co.buck1.member.MemberVO">
+		select *
+		from member
+		where userid = #{param1}
+	</select>
 	
 </mapper>

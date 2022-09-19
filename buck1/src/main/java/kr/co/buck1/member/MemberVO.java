@@ -2,7 +2,7 @@ package kr.co.buck1.member;
 
 public class MemberVO {
 
-	private int id, star, level, state;
+	private int id, star, level, state, sbcard;
 	private String userid, pwd, username, nickname, birth, phone, email, writeday;
 	
 	
@@ -77,5 +77,11 @@ public class MemberVO {
 	}
 	public void setWriteday(String writeday) {
 		this.writeday = writeday;
+	}
+	public int getSbcard() {
+		return sbcard;
+	}
+	public void setSbcard(int sbcard) {
+		this.sbcard = sbcard;
 	}
 }

@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.buck1.cart.CartVO;
+import kr.co.buck1.member.MemberVO;
 
 @Service
 @Qualifier("ms")
@@ -19,6 +19,7 @@ public class MenuServiceImpl implements MenuService {
 
 	@Autowired
 	private MenuMapper mapper;
+	//private MemberMapper memberMapper;
 	
 	@Override
 	public String drink_list(Model model) {
@@ -77,6 +78,23 @@ public class MenuServiceImpl implements MenuService {
 		return "redirect:/cart/list";
 	}
 	
+	@Override
+	public void popup_login_ok(HttpServletRequest req, HttpSession session, PrintWriter out) {
+		String userid = req.getParameter("userid");
+		String pwd = req.getParameter("pwd");
+		
+		int result = mapper.login_ok(userid, pwd);
+		if(result == 1) {
+			// 로그인 진행
+			MemberVO mvo = mapper.getInfo(userid);
+			session.setAttribute("userid", mvo.getUserid());
+			session.setAttribute("nick", mvo.getNickname());
+			out.print(result);
+		} else {
+			// ID/PW 불일치member/signin
+			out.print(result);			
+		}
+	}
 	
 	
 }

@@ -15,5 +15,6 @@ public interface MemberMapper {
 	public MemberVO search_pwd(String userid, String phone);
 	public void info_update_ok(String nick, String email, String id);
 	public void withdrawal(String userid);
+	public int sbcard_charge(String userid);
 	
 }

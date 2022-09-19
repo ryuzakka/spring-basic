@@ -24,7 +24,10 @@
 	}
 	section #payment, #coupon, #eGift, #receipts {
 		border-bottom:2px solid lightgrey;
-		padding-bottom:13px;
+/* 		padding-bottom:13px; */
+	}
+	section #paymentList {
+		width:120px;
 	}
 	section #payment .selectedPayment {
 		margin-top:16px;
@@ -47,7 +50,7 @@
 	
 	<!-- 
 		1. 결제 수단
-		2. 쿠폰/할인
+		2. 쿠폰/할인 => 추후 추가사항
 		3. 현금영수증
 		4. 주문내역  => 상품이미지+상품명+타입+사이즈  (수량정보 없이 1개씩 노출)
 		5. 주문금액 / 할인금액 / 최종 결제 금액
@@ -65,7 +68,7 @@
 		<div id="payment">
 			<h4>결제 수단</h4>
 			<div>
-				<select id="payment" name="payment" onchange="paymentType(this.value)">
+				<select id="paymentList" name="paymentList" onchange="paymentType(this.value)">
 					<option value="starbucksCard">스타벅스 카드</option>
 					<option value="creditCard">신용카드</option>
 					<option value="ssgPay">SSGPAY</option>
@@ -92,7 +95,7 @@
 		</div>
 		
 		<!-- 할인수단 선택 -->
-		<div id="discount">
+		<div id="discount" style="display:none;">
 			<div id="coupon">
 				<h4>쿠폰</h4>
 				<input type="radio" name="coupon" id="미사용" value="미사용" checked>
@@ -105,7 +108,7 @@
 					<%-- </c:forEach> --%>
 				</select>
 			</div>
-			<div id="eGift">
+			<div id="eGift" style="display:none;">
 				<h4>eGift</h4>
 				<input type="radio" name="gift" id="미사용" value="미사용" checked>
 				<label for="미사용">미사용</label>
@@ -124,12 +127,18 @@
 			<h4>현금영수증</h4>
 			<input type="radio" name="receipt" id="신청안함" value="신청안함" checked>
 			<label for="신청안함">신청안함</label>
-			<input type="radio" name="receipt" id="개인소득공제" value="개인소득공제">
-			<label for="개인소득공제">개인소득공제</label>
-			<input type="radio" name="receipt" id="사업자증빙용" value="사업자증빙용">
-			<label for="사업자증빙용">사업자증빙용</label>
-			<div class="receiptType"></div>
-			<div class="receiptType"></div>
+			<input type="radio" name="receipt" id="personnelReceipt" value="개인소득공제">
+			<label for="personnelReceipt">개인소득공제</label>
+			<input type="radio" name="receipt" id="corporateReceipt" value="사업자증빙용">
+			<label for="corporateReceipt">사업자증빙용</label>
+			<div class="receiptType">
+				<label for="personnel">휴대폰 번호</label>
+				<input type="phone" name="personnelReceipt" id="personnelReceipt" />
+			</div>
+			<div class="receiptType">
+				<label for="corporate">휴대폰 번호</label>
+				<input type="phone" name="corporateReceipt" id="corporateReceipt" />
+			</div>
 		</div>
 		
 		<!-- 주문내역 -->

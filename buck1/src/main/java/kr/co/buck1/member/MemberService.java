@@ -20,5 +20,6 @@ public interface MemberService {
 	public String info_update(HttpServletRequest req, Model model);
 	public String info_update_ok(HttpServletRequest req); 
 	public String withdrawal(HttpSession session);
+	public String sbcard_charge(HttpSession session, Model model);
 	
 }

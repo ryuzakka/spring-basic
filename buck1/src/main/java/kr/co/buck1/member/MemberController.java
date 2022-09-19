@@ -104,4 +104,9 @@ public class MemberController {
 		return "/member/withdrawal_ok";
 	}
 	
+	@RequestMapping("/member/sbcard_charge")
+	public String sbcard_charge(HttpSession session, Model model) {
+		return service.sbcard_charge(session, model);
+	}
+	
 }

@@ -129,5 +129,11 @@ public class MemberServiceImpl implements MemberService {
 		return "redirect:/member/withdrawal_ok";
 	}
 	
+	@Override
+	public String sbcard_charge(HttpSession session, Model model) {
+		int money = mapper.sbcard_charge(session.getAttribute("userid").toString());
+		model.addAttribute("balance", money);
+		return "/member/sbcard_charge";
+	}
 	
 }

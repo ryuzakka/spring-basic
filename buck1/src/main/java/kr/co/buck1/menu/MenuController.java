@@ -1,7 +1,6 @@
 package kr.co.buck1.menu;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,7 +29,6 @@ public class MenuController {
 //		MenuDao dao = sqlSession.getMapper(MenuDao.class);
 //		ArrayList<MenuDto> list = dao.list();
 //		model.addAttribute("list", list);
-		
 		return service.drink_list(model);
 	}
 	
@@ -42,6 +40,14 @@ public class MenuController {
 	@RequestMapping("/menu/drink_order")
 	public String drink_order(HttpServletRequest req, Model model) {
 		return service.drink_order(req, model);
+	}
+	@RequestMapping("/menu/popup_login")
+	public String popup_login() {
+		return "/menu/popup_login";
+	}
+	@RequestMapping("/menu/popup_login_ok")
+	public void popup_login_ok(HttpServletRequest req, HttpSession session, PrintWriter out) {
+		service.popup_login_ok(req, session, out);
 	}
 	
 	@RequestMapping("/menu/get_price")

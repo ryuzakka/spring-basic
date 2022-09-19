@@ -14,5 +14,6 @@ public interface MenuService {
 	public void getPrice(HttpServletRequest req, PrintWriter out);
 	public String drink_order(HttpServletRequest req, Model model);
 	public String drink_order_ok(HttpServletRequest req, HttpSession session);
+	public void popup_login_ok(HttpServletRequest req, HttpSession session, PrintWriter out);
 	
 }
