@@ -19,9 +19,24 @@ public class CartServiceImpl implements CartService {
 	private CartMapper mapper;
 	
 	@Override
-	public String list(HttpSession session, Model model) {
+	public String list(HttpSession session, Model model, HttpServletRequest req) {
 		model.addAttribute("list", mapper.list(session.getAttribute("userid").toString()));
 		return "/cart/list";
+	}
+	@Override
+	public String popup_store(Model model, HttpServletRequest req) {
+		String keyword;
+		
+		if(req.getParameter("keyword") == null) {
+			keyword = "";
+		} else {
+			keyword = req.getParameter("keyword");
+		}
+		
+		model.addAttribute("store", mapper.storelist(keyword));
+		model.addAttribute("total", mapper.getStoreTotal(keyword));
+		
+		return "/cart/popup_store";
 	}
 	
 	@Override

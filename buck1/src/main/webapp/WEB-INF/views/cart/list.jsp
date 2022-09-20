@@ -43,24 +43,26 @@
 	#section #bill {
 		margin:50px auto 20px auto;
 	}
-	#section #bill input[type='submit'] {
+	#section #bill #pay {
 		width:300px;
 		border-radius:10px;
 		border:0px;
 		background:#f4f4f1;
 		color:#222;
 		font-size:16px;
+		margin-top:15px;
 		padding:15px 0 18px 0;
 		vertical-align:center;
 	}
-	#section #bill input[type='submit']:hover {
+	#section #bill #pay:hover {
 		background:#006633;
 		color:white;
+		text-decoration:underline;
 	}
+	
 </style>
 <script>
 	function delrow(cartid) {
-		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get", "delete?id="+cartid);
 		xhr.send();
@@ -96,6 +98,11 @@
 			}
 		}
 	}
+	function storeOpen() {
+		var position = "left=200,top=80,width=570,height=580";
+		var popup = window.open("popup_store","select store",position);
+	}
+	
 </script>
 <div id="section">
 	
@@ -166,6 +173,7 @@
 			</table>
 		</div>
 		
+		<input type="hidden" name="storeid" id="storeid" value="" />
 	
 		<div id="bill">
 			<div>
@@ -173,8 +181,50 @@
 				<div>총 결제금액 : <fmt:formatNumber value="${cost}"/>원</div>
 				<input type="hidden" name="cost" value="${cost}">
 			</div>
-			<input type="submit" value="결제하기">
+			<input type="button" id="pay" onclick="storeOpen()" value="주문할 매장 선택하기">
 		</div>
+		
+		
+		<div id="store" style="display:none;">
+			<h2>매장 선택</h2>
+			<div id="searchArea">
+				<!-- <form name="search" method="get" action="list" onsubmit="return check(this)"> -->
+					<fieldset>
+						<!-- <legend> 키워드 검색 </legend> -->
+						<input type="search" name="keyword" id="keyword" list="rec" value="${keyword}" placeholder="키워드 검색 (매장명 또는 지역명)" size="30">
+						<datalist id="rec">
+							<option value="대화동">대화동</option>
+							<option value="주엽동">주엽동</option>
+							<option value="일산동">일산동</option>
+							<option value="덕이동">덕이동</option>
+							<option value="탄현동">탄현동</option>
+						</datalist>
+						<input type="button" onclick="storeSearch()" value="검색">
+					</fieldset>
+				<!-- </form> -->
+			</div>
+			
+			<ul class="list">
+				<c:forEach items="${store}" var="store">
+					<li class="list-item" onclick="selectStore(this,${store.id})">
+						<div class="imgContainer">
+							<c:if test="${store.storeimg != null}">
+								<img src="${pageContext.request.contextPath}/resources/storeimg/${store.storeimg}" height="90">
+							</c:if>
+						</div>
+						<dl>
+							<dt>${store.storename} (${store.addr2})</dt>
+							<dd>${store.addr1}</dd>
+						</dl>
+					</li>
+				</c:forEach>
+			</ul>
+			
+			<input type="submit" value="선택완료" />
+		</div>
+		
 	</form>
-	
 </div>
+
+<script>
+</script>

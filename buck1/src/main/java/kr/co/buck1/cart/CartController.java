@@ -17,8 +17,8 @@ public class CartController {
 	private CartService service;
 	
 	@RequestMapping("/cart/list")
-	public String list(HttpSession session, Model model) {
-		return service.list(session, model);
+	public String list(HttpSession session, Model model, HttpServletRequest req) {
+		return service.list(session, model, req);
 	}
 	
 	@RequestMapping("/cart/delete")
@@ -40,6 +40,9 @@ public class CartController {
 	public String cart_order(HttpServletRequest req, HttpSession session, Model model) {
 		return service.order(req, session, model);
 	}
-	
+	@RequestMapping("/cart/popup_store")
+	public String popup_store(Model model, HttpServletRequest req) {
+		return service.popup_store(model, req);
+	}
 	
 }

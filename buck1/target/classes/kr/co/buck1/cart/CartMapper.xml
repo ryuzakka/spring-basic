@@ -6,9 +6,35 @@
 <mapper namespace="kr.co.buck1.cart.CartMapper">
 	
 	<select id="list" resultType="kr.co.buck1.cart.CartVO">
-		select A.*, B.name, B.type, B.size
-		from cart A inner join menu B
-		on a.userid=#{param1} and B.code=A.code and A.state=0;
+		select 
+			A.*, 
+			B.name, 
+			B.type, 
+			B.size
+		from 
+			cart as A 
+			inner join menu as B
+		on 
+			a.userid=#{param1} and 
+			B.code=A.code and 
+			A.state=0;
+	</select>
+	
+	<select id="storelist" resultType="kr.co.buck1.store.FStoreVO">
+		select id, storename, storeimg, addr1, addr2
+		from store
+		where
+			state = 2 and
+			(storename like concat('%',#{param1},'%') or
+			addr2 like concat('%',#{param1},'%'))
+	</select>
+	
+	<select id="getStoreTotal" resultType="Integer">
+		select count(*)
+		from store
+		where
+			storename like concat('%',#{param1},'%') or
+			addr2 like concat('%',#{param1},'%')
 	</select>
 	
 	<update id="delete">
