@@ -118,7 +118,7 @@
 		
 		<ul class="list">
 			<c:forEach items="${store}" var="store">
-				<li class="list-item" onclick="selectStore(this,${store.id})">
+				<li class="list-item" onclick="selectStore(this,${store.id},'${store.storeimg}','${store.storename}','${store.addr1}')">
 					<div class="imgContainer">
 						<c:if test="${store.storeimg != null}">
 							<img src="${pageContext.request.contextPath}/resources/storeimg/${store.storeimg}" height="90">
@@ -141,14 +141,24 @@
 		//console.log(len);
 		len != 0 ? true : false;
 	}
-	function selectStore(my,id) {
+	function selectStore(my, id, storeimg, storename, addr) {
 		/* let stores = document.querySelectorAll('.list-item');
 		for(var i=0; i<stores.length; i++) {
 			if(stores[i].classList.contains("on"))
 				stores[i].classList.remove("on");
 		}
 		my.classList.add("on"); */
-		opener.document.getElementById('storeid').value = id;
+		
+		// parent창에 선택된 매장 표시하기
+		opener.document.querySelector('#store').style.display = "block";
+		opener.document.querySelector('#storeid').value = id;
+		opener.document.querySelector('#store img').src = "${pageContext.request.contextPath}/resources/storeimg/"+storeimg;
+		opener.document.querySelector('#store dt').innerText = storename;
+		opener.document.querySelector('#store dd').innerText = addr;
+		
+		//opener.document.getElementById('storeid').value = id;
+		
+		// 버튼 기능변경 : 매장선택 -> 결제 버튼으로 변경하기
 		opener.document.querySelector('#pay').type = "submit";
 		opener.document.querySelector('#pay').value = "결제하기";
 		opener.document.querySelector('#pay').onclick = "";

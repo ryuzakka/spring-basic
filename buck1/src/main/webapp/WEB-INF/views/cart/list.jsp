@@ -41,7 +41,7 @@
 		height:48%;
 	}
 	#section #bill {
-		margin:50px auto 20px auto;
+		margin:40px auto 20px auto;
 	}
 	#section #bill #pay {
 		width:300px;
@@ -173,54 +173,37 @@
 			</table>
 		</div>
 		
-		<input type="hidden" name="storeid" id="storeid" value="" />
+		<div id="store" style="display:none;border:none;margin-top:35px;padding:0px;">
+			<input type="hidden" name="storeid" id="storeid" value="" />
+			<fieldset style="display:inline-block;border:1px solid #f6f5ef;">
+				<legend style="width:50%;height:30px;padding-top:7px;background:#f6f5ef;">선택 매장</legend>
+				<div style="display:block;width:200px;margin:auto"><img src="" width="200px"/></div>
+				<dl style="display:inline-block;text-align:center;vertical-align:top;margin-top:14px;">
+					<dt style="font-weight:bold;"></dt>
+					<dd style="margin:0px;padding:0px;"></dd>
+				</dl><br>
+				<input type="button" onclick="storeOpen()" value="다시선택하기" />
+			</fieldset>
+		</div>
 	
 		<div id="bill">
-			<div>
+			<%-- <div>
 				<div>총 상품수량 : <fmt:formatNumber value="${unit}"/></div>
 				<div>총 결제금액 : <fmt:formatNumber value="${cost}"/>원</div>
-				<input type="hidden" name="cost" value="${cost}">
-			</div>
-			<input type="button" id="pay" onclick="storeOpen()" value="주문할 매장 선택하기">
-		</div>
-		
-		
-		<div id="store" style="display:none;">
-			<h2>매장 선택</h2>
-			<div id="searchArea">
-				<!-- <form name="search" method="get" action="list" onsubmit="return check(this)"> -->
-					<fieldset>
-						<!-- <legend> 키워드 검색 </legend> -->
-						<input type="search" name="keyword" id="keyword" list="rec" value="${keyword}" placeholder="키워드 검색 (매장명 또는 지역명)" size="30">
-						<datalist id="rec">
-							<option value="대화동">대화동</option>
-							<option value="주엽동">주엽동</option>
-							<option value="일산동">일산동</option>
-							<option value="덕이동">덕이동</option>
-							<option value="탄현동">탄현동</option>
-						</datalist>
-						<input type="button" onclick="storeSearch()" value="검색">
-					</fieldset>
-				<!-- </form> -->
-			</div>
+				
+			</div> --%>
 			
-			<ul class="list">
-				<c:forEach items="${store}" var="store">
-					<li class="list-item" onclick="selectStore(this,${store.id})">
-						<div class="imgContainer">
-							<c:if test="${store.storeimg != null}">
-								<img src="${pageContext.request.contextPath}/resources/storeimg/${store.storeimg}" height="90">
-							</c:if>
-						</div>
-						<dl>
-							<dt>${store.storename} (${store.addr2})</dt>
-							<dd>${store.addr1}</dd>
-						</dl>
-					</li>
-				</c:forEach>
-			</ul>
-			
-			<input type="submit" value="선택완료" />
+			<fieldset style="display:inline-block;width:300px;border:1px solid #f6f5ef;">
+				<legend style="width:50%;height:30px;padding-top:7px;background:#f6f5ef;">결제할 내역</legend>
+				<dl style="display:inline-block;text-align:center;vertical-align:top;margin-top:14px;">
+					<dt style="font-weight:bold;">총 상품수량</dt>
+					<dd style="margin:0px;padding:0px;"><fmt:formatNumber value="${unit}"/></dd>
+					<dt style="font-weight:bold;margin-top:10px;">총 결제금액</dt>
+					<dd style="margin:0px;padding:0px;"><fmt:formatNumber value="${cost}"/>원</dd>
+				</dl>
+			</fieldset>
+			<input type="hidden" name="cost" value="${cost}">
+			<p><input type="button" id="pay" onclick="storeOpen()" value="주문할 매장 선택하기"></p>
 		</div>
 		
 	</form>
