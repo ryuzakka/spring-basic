@@ -173,8 +173,9 @@
 			</table>
 		</div>
 		
+		<!-- 주문 매장 -->
 		<div id="store" style="display:none;border:none;margin-top:35px;padding:0px;">
-			<input type="hidden" name="storeid" id="storeid" value="" />
+			<input type="hidden" name="store_id" id="storeid" value="" />
 			<fieldset style="display:inline-block;border:1px solid #f6f5ef;">
 				<legend style="width:50%;height:30px;padding-top:7px;background:#f6f5ef;">선택 매장</legend>
 				<div style="display:block;width:200px;margin:auto"><img src="" width="200px"/></div>

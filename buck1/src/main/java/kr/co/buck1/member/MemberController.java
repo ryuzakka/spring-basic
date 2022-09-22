@@ -113,4 +113,8 @@ public class MemberController {
 		return service.sbcard_recharge(req);
 	}
 	
+	@RequestMapping("/member/myorder")
+	public String myorder(HttpSession session, Model model) {
+		return service.myOrder(session, model);
+	}
 }

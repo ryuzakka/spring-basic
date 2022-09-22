@@ -20,7 +20,7 @@
 		
 		select
 			*,
-			@rownum:=@rownum+1 as rnum 
+			@rownum:=@rownum+1 as rnum
 		from 
 			store, 
 			(select @rownum:=#{param2}) as r

@@ -1,5 +1,9 @@
 package kr.co.buck1.member;
 
+import java.util.ArrayList;
+
+import kr.co.buck1.vo.PurchaseVO;
+
 public interface MemberMapper {
 
 	public int signin_ok(MemberVO vo);
@@ -13,5 +17,7 @@ public interface MemberMapper {
 	public void withdrawal(String userid);
 	public int sbcard_charge(String userid);
 	public void sbcard_recharge(String fare, String userid);
+	public ArrayList<PurchaseVO> myOrder(String userid, String oCode);
+	public ArrayList<PurchaseVO> myOrderStore(String userid, String oCode);
 	
 }

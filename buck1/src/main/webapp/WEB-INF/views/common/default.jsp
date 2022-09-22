@@ -200,7 +200,7 @@
 								<li><span style="font-size:12px;font-weight:bold;">${nick}님</span></li>
 								<li><a href="../member/info">회원정보</a></li>
 								<li><a href="../cart/list">장바구니</a></li>
-								<li><a href="">나의 주문</a></li>
+								<li><a href="../member/myorder">나의 주문</a></li>
 								<li><a href="../member/sbcard_charge">카드 충전</a></li>
 								<!-- <li><a href="">Gift 확인</a></li> -->
 								<li><a href="../member/logout">로그아웃</a></li>

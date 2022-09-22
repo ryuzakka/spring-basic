@@ -6,21 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script>
-	function paymentType(val) {
-		document.getElementById('starbucksCard').style.display = "none";
-		document.getElementById('creditCard').style.display = "none";
-		document.getElementById('ssgPay').style.display = "none";
-		document.getElementById(val).style.display = "block";
-	}
-</script>
 <style>
-	h2 {
-		text-align:center;
-	}
 	section {
 		width:500px;
-		margin:auto;
+		margin:55px auto;
+	}
+	section h2 {
+		text-align:center;
+		font-size:2em;
+	}
+	section .section {
+		margin-bottom:45px;
+	}
+	section .section h4 {
+		margin-bottom:10px;
 	}
 	section #payment, #coupon, #eGift, #receipts {
 		border-bottom:2px solid lightgrey;
@@ -37,14 +36,142 @@
 		display:inline-block;
 	}
 	section #payment .selectedPayment div:nth-child(2) {
-		vertical-align:top;
+		vertical-align:bottom;
+		padding-bottom:9px;
 	}
 	section #payment .selectedPayment img {
 		width:110px;
 		vertical-align:middle;
 	}
-	
+	section #payment .selectedPayment .pay-title {
+		font-size:13px;
+		font-weight:bold;
+	}
+	section #payment .selectedPayment .pay-con {
+		font-size:16px;
+	}
+	section .order {
+		margin-bottom:20px;
+	}
+	section .order .menu-list {
+		padding:0px;
+		/* border:1px solid green; */
+	}
+	section .order .menu-list .items {
+		list-style:none;
+		padding:7px 18px;
+		margin:4px 8px;
+		height:60px;
+		background:#f6f5ef;
+	}
+	section .order .menu-list .items div {
+		display:inline-block;
+	}
+	section .order .menu-list .items dl {
+		display:inline-block;
+		margin:0px;
+		padding-top:8px;
+		vertical-align:top;
+	}
+	section .order .menu-list .items dl dd {
+		display:inline-block;
+		vertical-align:top;
+		margin:5px 3px 0px 3px;
+		font-size:11px;
+	}
+	section #costfield .finalCost {
+		margin-bottom:12px;
+	}
+	section #costfield .finalCost hr {
+		width:360px;
+		margin:16px 53px;
+	}
+	section #costfield .finalCost dl {
+		margin:10px auto;
+		width:300px;
+	}
+	section #costfield .finalCost dl dt {
+		display:inline-block;
+		width:114px;
+		text-align:left;
+	}
+	section #costfield .finalCost dl dd {
+		display:inline-block;
+		width:154px;
+		margin:0px;
+		text-align:right;
+	}
+	section #payBtn {
+		margin:0px auto 40px auto;
+		text-align:center;
+	}
+	section #payBtn input[type='button'] {
+		width:300px;
+		border-radius:10px;
+		border:0px;
+		background:#f4f4f1;
+		color:#222;
+		font-size:16px;
+		margin-top:15px;
+		padding:15px 0 18px 0;
+		vertical-align:center;
+	}
+	section #payBtn input[type='submit'] {
+		width:300px;
+		border-radius:10px;
+		border:0px;
+		background:#006633;
+		color:white;
+		font-size:16px;
+		margin-top:15px;
+		padding:15px 0 18px 0;
+		vertical-align:center;
+	}
+	section #payBtn input[type='submit']:hover {
+		text-decoration:underline;
+	}
 </style>
+
+<script>
+	function paymentType(val) {
+		document.getElementById('starbucksCard').style.display = "none";
+		document.getElementById('creditCard').style.display = "none";
+		document.getElementById('ssgPay').style.display = "none";
+		document.getElementById(val).style.display = "block";
+		
+		document.getElementsByClassName('starbucksCard')[0].style.display = "none";
+		document.getElementsByClassName('creditCard')[0].style.display = "none";
+		document.getElementsByClassName('ssgPay')[0].style.display = "none";
+		document.getElementsByClassName(val)[0].style.display = "block";
+		
+		/* if(val == 'starbucksCard') {			
+			document.querySelector('.starbucksCard').style.display = "block";
+			document.querySelector('.ssgPay').style.display = "none";
+		} else {			
+			document.querySelector('.starbucksCard').style.display = "none";
+			document.querySelector('.ssgPay').style.display = "block";
+		} */
+	}
+	function rechargePopup() {
+		var position = "left=200,top=80,width=570,height=630";
+		var popup = window.open("popup_recharge","starbucks card recharge",position);
+	}
+	function receiptChange(my) {
+		//console.log(n);
+		const receiptType = document.querySelector('.receiptType');
+		let receiptName = my.value;
+		
+		if(receiptName != "신청안함") {
+			receiptType.style.display = "block";
+			receiptType.querySelector('label').innerText = receiptName;
+			receiptType.querySelector('input').value = "";
+		} else {
+			receiptType.style.display = "none";
+			receiptType.querySelector('input').value = "";
+		}
+	}
+</script>
+
 </head>
 <body>
 	
@@ -56,16 +183,14 @@
 		5. 주문금액 / 할인금액 / 최종 결제 금액
 	 -->
 
+<section>
 	<h2>결제하기</h2>
-	<section>
 
-	<form method="post" action="">
-		<input type="hidden" name="cartId" value="${param.ids}">
-		<input type="hidden" name="pCode" value="${param.codes}">
-		<input type="hidden" name="pUnit" value="${param.units}">
+	<form method="post" action="cart_order_ok">
+		<input type="hidden" name="store_id" value="${store_id}" />
 
 		<!-- 결제수단 선택 -->
-		<div id="payment">
+		<div id="payment" class="section">
 			<h4>결제 수단</h4>
 			<div>
 				<select id="paymentList" name="paymentList" onchange="paymentType(this.value)">
@@ -77,10 +202,16 @@
 			<div id="starbucksCard" class="selectedPayment">
 				<div><img src="${pageContext.request.contextPath}/resources/images/e_gold_card.png"></div>
 				<div>
-					<span>스타벅스 카드</span><br>
+					<span class="pay-title">스타벅스 카드</span><br>
 					<div>
-						<span>충전금액</span><br>
-						<span><fmt:formatNumber type="number" maxFractionDigits="3" pattern="###,###원" value="${member.sbcard}" /></span>
+						<span class="pay-con">
+							잔액&nbsp;
+							<fmt:formatNumber type="number" maxFractionDigits="3" pattern="###,###원" value="${member.sbcard}" />
+						</span>
+						<span class="pay-con">
+							
+						</span>
+						<input type="button" onclick="rechargePopup()" value="충전하기" />
 					</div>
 					
 				</div>
@@ -88,18 +219,18 @@
 			<div id="creditCard" class="selectedPayment" style="display:none">
 				<div><img src="${pageContext.request.contextPath}/resources/images/credit01.png"></div>
 				<div>
-					<span>신용카드</span><br>
-					<span>1234-1234-1234-1234</span>
+					<span class="pay-title">신용카드</span><br>
+					<span class="pay-con">1234-1234-1234-1234</span>
 				</div>
 			</div>
 			<div id="ssgPay" class="selectedPayment" style="display:none">
 				<div><img src="${pageContext.request.contextPath}/resources/images/ssgpay.png"></div>
-				<div>SSGPAY</div>
+				<div class="pay-title">SSGPAY</div>
 			</div>
 		</div>
 		
 		<!-- 할인수단 선택 -->
-		<div id="discount" style="display:none;">
+		<div id="discount" class="section" style="display:none;">
 			<div id="coupon">
 				<h4>쿠폰</h4>
 				<input type="radio" name="coupon" id="미사용" value="미사용" checked>
@@ -127,68 +258,104 @@
 		</div>
 		
 		<!-- 현금영수증 선택 -->
-		<div id="receipts">
+		<div id="receipts" class="section">
 			<h4>현금영수증</h4>
-			<input type="radio" name="receipt" id="신청안함" value="신청안함" checked><label for="신청안함">신청안함</label>
-			<input type="radio" name="receipt" id="personnelReceipt" value="개인소득공제"><label for="personnelReceipt">개인소득공제</label>
-			<input type="radio" name="receipt" id="corporateReceipt" value="사업자증빙용"><label for="corporateReceipt">사업자증빙용</label>
-			<div class="receiptType">
-				<input type="phone" name="personnelReceipt" id="personnelReceipt" /><label for="personnelReceipt">휴대폰 번호</label>
-			</div>
-			<div class="receiptType">
-				<input type="phone" name="corporateReceipt" id="corporateReceipt" /><label for="corporateReceipt">사업자 번호</label>
+			<input type="radio" name="receipt" 
+				id="신청안함" 
+				value="신청안함"
+				onchange="receiptChange(this)" 
+				checked><label for="신청안함">신청안함</label>
+			<input type="radio" name="receipt" 
+				id="personnelReceipt"
+				value="개인소득공제"
+				onchange="receiptChange(this)"><label for="personnelReceipt">개인소득공제</label>
+			<input type="radio" name="receipt" 
+				id="corporateReceipt" 
+				value="사업자증빙용"
+				onchange="receiptChange(this)"><label for="corporateReceipt">사업자증빙용</label>
+			<div class="receiptType" style="display:none;">
+				<label for="receiptNumber"></label><input type="phone" name="receiptNumber" id="receiptNumber" />
 			</div>
 		</div>
+		<p>
 		
 		<!-- 주문내역 -->
-		<div id="orderList">
+		<div class="order">
 			<h4>주문내역</h4>
-			<ul>
+			<ul class="menu-list">
 				<c:forEach items="${cart}" var="cart">
-					<li>
-						<img src="${pageContext.request.contextPath}/resources/images/${cart.name}.jpg" alt="상품이미지">
-						<div>${cart.name}</div>
-						<ul>
-							<li>
-								<c:if test="${cart.type == 1}">Hot</c:if>
-								<c:if test="${cart.type == 2}">Ice</c:if>
-							</li>
-							<li>								
+					<li class="items">
+						<input type="hidden" name="cartid" value="${cart.id}" />
+						<input type="hidden" name="prod_code" value="${cart.code}" />
+						<input type="hidden" name="prod_unit" value="${cart.unit}" />						
+						<div>
+							<img 
+								src="${pageContext.request.contextPath}/resources/images/${cart.name}.jpg" 
+								alt="상품이미지"
+								height="60" />
+						</div>
+						<dl>
+							<dt>${cart.name}</dt>
+							<dd>
+								<c:if test="${cart.type == 1}"><span style="color:red;">Hot</span></c:if>
+								<c:if test="${cart.type == 2}"><span style="color:blue;">Ice</span></c:if>
+							</dd>
+							<dd>|</dd>
+							<dd>
 								<c:if test="${cart.size == 1}">Short</c:if>
 								<c:if test="${cart.size == 2}">Tall</c:if>
 								<c:if test="${cart.size == 3}">Grande</c:if>
 								<c:if test="${cart.size == 4}">Venti</c:if>
-							</li>
-						</ul>
+							</dd>
+							<dd>|</dd>
+							<dd>${cart.prod_cost}</dd>
+						</dl>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 		
 		<!-- 결제금액 정보 -->
-		<div id="finalCost">
-			<table>
-				<tr>
-					<td>주문 금액</td>
-					<td><fmt:formatNumber value="${param.cost}"/>원</td>
-				</tr>
-				<tr>
-					<td>할인 금액</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>최종 결제 금액</td>
-					<td></td>
-				</tr>
-			</table>
+		<div id="costfield">
+		
+			<fieldset class="finalCost">
+				<!-- <legend><b>총 결제 내용</b></legend> -->
+				<dl>
+					<dt>주문 금액</dt>
+					<dd><fmt:formatNumber pattern="###,###" value="${param.cost}"/>원</dd>
+				</dl>
+				<dl>
+					<dt>할인 금액</dt>
+					<dd><fmt:formatNumber pattern="###,###" value=""/>원</dd>
+				</dl>
+				<hr>
+				<dl>
+					<dt>최종 결제 금액</dt>
+					<dd><fmt:formatNumber pattern="###,###" value="${param.cost}"/>원</dd>
+				</dl>
+			</fieldset>
 		</div>
 		
-		<div>
-			<input type="submit" value="(최종결제금액)원 결제하기">
-		</div>	
+		<div id="payBtn">
+			<div class="starbucksCard">
+				<c:if test="${member.sbcard >= param.cost}">
+					<input type="hidden" name="payWithSbcard" value="${param.cost}" />
+					<input type="submit" value="스타벅스 카드로 결제하기" />
+				</c:if>
+				<c:if test="${member.sbcard < param.cost}">
+					<input type="button" value="금액이 부족합니다." />
+				</c:if>
+			</div>
+			<div class="creditCard" style="display:none;">
+				<input type="submit" value="신용카드로 결제하기" />
+			</div>
+			<div class="ssgPay" style="display:none;">
+				<input type="submit" value="페이로 결제하기" />
+			</div>
+		</div>
 	</form>
 
-	</section>
+</section>
 	
 </body>
 </html>

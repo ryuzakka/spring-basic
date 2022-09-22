@@ -3,7 +3,7 @@ package kr.co.buck1.cart;
 public class CartVO {
 
 	private int id,state,unit,prod_cost,total_cost,store_id, type,size;
-	private String userid,code,writeday,orderday, name;
+	private String userid,code,writeday,orderday,ordertime, name;
 	
 	
 	public int getId() {
@@ -83,5 +83,11 @@ public class CartVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getOrdertime() {
+		return ordertime;
+	}
+	public void setOrdertime(String ordertime) {
+		this.ordertime = ordertime;
 	}
 }

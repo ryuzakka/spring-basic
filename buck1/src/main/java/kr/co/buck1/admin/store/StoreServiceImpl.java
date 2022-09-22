@@ -143,7 +143,7 @@ public class StoreServiceImpl implements StoreService {
 //		vo.setState(Integer.parseInt(multi.getParameter("state")));
 		
 		mapper.store_update(vo);
-		return "redirect:/admin_store/store_list";
+		return "redirect:/admin_store/store_update";
 	}
 	
 	

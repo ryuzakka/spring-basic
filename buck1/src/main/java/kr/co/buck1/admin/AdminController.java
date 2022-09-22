@@ -21,4 +21,9 @@ public class AdminController {
 		return service.member(model, req);
 	}
 	
+	@RequestMapping("/admin/order")
+	public String order(Model model) {
+		return service.order(model);
+	}
+	
 }

@@ -26,4 +26,43 @@
 			email like concat('%',#{param1},'%')
 	</select>
 	
+	<select id="order" resultType="kr.co.buck1.vo.PurchaseVO">
+		SELECT 
+			a.*,
+			b.name,
+			b.size,
+			c.storename,
+			d.nickname
+		FROM 
+			purchase AS a,
+			menu AS b,
+			store AS c,
+			member AS d
+		WHERE 
+			a.prod_code = b.code and
+			a.store_id = c.id and
+			a.userid = d.userid
+		ORDER BY
+			a.id DESC
+	</select>
+	
+	<select id="getOrderCount" resultType="Integer">
+		SELECT COUNT(DISTINCT order_code) AS cnt
+		FROM purchase
+	</select>
+	
+	<select id="getOrderItemCount" resultType="kr.co.buck1.vo.PurchaseVO">
+		SELECT
+			order_code,
+			COUNT(*) AS cnt
+		FROM
+			purchase
+		WHERE
+			store_id != 'null'
+		GROUP BY
+			order_code
+		ORDER BY
+			id DESC
+	</select>
+	
 </mapper>

@@ -107,7 +107,7 @@
 				<li> | </li>
 				<li><a href="search_pwd">비밀번호 찾기</a></li>
 				<li> | </li>
-				<li><a href="../main/index">홈으로</a></li>
+				<li><a href="signup">회원가입</a></li>
 			</ul>
 			<!-- <input type="button" onclick="javascript:location='login.jsp'" value="로그인 페이지로 이동"><p>
 			<input type="button" onclick="javascript:location='../main/index.jsp'" value="홈으로"> -->

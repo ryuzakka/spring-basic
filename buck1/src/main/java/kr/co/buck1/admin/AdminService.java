@@ -7,5 +7,6 @@ import org.springframework.ui.Model;
 public interface AdminService {
 
 	public String member(Model model, HttpServletRequest req);
+	public String order(Model model);
 	
 }

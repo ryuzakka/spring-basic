@@ -22,5 +22,6 @@ public interface MemberService {
 	public String withdrawal(HttpSession session);
 	public String sbcard_charge(HttpSession session, Model model);
 	public String sbcard_recharge(HttpServletRequest req);
+	public String myOrder(HttpSession session, Model model);
 	
 }

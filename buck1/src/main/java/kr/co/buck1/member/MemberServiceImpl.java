@@ -1,6 +1,9 @@
 package kr.co.buck1.member;
 
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import kr.co.buck1.vo.PurchaseVO;
 
 @Service
 @Qualifier("ms")
@@ -141,7 +146,30 @@ public class MemberServiceImpl implements MemberService {
 		String rechargeFare = req.getParameter("fare");
 		String userid = req.getParameter("userid");
 		mapper.sbcard_recharge(rechargeFare, userid);
-		return "/member/sbcard_recharge";
+		return "/member/sbcard_charge";
+	}
+	
+	@Override
+	public String myOrder(HttpSession session, Model model) {
+		String userid = session.getAttribute("userid").toString();
+		
+		// 오늘 날짜 구하기
+		LocalDate today = LocalDate.now();
+		DecimalFormat dmFormat = new DecimalFormat("00");
+		int year = today.getYear();
+		String month = dmFormat.format(Double.valueOf(today.getMonthValue()));
+		String day = dmFormat.format(Double.valueOf(today.getDayOfMonth()));
+		
+		String oCode = year + month + day;	// 오늘 날짜로 주문번호 앞 8자리 생성
+		
+		// 구매정보 + 메뉴정보 가져오기
+//		ArrayList<PurchaseVO> orderList = ;
+		model.addAttribute("order", mapper.myOrder(userid, oCode));
+		
+		// 주문번호 + 주문매장
+		model.addAttribute("store", mapper.myOrderStore(userid, oCode));
+		
+		return "/member/myorder";
 	}
 	
 }

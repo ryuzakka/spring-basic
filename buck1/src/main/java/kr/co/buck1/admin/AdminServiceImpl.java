@@ -61,4 +61,20 @@ public class AdminServiceImpl implements AdminService {
 		return "/admin/member";
 	}
 	
+	@Override
+	public String order(Model model) {
+		
+		// 총 주문 수
+		//int orderCount = mapper.getOrderCount();
+		
+		// 주문 목록 + 주문별 상품수
+		model.addAttribute("order", mapper.getOrderItemCount());
+		
+		// 전체 주문
+//		model.addAttribute("items", mapper.getOrderItemCount());
+		model.addAttribute("items", mapper.order());
+		
+		return "/admin/order";
+	}
+	
 }

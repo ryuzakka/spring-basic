@@ -53,4 +53,57 @@
 		select * from member where userid=#{param1}
 	</select>
 	
+	<select id="recharge" resultType="Integer">
+		select sbcard
+		from member
+		where userid = #{param1}
+	</select>
+	
+	<update id="popup_recharge_ok">
+		update member 
+		set sbcard = sbcard + #{param1}
+		where userid = #{param2}
+	</update>
+	
+	<select id="getOrderCode" resultType="String">
+		select ifnull(max(order_code),0) as code
+		from purchase
+		where order_code like concat(#{param1},'%')
+	</select>
+	
+	<insert id="orderOk">
+		insert into purchase
+			(order_code, 
+			userid, 
+			prod_code, 
+			unit, 
+			store_id,
+			writeday,
+			writetime)
+		values(
+			#{param1},
+			#{param2},
+			#{param3},
+			#{param4},
+			#{param5},
+			now(),
+			now())
+	</insert>
+	
+	<update id="cartStateChange">
+		update cart
+		set state = 1,
+			orderday = now(),
+			ordertime = now()
+		where
+			id=#{param1} and 
+			state=0
+	</update>
+	
+	<update id="payWithSbcard">
+		update member
+		set sbcard = sbcard - #{param1}
+		where userid = #{param2}
+	</update>
+	
 </mapper>

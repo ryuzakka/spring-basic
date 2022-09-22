@@ -5,6 +5,8 @@ public class MemberVO {
 	private int id, star, level, state, sbcard;
 	private String userid, pwd, username, nickname, birth, phone, email, writeday;
 	
+	// 주문확인용
+	private int store_id;
 	
 	public int getId() {
 		return id;
@@ -83,5 +85,11 @@ public class MemberVO {
 	}
 	public void setSbcard(int sbcard) {
 		this.sbcard = sbcard;
+	}
+	public int getStore_id() {
+		return store_id;
+	}
+	public void setStore_id(int store_id) {
+		this.store_id = store_id;
 	}
 }

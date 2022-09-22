@@ -59,6 +59,41 @@
 		where userid = #{param2}
 	</update>
 	
+	<select id="myOrder" resultType="kr.co.buck1.vo.PurchaseVO">
+		SELECT 
+			a.*,
+			b.name,
+			b.type,
+			b.size
+		FROM 
+			purchase AS a,
+			menu AS b
+		WHERE
+			a.userid = #{param1} AND
+			a.order_code LIKE concat(#{param2},'%') AND
+			a.state &gt; 0 AND 
+			a.state &lt; 4 AND
+			a.prod_code = b.code
+	</select>
+	
+	<select id="myOrderStore" resultType="kr.co.buck1.vo.PurchaseVO">
+		SELECT 
+			DISTINCT a.order_code,
+			a.userid, 
+			a.store_id,
+			a.state,
+			b.storename,
+			b.storeimg,
+			b.addr1
+		FROM
+			purchase AS a,
+			store AS b 
+		WHERE
+			a.userid = #{param1} AND 
+			a.order_code LIKE concat(#{param2},'%') AND 
+			a.store_id = b.id;
+	</select>
+	
 </mapper>
 
 
