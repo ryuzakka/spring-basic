@@ -8,7 +8,10 @@
 	<select id="signin_ok" parameterType="kr.co.buck1.member.MemberVO" resultType="Integer">
 		select count(*) 
 		from member 
-		where userid=#{userid} and pwd=#{pwd}
+		where 
+			userid=#{userid} and 
+			pwd=#{pwd} and
+			state = 0
 	</select>
 	
 	<insert id="signup_ok" parameterType="kr.co.buck1.member.MemberVO">
@@ -17,20 +20,26 @@
 		values(#{userid},#{pwd},#{username},#{nickname},#{birth},#{phone},#{email},now())
 	</insert>
 	
+	<select id="stateCheck" resultType="Integer">
+		SELECT state
+		FROM member
+		WHERE userid = #{param1}
+	</select>
+	
 	<select id="getInfo" resultType="kr.co.buck1.member.MemberVO">
 		select * from member where userid=#{param1}
 	</select>
 	
 	<select id="idcheck" resultType="Integer">
-		select count(*) from member where userid=#{param1}
+		select count(*) from member where userid=#{param1} and state=0
 	</select>
 	
 	<select id="phonecheck" resultType="Integer">
-		select count(*) from member where phone=#{param1}
+		select count(*) from member where phone=#{param1} and state=0
 	</select>
 	
 	<select id="search_id" resultType="String">
-		select userid from member where phone=#{param1}
+		select userid from member where phone=#{param1} and state=0
 	</select>
 	
 	<select id="search_pwd" resultType="kr.co.buck1.member.MemberVO">

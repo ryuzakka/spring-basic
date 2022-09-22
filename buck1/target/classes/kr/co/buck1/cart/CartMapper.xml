@@ -106,4 +106,10 @@
 		where userid = #{param2}
 	</update>
 	
+	<update id="starAdd">
+		UPDATE member
+		SET star = star + #{param2}
+		WHERE userid = #{param1}
+	</update>
+	
 </mapper>

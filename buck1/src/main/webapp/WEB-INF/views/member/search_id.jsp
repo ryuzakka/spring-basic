@@ -99,6 +99,9 @@
 				<c:if test="${param.err == 1}">
 					<br><span style="color:red;font-size:13px;">일치하는 정보가 없습니다.</span>
 				</c:if>
+				<c:if test="${param.err == 2}">
+					<br><span style="color:red;font-size:13px;">탈퇴한 회원입니다.</span>
+				</c:if>
 				<p><input type="submit" name="submit" value="아이디 찾기"></p>
 			</form>
 			<p>

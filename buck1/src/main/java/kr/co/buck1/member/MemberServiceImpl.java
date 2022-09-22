@@ -24,15 +24,20 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public String signin_ok(MemberVO vo, HttpSession session) {
+		String userid = vo.getUserid();
+		int state = mapper.stateCheck(userid);
 		
 		if(mapper.signin_ok(vo) == 1) {
 			// 로그인 진행
-			MemberVO mvo = mapper.getInfo(vo.getUserid());
+			MemberVO mvo = mapper.getInfo(userid);
 			session.setAttribute("userid", mvo.getUserid());
 			session.setAttribute("nick", mvo.getNickname());
 			
 			return "/main/index";
-		} else {
+		} else if(state == 9) {
+			return "redirect:/member/signin?err=2";
+		}
+		else {
 			// ID/PW 불일치
 			return "redirect:/member/signin?err=1";
 		}
@@ -77,8 +82,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String search_id(MemberVO vo) {
 		String userid = mapper.search_id(vo.getPhone());
+		int state = mapper.stateCheck(userid);
+		
 		if(userid == null)
 			return "redirect:/member/search_id?err=1";
+		else if(state == 9)
+			return "redirect:/member/search_id?err=2";
 		else
 			return "redirect:/member/search_id?userid="+userid;
 	}
@@ -87,10 +96,14 @@ public class MemberServiceImpl implements MemberService {
 	public String search_pwd(HttpServletRequest req) {
 		String userid = req.getParameter("userid");
 		String phone = req.getParameter("phone");
+		int state = mapper.stateCheck(userid);
 		
 		if(mapper.search_pwd(userid, phone) == null) {
 			return "redirect:/member/search_pwd?err=1";
-		} else {
+		} else if(state == 9) {			
+			return "redirect:/member/search_pwd?err=2";
+		}
+		else {
 			MemberVO mvo = mapper.search_pwd(userid, phone);
 			userid = mvo.getUserid();
 			String pwd = mvo.getPwd();

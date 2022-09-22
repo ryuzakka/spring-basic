@@ -283,11 +283,13 @@
 		<div class="order">
 			<h4>주문내역</h4>
 			<ul class="menu-list">
+				<c:set var="totalUnit" value="" />
 				<c:forEach items="${cart}" var="cart">
 					<li class="items">
 						<input type="hidden" name="cartid" value="${cart.id}" />
 						<input type="hidden" name="prod_code" value="${cart.code}" />
-						<input type="hidden" name="prod_unit" value="${cart.unit}" />						
+						<input type="hidden" name="prod_unit" value="${cart.unit}" />
+						<c:set var="totalUnit" value="${totalUnit = totalUnit + cart.unit}" />
 						<div>
 							<img 
 								src="${pageContext.request.contextPath}/resources/images/${cart.name}.jpg" 
@@ -312,6 +314,7 @@
 						</dl>
 					</li>
 				</c:forEach>
+				<input type="hidden" name="total_unit" value="${totalUnit}" />
 			</ul>
 		</div>
 		

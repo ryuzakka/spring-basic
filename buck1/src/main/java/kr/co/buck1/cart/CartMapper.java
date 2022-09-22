@@ -29,4 +29,7 @@ public interface CartMapper {
 	// 스타벅스 카드로 결제시 금액 차감
 	public void payWithSbcard(int cost, String userid);
 	
+	// 결제한 회원의 별(star) 추가
+	public void starAdd(String userid, int totalUnit);
+	
 }

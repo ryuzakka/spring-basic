@@ -94,7 +94,7 @@
 	<div id="signin-form">
 	<form method="post" action="signin_ok">
 		<c:if test="${param.userid == null}"><input type="text" name="userid" id="userid" placeholder="아이디" required></c:if>
-		<%-- <c:if test="${param.userid != null}"><input type="text" name="userid" value="${param.userid}" required></c:if> --%>
+		<c:if test="${param.userid != null}"><input type="text" name="userid" value="${param.userid}" required></c:if>
 		<p>
 		<input type="password" name="pwd" placeholder="비밀번호" required><p>
 		<ul id="support-btn">
@@ -111,6 +111,9 @@
 	
 	<c:if test="${param.err == 1}">
 		<div id="signinErr">로그인 정보가 일치하지 않습니다.<br>아이디나 비밀번호를 확인 후 다시 입력해 주세요.</div>
+	</c:if>
+	<c:if test="${param.err == 2}">
+		<div id="signinErr">입력하신 아이디는 탈퇴한 계정 입니다.<br>회원가입을 진행해 주세요.</div>
 	</c:if>
 
 </div>

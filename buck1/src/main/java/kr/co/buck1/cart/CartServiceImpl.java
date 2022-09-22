@@ -115,12 +115,10 @@ public class CartServiceImpl implements CartService {
 		int year = today.getYear();
 		String month = dmFormat.format(Double.valueOf(today.getMonthValue()));
 		String day = dmFormat.format(Double.valueOf(today.getDayOfMonth()));
-		
 		String orderCode = year + month + day;
 		
 		// 주문번호 만들기2. 오늘날짜의 주문번호가 있는지 확인
 		String oCode = mapper.getOrderCode(orderCode);
-		
 		if(oCode.equals("0")) {	// 없다면 0001 설정하기
 			orderCode += "0001";
 		} else {	// 있다면 가장 큰 값에 +1 설정하기
@@ -128,8 +126,8 @@ public class CartServiceImpl implements CartService {
 			orderCode = Long.toString(codeNum);
 		}
 		
+		// 구매테이블(purchase)에 구매내역 등록
 		ArrayList<CartVO> vo = mapper.list(userid);
-		
 		for(int i=0; i<vo.size(); i++) {
 			// 구매 테이블에 구매내역 추가
 			String pcode = vo.get(i).getCode();
@@ -145,6 +143,10 @@ public class CartServiceImpl implements CartService {
 		if(payWithSbcard != null) {
 			mapper.payWithSbcard(Integer.parseInt(payWithSbcard), userid);
 		}
+		
+		// 별(star) 추가
+		int totalUnit = Integer.parseInt(req.getParameter("total_unit"));
+		mapper.starAdd(userid, totalUnit);
 		
 		return "redirect:/member/myorder";
 //		return "redirect:/cart/cart_order";

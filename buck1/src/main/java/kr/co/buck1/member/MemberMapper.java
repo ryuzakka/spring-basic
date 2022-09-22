@@ -8,6 +8,7 @@ public interface MemberMapper {
 
 	public int signin_ok(MemberVO vo);
 	public void signup_ok(MemberVO vo);
+	public int stateCheck(String userid);
 	public MemberVO getInfo(String userid);
 	public int idcheck(String userid);
 	public int phonecheck(String phone);

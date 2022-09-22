@@ -5,8 +5,110 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>Insert title here</title>
+<style>
+	section {
+		width:1200px;
+		margin:70px auto;
+		/* text-align:center; */
+	}
+	section h2 {
+		font-size:2em;
+		text-align:center;
+	}
+	section #container {
+		width:800px;
+		margin:auto;
+	}
+	section #container ol {
+		margin-top:50px;
+	}
+	section #container ol .order-list {
+		margin:20px auto;
+		border-bottom:1px solid #dddddd;
+	}
+	section #container ol .order-list dl {
+		margin:0px;
+		padding:0px;
+		display:flex;
+		justify-content:space-between;
+	}
+	section #container ol .order-list .title > div {
+		display:inline-block;
+		/* border:1px solid #dddddd; */
+		padding:0px 10px;
+		margin:0px 6px;
+	}
+	section #container ol .order-list .title > div dt {		
+		margin:0px;
+		padding:0px;
+		font-size:12px;
+		font-style:italic;
+	}
+	section #container ol .order-list .title > div dd {	
+		margin:0px;
+		padding:4px 0px 0px 0px;
+		font-size:15px;
+		font-weight:bold;
+	}
+	section #container ol .order-list .title dd {
+		/* margin:0px;
+		padding:0px; */
+	}
+	section #container ol .order-list .title .product-cnt {
+		display:inline-block;
+		width:16px;
+		height:16px;
+		border:none;
+		border-radius:50%;
+		background:#006633;
+		color:white;
+		font-size:12px;
+		text-align:center;
+	}
+	section #container ol .order-list .product {
+		display:none;
+		padding-left:20px;
+		margin:8px 260px 8px 15px;
+		/* margin-left:15px;
+		margin-right:260px; */
+		background:#f6f5ef;
+	}
+	section #container ol .order-list .product > div {
+		display:inline-block;
+		/* border:1px solid #dddddd; */
+		padding:5px 10px;
+/* 		margin:0px 6px; */
+	}
+	section #container ol .order-list .product dt {
+		/* display:inline-block; */
+		margin:0px;
+		padding:0px;
+		font-size:12px;
+		font-style:italic;
+	}
+	section #container ol .order-list .product dd {
+		/* display:inline-block; */
+		margin:0px;
+		padding:0px;
+		font-size:15px;
+		font-weight:bold;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function(){
+		$(".order-list").mouseenter(function(){
+			$(this).css("background","#dddddd");
+		});
+		$(".order-list").mouseleave(function(){
+			$(this).css("background","white");
+		});
+		$(".order-list").click(function(){
+			$(this).find(".product").stop().slideToggle();
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -14,7 +116,7 @@
 	<h2>주문 관리</h2>
 	
 	<div id="container">
-		<table align="center" border="0">
+		<%-- <table align="center" border="0">
 			<thead>
 				<tr>
 					<th>주문번호</th>
@@ -49,7 +151,7 @@
 				</c:forEach>
 			</c:forEach>
 			</tbody>
-		</table>
+		</table> --%>
 		
 		<!--  -->
 		<!--  -->
@@ -57,149 +159,75 @@
 		<ol>
 			<c:set var="cnt" value="" />
 			<c:forEach items="${order}" var="order">
-				<li class="oNode">
-				<c:set var="cnt" value="${cnt = order.cnt}" />
+				<li class="order-list">
+					<c:set var="cnt" value="${cnt = order.cnt}" />
 					<c:forEach items="${items}" var="item">
-					<c:if test="${order.order_code == item.order_code}">
-						<c:if test="${cnt == order.cnt}">
-							<dl>
-								<dt>주문번호</dt>
-								<dt>주문자</dt>
-								<dt>주문매장</dt>
-								<dt>주문상태</dt>
-								<dt>주문시간</dt><br>
-								<dd>
-									${item.order_code}
-									<div style="display:inline-block;width:16px;height:16px;border:none;border-radius:50%;background:#006633;color:white;font-size:12px;text-align:center;">${order.cnt}</div>
-								</dd>
-								<dd>${item.nickname}</dd>
-								<dd>${item.storename}</dd>
-								<dd>
-									<c:if test="${item.state == 1}">접수 대기중</c:if>
-									<c:if test="${item.state == 2}">주문확인</c:if>
-									<c:if test="${item.state == 3}">제조완료</c:if>
-									<c:if test="${item.state == 4}">수령완료</c:if>
-								</dd>
-								<dd>${item.writetime}</dd>
+						<c:if test="${order.order_code == item.order_code}">
+							<c:if test="${cnt == order.cnt}">
+								<dl class="title">
+									<div style="width:168px;">
+										<dt>주문번호</dt>
+										<dd>
+											${item.order_code}
+											<div class="product-cnt">${order.cnt}</div>
+										</dd>
+									</div>
+									<div style="width:100px;">
+										<dt>주문자</dt>
+										<dd>${item.nickname}</dd>
+									</div>
+									<div style="width:130px;">
+										<dt>주문매장</dt>
+										<dd>${item.storename}</dd>
+									</div>
+									<div style="width:100px;">
+										<dt>주문상태</dt>
+										<dd>
+											<c:if test="${item.state == 1}">접수 대기중</c:if>
+											<c:if test="${item.state == 2}">주문확인</c:if>
+											<c:if test="${item.state == 3}">제조완료</c:if>
+											<c:if test="${item.state == 4}">수령완료</c:if>
+										</dd>
+									</div>
+									<div  style="width:80px;">
+										<dt>주문시간</dt>
+										<dd>${item.writetime}</dd>
+									</div>
+								</dl>
+							</c:if>
+							<dl class="product">
+								<div style="width:260px;">
+									<dt>메뉴명</dt>
+									<dd>${item.name}</dd>
+								</div>
+								<div style="width:80px;">
+									<dt>사이즈</dt>
+									<dd>
+										<c:choose>
+											<c:when test="${item.size == 1}">Short</c:when>
+											<c:when test="${item.size == 2}">Tall</c:when>
+											<c:when test="${item.size == 3}">Grande</c:when>
+											<c:when test="${item.size == 4}">Venti</c:when>
+										</c:choose>
+									</dd>
+								</div>
+								<div style="width:50px;">
+									<dt>수량</dt>
+									<dd>${item.unit}</dd>
+								</div>
 							</dl>
+							<c:set var="cnt" value="${cnt = cnt-1}" />
 						</c:if>
-						<%-- <c:if test="${item.order_code == order.order_code}"> --%>
-						<dl class="option">
-							<dt>메뉴명</dt>
-							<dd>${item.name}</dd>
-							<dt>사이즈</dt>
-							<dd>
-								<c:choose>
-									<c:when test="${item.size == 1}">Short</c:when>
-									<c:when test="${item.size == 2}">Tall</c:when>
-									<c:when test="${item.size == 3}">Grande</c:when>
-									<c:when test="${item.size == 4}">Venti</c:when>
-								</c:choose>
-							</dd>
-							<dt>수량</dt>
-							<dd>${item.unit}</dd>
-						</dl>
-						<%-- </c:if> --%>
-						<c:set var="cnt" value="${cnt = cnt-1}" />
-					</c:if>
 					</c:forEach>
 				</li>
-			<%-- <c:set var="cnt" value="${cnt = 1}" /> --%>
 			</c:forEach>
 		</ol>
 		
 		<!--  -->
 		<!--  -->
-		
-		<%-- <ol>
-			<li>
-			<c:set var="orderCode" value="" />
-			<c:forEach items="${order}" var="order">
-				<ul><li style="display:inline-block;">
-				<dl class="oNode">
-				<c:if test="${orderCode != order.order_code}">
-					<dt>주문번호</dt>
-					<dt>주문자</dt>
-					<dt>주문매장</dt>
-					<dt>주문상태</dt><br>
-					<dd>${order.order_code}</dd>
-					<dd>${order.nickname}</dd>
-					<dd>${order.storename}</dd>
-					<dt>주문시간</dt>
-					<dd>
-						<c:if test="${order.state == 1}">접수 대기중</c:if>
-						<c:if test="${order.state == 2}">주문확인</c:if>
-						<c:if test="${order.state == 3}">제조완료</c:if>
-						<c:if test="${order.state == 4}">수령완료</c:if>
-					</dd>
-					<dd>${order.writetime}</dd>
-				</c:if>
-					<c:forEach items="${items}" var="item">
-					<c:if test="${item.order_code = order.order_code}">
-						<dl class="option">
-							<caption>주문정보</caption>
-							<dt>메뉴명</dt>
-							<dd>${order.name}</dd>
-							<dt>사이즈</dt>
-							<dd>
-								<c:choose>
-									<c:when test="${order.size == 1}">Short</c:when>
-									<c:when test="${order.size == 2}">Tall</c:when>
-									<c:when test="${order.size == 3}">Grande</c:when>
-									<c:when test="${order.size == 4}">Venti</c:when>
-								</c:choose>
-							</dd>
-							<dt>수량</dt>
-							<dd>${order.unit}</dd>
-						</dl>
-					</c:if>
-					</c:forEach>
-				</dl>
-			
-				<dl class="oNode">dl
-					<dd class="option">${order.order_code}</dd>
-					<dd class="option">${order.nickname}</dd>
-					<dd class="option">${order.storename}</dd>
-					<dd class="option">
-						<c:if test="${order.state == 1}">접수 대기중</c:if>
-						<c:if test="${order.state == 2}">주문확인</c:if>
-						<c:if test="${order.state == 3}">제조완료</c:if>
-						<c:if test="${order.state == 4}">수령완료</c:if>
-					</dd>
-					<dd class="option">${order.writetime}</dd>
-				</dl>
-			</li>
-			</ul>
-			<c:set var="orderCode" value="${order.order_code}"></c:set>
-			</c:forEach>
-			</li>
-		</ol> --%>
 
 	</div>
 </section>
-<style>
-	dt, dd {		
-		display:inline-block;
-	}
-	.oNode dt, dd {
-		display:inline-block;
-	}
-	.option {
-		display:none;
-	}
-</style>
-<script>
-	$(function(){
-		$(".oNode").mouseenter(function(){
-			$(this).css("background","yellow");
-		});
-		$(".oNode").mouseleave(function(){
-			$(this).css("background","white");
-		});
-		$(".oNode").click(function(){
-			$(this).find(".option").stop().slideToggle();
-		});
-	});
-</script>
+
 </body>
 </html>
