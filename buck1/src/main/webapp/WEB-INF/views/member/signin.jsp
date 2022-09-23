@@ -87,7 +87,12 @@
 		
 		<div id="message">
 			<h3>안녕하세요. 스타벅스 입니다.</h3>
-			<span>회원서비스 이용을 위해 로그인 해주세요.</span>
+			<c:if test="${param.err != 3}">
+				<span>회원서비스 이용을 위해 로그인 해주세요.</span>
+			</c:if>
+			<c:if test="${param.err == 3}">
+				<span>해당 페이지는 회원 전용 서비스 입니다. 원활한 이용을 위해 로그인 해주세요.</span>
+			</c:if>
 		</div>
 	</div>
 	

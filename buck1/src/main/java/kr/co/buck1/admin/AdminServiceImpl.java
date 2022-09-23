@@ -1,5 +1,7 @@
 package kr.co.buck1.admin;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +77,16 @@ public class AdminServiceImpl implements AdminService {
 		model.addAttribute("items", mapper.order());
 		
 		return "/admin/order";
+	}
+	
+	@Override
+	public void orderProgress(HttpServletRequest req, PrintWriter out) {
+		String orderCode = req.getParameter("orderCode");
+		int state = Integer.parseInt(req.getParameter("state"));
+		
+		mapper.orderProgress(orderCode,state);
+		
+		out.print(state);
 	}
 	
 }

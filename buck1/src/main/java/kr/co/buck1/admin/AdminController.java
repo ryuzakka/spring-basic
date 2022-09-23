@@ -1,5 +1,7 @@
 package kr.co.buck1.admin;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +27,15 @@ public class AdminController {
 	public String order(Model model) {
 		return service.order(model);
 	}
+	
+	@RequestMapping("/admin/orderProgress")
+	public void orderProgress(HttpServletRequest req, PrintWriter out) {
+		service.orderProgress(req, out);
+	}
+	
+	/*@RequestMapping("/admin/menu")
+	public String menu(Model model) {
+		return service.menu(model);
+	}*/
 	
 }

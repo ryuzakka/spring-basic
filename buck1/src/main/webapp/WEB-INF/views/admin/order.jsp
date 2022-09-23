@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:if test="${userid != 'admin'}">
+	<c:redirect url="../member/signin?err=3" />
+</c:if>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -94,19 +99,67 @@
 		font-size:15px;
 		font-weight:bold;
 	}
+	section #container ol .order-list .state-progress {
+		display:none;
+		margin:8px 260px 8px 15px;
+		padding:10px 0px 10px 33px;
+		border:0px solid #006633;
+	}
+	section #container ol .order-list .state-progress button {
+		display:inline-block;
+		width:60px;
+		height:60px;
+		border:none;
+		border-radius:50%;
+		font-size:17px;
+		margin-left:43px;
+		margin-right:25px;
+	}
+	section #container ol .order-list .state-progress button:hover {
+		background:#006633;
+		color:white;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(function(){
+		
+		// 주문목록 hover 효과
 		$(".order-list").mouseenter(function(){
 			$(this).css("background","#dddddd");
 		});
 		$(".order-list").mouseleave(function(){
 			$(this).css("background","white");
 		});
+		
+		// 주문목록 click 이벤트
 		$(".order-list").click(function(){
 			$(this).find(".product").stop().slideToggle();
+			$(this).find(".state-progress").stop().slideToggle();
 		});
+		
+		// 상태변경 AJAX 처리
+		$(".o-state").click(function(){
+			let code = $(this).parent().find(".o-code").val();
+			let state = $(this).val();
+			
+			$.ajax({
+				url: 'orderProgress',
+				type: 'post',
+				async: true,
+				data: {
+					'orderCode': code,
+					'state': state
+				},
+				dataType: 'text',
+				complete: function(response) {
+					console.log(response);
+					alert(code + "," + state);
+					location.reload();
+				}
+			});
+		});
+		
 	});
 </script>
 </head>
@@ -116,45 +169,6 @@
 	<h2>주문 관리</h2>
 	
 	<div id="container">
-		<%-- <table align="center" border="0">
-			<thead>
-				<tr>
-					<th>주문번호</th>
-					<th>주문자</th>
-					<th>주문매장</th>
-					<th>주문상태</th>
-					<th>주문시간</th>
-					<th>cnt</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:set var="count" value="" />
-			<c:forEach items="${order}" var="order">
-				<c:set var="count" value="${count = order.cnt}" />
-				<c:forEach items="${items}" var="item">
-					<c:if test="${item.order_code == order.order_code}">
-					<tr class="oNode">
-						<td>${order.order_code}</td>
-						<td>${order.nickname}</td>
-						<td>${order.storename}</td>
-						<td>
-							<c:if test="${order.state == 1}">접수 대기중</c:if>
-							<c:if test="${order.state == 2}">주문확인</c:if>
-							<c:if test="${order.state == 3}">제조완료</c:if>
-							<c:if test="${order.state == 4}">수령완료</c:if>
-						</td>
-						<td>${order.writetime}</td>
-						<td>${count}</td>
-					</tr>
-					<c:set var="count" value="${count = count - 1}" />
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-			</tbody>
-		</table> --%>
-		
-		<!--  -->
-		<!--  -->
 		
 		<ol>
 			<c:set var="cnt" value="" />
@@ -187,9 +201,16 @@
 											<c:if test="${item.state == 2}">주문확인</c:if>
 											<c:if test="${item.state == 3}">제조완료</c:if>
 											<c:if test="${item.state == 4}">수령완료</c:if>
+											<%-- <input type="hidden" name="oCode" class="oCode" value="${item.order_code}" />
+											<select name="orderState" class="orderState">
+												<option value="1">주문상태 변경</option>
+												<option value="2">주문확인</option>
+												<option value="3">제조완료</option>
+												<option value="4">수령완료</option>
+											</select> --%>
 										</dd>
 									</div>
-									<div  style="width:80px;">
+									<div style="width:80px;">
 										<dt>주문시간</dt>
 										<dd>${item.writetime}</dd>
 									</div>
@@ -219,13 +240,18 @@
 							<c:set var="cnt" value="${cnt = cnt-1}" />
 						</c:if>
 					</c:forEach>
+					
+					<!-- 주문 상태 변경 -->
+					<fieldset class="state-progress">
+						<input type="hidden" name="o-code" class="o-code" value="${order.order_code}" />
+						<button type="button" class="o-state" value="2">주문확인</button>
+						<button type="button" class="o-state" value="3">제조완료</button>
+						<button type="button" class="o-state" value="4">수령완료</button>
+					</fieldset>
 				</li>
 			</c:forEach>
 		</ol>
 		
-		<!--  -->
-		<!--  -->
-
 	</div>
 </section>
 

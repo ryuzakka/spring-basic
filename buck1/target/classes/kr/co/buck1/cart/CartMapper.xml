@@ -112,4 +112,16 @@
 		WHERE userid = #{param1}
 	</update>
 	
+	<select id="getStar" resultType="Integer">
+		SELECT star
+		FROM member
+		WHERE userid = #{param1}
+	</select>
+	
+	<update id="levelUp">
+		UPDATE member
+		SET level = #{param2}
+		WHERE userid = #{param1}
+	</update>
+	
 </mapper>

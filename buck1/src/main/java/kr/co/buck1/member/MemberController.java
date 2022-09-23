@@ -65,8 +65,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/search_id_ok")
-	public String search_id_ok(MemberVO vo) {
-		return service.search_id(vo);
+	public String search_id_ok(HttpServletRequest req) {
+		return service.search_id(req);
 	}
 	
 	@RequestMapping("/member/search_pwd")

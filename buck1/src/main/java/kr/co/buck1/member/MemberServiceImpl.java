@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String signup_ok(HttpServletRequest req) {
 		String birth, email;
-		birth = req.getParameter("birth1") + req.getParameter("birth2") + req.getParameter("birth3");
+		//birth = req.getParameter("birth1") + req.getParameter("birth2") + req.getParameter("birth3");
 		email = req.getParameter("email1") +"@"+ req.getParameter("email2");
 
 		MemberVO vo = new MemberVO();
@@ -56,7 +56,7 @@ public class MemberServiceImpl implements MemberService {
 		vo.setUsername(req.getParameter("username"));
 		vo.setNickname(req.getParameter("nickname"));
 		vo.setPhone(req.getParameter("phone"));
-		vo.setBirth(birth);
+		vo.setBirth(req.getParameter("birth"));
 		vo.setEmail(email);
 		
 		mapper.signup_ok(vo);
@@ -80,16 +80,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public String search_id(MemberVO vo) {
-		String userid = mapper.search_id(vo.getPhone());
-		int state = mapper.stateCheck(userid);
+	public String search_id(HttpServletRequest req) {
+		String phone = req.getParameter("phone");
 		
-		if(userid == null)
+		if(mapper.phonecheck(phone) == 0) {
 			return "redirect:/member/search_id?err=1";
-		else if(state == 9)
-			return "redirect:/member/search_id?err=2";
-		else
-			return "redirect:/member/search_id?userid="+userid;
+		} else {
+			String userid = mapper.search_id(phone);
+			int state = mapper.stateCheck(userid);
+			
+			if(state == 9) {
+				return "redirect:/member/search_id?err=2";
+			} else {
+				return "redirect:/member/search_id?userid="+userid;
+			}
+		}
+		
 	}
 	
 	@Override

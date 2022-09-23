@@ -19,6 +19,7 @@
 			width:100%;
 			position:relative;
 			/* overflow-x:hidden; */
+			z-index:99;
 		}
 		#wrap #gnb {
 			width:100%;

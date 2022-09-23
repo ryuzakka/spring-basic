@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:if test="${userid == null}">
-	<%-- <c:redirect url="../common/warning/member_only.jsp" /> --%>
+	<c:redirect url="../member/signin?err=3" />
 </c:if>
 
 

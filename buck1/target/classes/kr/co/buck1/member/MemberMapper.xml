@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="search_id" resultType="String">
-		select userid from member where phone=#{param1} and state=0
+		select userid from member where phone=#{param1}
 	</select>
 	
 	<select id="search_pwd" resultType="kr.co.buck1.member.MemberVO">
@@ -51,9 +51,19 @@
 	</update>
 	
 	<update id="withdrawal">
-		update member
-		set state = 9
-		where userid = #{param1}
+		UPDATE member
+		SET
+			pwd = null,
+			username = null,
+			nickname = null,
+			birth = null,
+			phone = null,
+			email = null,
+			star = 0,
+			level = 0,
+			sbcard = 0,
+			state = 9
+		WHERE userid = #{param1}
 	</update>
 	
 	<select id="sbcard_charge" resultType="Integer">

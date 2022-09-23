@@ -32,4 +32,10 @@ public interface CartMapper {
 	// 결제한 회원의 별(star) 추가
 	public void starAdd(String userid, int totalUnit);
 	
+	// 별 개수 확인
+	public int getStar(String userid);
+	
+	// 등급 상향
+	public void levelUp(String userid, int level);
+	
 }

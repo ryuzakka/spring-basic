@@ -204,6 +204,14 @@
 		console.log(selectNum + " " + val);
 		document.inputForm.email2.value = val;
 	}
+	function birthCheck(my) {
+		var birth_err = document.getElementsByClassName('err')[2];
+		
+		if(my.value == '') {
+			birth_err.style.display = "inline-block";
+			my.focus();
+		}
+	}
 </script>
 
 <div id="section">
@@ -242,14 +250,15 @@
 		<tr>
 			<td>생년월일</td>
 			<td>
-				<select name="birth1">
+				<input type="date" name="birth" onblur="birthCheck(this)" />
+				<%-- <select name="birth1">
 					<c:forEach var="year" begin="0" end="130"><option value="${2022-year}">${2022-year}</option></c:forEach>
 				</select>-
 				<select name="birth2">
 					<c:forEach var="month" begin="1" end="12"><option value="${month}">${month}</option></c:forEach>
 				</select>-
-				<input type="number" name="birth3" onblur="birthDay(this)"><br>
-				<div class="err">유효하지 않은 날짜입니다.</div>
+				<input type="number" name="birth3" onblur="birthDay(this)"><br> --%>
+				<div class="err">생년월일을 완성해주세요.</div>
 			</td>
 		</tr>
 		<tr>

@@ -65,4 +65,10 @@
 			id DESC
 	</select>
 	
+	<update id="orderProgress">
+		UPDATE purchase
+		SET state = #{param2}
+		WHERE order_code = #{param1}
+	</update>
+	
 </mapper>

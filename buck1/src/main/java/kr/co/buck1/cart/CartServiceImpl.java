@@ -148,6 +148,14 @@ public class CartServiceImpl implements CartService {
 		int totalUnit = Integer.parseInt(req.getParameter("total_unit"));
 		mapper.starAdd(userid, totalUnit);
 		
+		// 별(star) 갯수 확인
+		int cntStar = mapper.getStar(userid);
+		if(cntStar >= 12) {
+			mapper.levelUp(userid, 2);
+		} else if (cntStar >= 5) {
+			mapper.levelUp(userid, 1);
+		} else {}
+		
 		return "redirect:/member/myorder";
 //		return "redirect:/cart/cart_order";
 	}

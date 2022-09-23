@@ -12,4 +12,7 @@ public interface AdminMapper {
 	public ArrayList<PurchaseVO> order();
 	public ArrayList<PurchaseVO> getOrderItemCount();
 	
+	// 주문 상태 변경
+	public void orderProgress(String code, int state);
+	
 }
