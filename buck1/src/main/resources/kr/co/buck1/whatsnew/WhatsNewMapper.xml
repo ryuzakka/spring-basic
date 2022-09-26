@@ -125,8 +125,9 @@
 		select *
 		from campaign
 		where
-			now() &gt;= startdate
-			and now() &lt;= enddate+1
+			<!-- now() &gt;= startdate
+			and now() &lt;= enddate+1 -->
+			(curdate() between startdate and enddate)
 			and title like concat('%',#{param1},'%')
 		order by id desc
 	</select>
@@ -135,8 +136,9 @@
 		select count(*) 
 		from campaign
 		where
-			now() &gt;= startdate
-			and now() &lt;= enddate
+			<!-- now() &gt;= startdate
+			and now() &lt;= enddate -->
+			(curdate() between startdate and enddate)
 			and title like concat('%',#{param1},'%')
 	</select>
 	
