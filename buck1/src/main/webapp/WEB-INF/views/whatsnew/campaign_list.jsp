@@ -74,12 +74,12 @@
 		display:flex;
 		flex-flow:row wrap;
 		/* justify-content:space-between; */
-		justify-content:left;
+		justify-content:center;
 	}
 	section main ul li {
 		list-style:none;
-		/* margin:16px 0px 12px 0px; */
-		margin-bottom:20px;
+		margin:0px 7px 20px 7px;
+		/* margin-bottom:20px; */
 	}
 	section main ul li a {
 		text-decoration:none;

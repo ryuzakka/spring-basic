@@ -5,6 +5,9 @@ public class MenuVO {
 	private int id, type, size, price, state;
 	private String cate1, cate2, code, name, writeday, img;
 	
+	// 문자 치환용
+	private String catename, typename, sizename, statename;
+	
 	
 	public int getId() {
 		return id;
@@ -71,5 +74,29 @@ public class MenuVO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getCatename() {
+		return catename;
+	}
+	public void setCatename(String catename) {
+		this.catename = catename;
+	}
+	public String getTypename() {
+		return typename;
+	}
+	public void setTypename(String typename) {
+		this.typename = typename;
+	}
+	public String getSizename() {
+		return sizename;
+	}
+	public void setSizename(String sizename) {
+		this.sizename = sizename;
+	}
+	public String getStatename() {
+		return statename;
+	}
+	public void setStatename(String statename) {
+		this.statename = statename;
 	}
 }

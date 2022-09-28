@@ -16,7 +16,7 @@
 	.main-banner {
 		width:100%;
 		height:646px;
-		border:1px solid red;
+		/* border:1px solid #f6f5ef; */
 		background-image:url("${pageContext.request.contextPath}/resources/main/main_background.jpg");
 		background-size:cover;
 		-ms-overflow-style: none; /* IE and Edge */
@@ -31,7 +31,9 @@
 		justify-content:space-between;
 		/* overflow:hidden;
 		position:relative; */
-		margin:40px auto;
+		/* margin:40px auto; */
+		margin:auto;
+		padding-top:40px;
 		
 	}
 	.main-banner .wrap .img-wrap .parts-wrap {
@@ -77,7 +79,7 @@
 		width:100%;
 		height:62px;
 		background:#ddd;
-		margin-bottom:200px;
+		/* margin-bottom:200px; */
 		display:flex;
 		justify-content:center;
 	}
@@ -96,6 +98,7 @@
 		vertical-align:center;
 		/* overflow:hidden; */
 		position:relative;
+		background:#eee;
 	}
 	.line-banner .campaign {
 		display:inline-block;
@@ -112,30 +115,43 @@
 		font-weight:bold;
 		font-size:18px;
 		float:left;
-		margin-top:14px;
+		margin-top:17px;
 	}
-	.line-banner > .notice-rolling { width:60%;position:relative;margin:0px;display:inline-block; overflow:hidden; }
-	.line-banner > .news-rolling { width:60%;position:relative;margin:0px;display:inline-block; overflow:hidden; }
-	.line-banner > .campaign-rolling { width:60%;position:relative;margin:0px;display:inline-block; overflow:hidden; }
+	.line-banner .notice .notice-rolling { width:70%;height:32px;position:relative;margin:16px 0 0 0;display:inline-block;overflow:hidden; }
+	.line-banner .news .news-rolling { width:70%;height:32px;position:relative;margin:16px 0 0 0;display:inline-block;overflow:hidden; }
+	.line-banner .campaign .campaign-rolling { width:70%;height:32px;position:relative;margin:16px 0 0 0;display:inline-block;overflow:hidden; }
 	
 	.line-banner .list {	/* ul */
 		list-style:none;
-		max-width:300px;
+		/* max-width:300px; */
+		text-align:left;
+		margin:0px;
+		margin-top:-7px;
+		padding:0px;
+		overflow:hidden;
 	}
-	.line-banner .notice-rolling .list {
+	.line-banner .list li {
+		font-size:13px;
+		margin:10px 0px;
+		padding-top:4px;
+	}
+	.line-banner .list li a { text-decoration:none;color:black; }
+	.line-banner .list li a:hover { text-decoration:underline;cursor:pointer;color:#006633 }
+	/* .line-banner .notice-rolling .list {
 		position:absolute;
 		top:0;
 		left:0;
 		height:100%;
 		display:flex;
 		text-align:left;
-	}
+	} */
 	.line-banner .view-more {
 		display:inline-block;
 		width:10%;
 		cursor:pointer;
 		float:right;
-		margin-top:14px;
+		margin-top:19px;
+		font-size:14px;
 	}
 	.line-banner .view-more:hover {
 		text-decoration:underline;
@@ -145,21 +161,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	// Text Rolling
-	/* $(function(){
-		let h = 10;
+	$(function(){
+		let h = -2;
 		setInterval(function(){
 			let ss = setInterval(function(){
 				h--;
-				$('.list').css("margin-top", h);
-				if(h == -73) {
-					clearInterval(ss);
-					$('.list > li').eq(0).insertAfter($('.list > li').eq(5));
-					$('.list').css("margin-top", "10px");
-					h = 10;
+				//$('.list').css("margin-top", h);
+				var ullist = document.querySelectorAll('.list');
+				for(i=0; i<ullist.length; i++) {					
+					ullist[i].style.marginTop = h+"px";
 				}
-			},100);
+				if(h == -16) {
+					clearInterval(ss);
+					$('.notice-rolling .list li').eq(0).insertAfter($('.notice-rolling .list li').eq(4));
+					$('.news-rolling .list li').eq(0).insertAfter($('.news-rolling .list li').eq(4));
+					$('.campaign-rolling .list li').eq(0).insertAfter($('.campaign-rolling .list li').eq(4));
+					//$('.list').css("margin-top", "-3px");
+					for(i=0; i<ullist.length; i++) {
+						ullist[i].style.marginTop = "-3px";
+					}
+					h = -3;
+				}
+			},600);
 		},1500);
-	}); */
+	});
 </script>
 
 <main>
@@ -170,7 +195,7 @@
 			<div class="img-wrap">
 				<div class="parts-wrap" style="margin-top:165px;margin-right:114px;animation: firstFadeIn 1.5s forwards;">
 					<img src="${pageContext.request.contextPath}/resources/main/main_copy.png" />
-					<p style="margin:48px auto;"><a href="" >자세히 보기</a></p>
+					<p style="margin:48px auto;"><a href="../whatsnew/campaign_view?id=15" >자세히 보기</a></p>
 				</div>
 				<div class="parts-wrap" style="margin-top:28px;animation: firstFadeIn 1.5s forwards;animation-delay:0.5s;">
 					<img src="${pageContext.request.contextPath}/resources/main/main_drink1.png" />
@@ -187,38 +212,41 @@
 	
 	<!-- 띠배너 -->
 	<section class="line-banner">
+	
 		<div class="notice">
 			<div class="title">공지사항</div>
 			<div class="notice-rolling">
 				<ul class="list">
 					<c:forEach items="${notice}" var="notice">
-						<li><a href="">${notice.title}</a></li>
+						<li><a href="../whatsnew/notice_view?id=${notice.id}">${notice.title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="view-more">더보기</div>
+			<div class="view-more" onclick="javascript:location='../whatsnew/notice_list'">더보기</div>
 		</div>
+		
 		<div class="news">
 			<div class="title">뉴스</div>
 			<div class="news-rolling">
 				<ul class="list">
 					<c:forEach items="${news}" var="news">
-						<li><a href="">${news.title}</a></li>
+						<li><a href="../whatsnew/news_view?id=${news.id}">${news.title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="view-more">더보기</div>
+			<div class="view-more" onclick="javascript:location='../whatsnew/news_list'">더보기</div>
 		</div>
+		
 		<div class="campaign">
 			<div class="title">이벤트</div>
 			<div class="campaign-rolling">
 				<ul class="list">
 					<c:forEach items="${campaign}" var="campaign">
-						<li><a href="">${campaign.title}</a></li>
+						<li><a href="../whatsnew/campaign_view?id=${campaign.id}">${campaign.title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="view-more">더보기</div>
+			<div class="view-more" onclick="javascript:location='../whatsnew/campaign_list'">더보기</div>
 		</div>
 	</section>
 	

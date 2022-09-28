@@ -66,7 +66,7 @@
 		border-spacing:0px;
 		font-size:14px;
 	}
-	section table caption {
+	/* section table caption {
 		text-align:right;
 		padding: 8px 10px;
 	}
@@ -75,9 +75,9 @@
 		color:#006633;
 		font-size:14px;
 		font-weight:600;
-	}
+	} */
 	section table thead tr th {
-/* 		font-size:14px; */
+		/* font-size:14px; */
 		border-top:1px solid black;
 		border-bottom:1px solid black;
 		padding-top:17px;

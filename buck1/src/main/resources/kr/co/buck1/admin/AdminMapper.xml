@@ -71,4 +71,38 @@
 		WHERE order_code = #{param1}
 	</update>
 	
+	<select id="getMenu" resultType="kr.co.buck1.menu.MenuVO">
+		SELECT
+			menu.id,
+			menu.name,
+			menu.price,
+			if(menu.type=1, "Hot", "Iced") AS typename,
+			if(menu.size=1, "Short", 
+				if(menu.size=2, "Tall", 
+					if(menu.size=3,"Grande","Venti"))) AS sizename,
+			if(menu.state=1, "주문가능", "철회") AS statename,
+			cate.catename
+		FROM
+			menu AS menu,
+			menu_cate AS cate
+		WHERE
+			menu.cate1 = cate.cate1 AND 
+			menu.cate2 = cate.cate2 AND
+			menu.name LIKE concat('%',#{param1},'%') AND
+			menu.cate2 = #{param2}
+	</select>
+	
+	<select id="getCateDrink" resultType="kr.co.buck1.menu.MenuVO">
+		SELECT
+			*
+		FROM
+			menu_cate
+		WHERE
+			cate1 = 01
+	</select>
+	
+	<insert id="setMenu" parameterType="kr.co.buck1.menu.MenuVO">
+		
+	</insert>
+	
 </mapper>

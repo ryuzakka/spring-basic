@@ -6,21 +6,21 @@
 <mapper namespace="kr.co.buck1.HomeMapper">
 	
 	<select id="main_notice_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
-		SELECT title
+		SELECT id, title
 		FROM notice
 		ORDER BY id desc
 		LIMIT 5
 	</select>
 	
 	<select id="main_news_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
-		SELECT title
+		SELECT id, title
 		FROM news
 		ORDER BY id desc
 		LIMIT 5
 	</select>
 	
 	<select id="main_campaign_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
-		SELECT title
+		SELECT id, title
 		FROM campaign
 		ORDER BY id desc
 		LIMIT 5

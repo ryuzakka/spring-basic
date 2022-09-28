@@ -211,6 +211,7 @@
 							<div>관리자모드</div>
 							<ul id="admin">
 								<li><a href="../admin/order">주문관리</a></li>
+								<li><a href="../admin/menu?cateid=01">메뉴관리</a></li>
 								<li><a href="../admin_store/store_list">매장관리</a></li>
 								<li><a href="../admin/member">회원정보</a></li>
 								<li><a href="../whatsnew/notice_list">공지관리</a></li>
