@@ -74,7 +74,7 @@
 		display:flex;
 		flex-flow:row wrap;
 		/* justify-content:space-between; */
-		justify-content:center;
+		justify-content:left;
 	}
 	section main ul li {
 		list-style:none;

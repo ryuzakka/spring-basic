@@ -67,7 +67,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="campaign">
-				<tr onclick="javascript:location='../whatsnew/campaign_update?id=${campaign.id}'">
+				<tr onclick="javascript:location='../whatsnew/campaign_view?id=${campaign.id}'">
 					<td>${campaign.catename}</td>
 					<td><img src="${pageContext.request.contextPath}/resources/campaignimg/${campaign.thumbnail}" /></td>
 					<td>${campaign.title}</td>
