@@ -25,11 +25,11 @@ public class MenuController {
 	}
 	
 	@RequestMapping("/menu/drink_list")
-	public String drink_list(Model model) {
+	public String drink_list(Model model, HttpServletRequest req) {
 //		MenuDao dao = sqlSession.getMapper(MenuDao.class);
 //		ArrayList<MenuDto> list = dao.list();
 //		model.addAttribute("list", list);
-		return service.drink_list(model);
+		return service.drink_list(model, req);
 	}
 	
 	@RequestMapping("/menu/drink_content")

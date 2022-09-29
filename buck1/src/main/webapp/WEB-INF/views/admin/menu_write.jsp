@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${userid != 'admin'}">
+	<c:redirect url="../error/error404" />
+</c:if>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,11 +77,13 @@
 	<form name="menuInput" method="post" action="menu_write_ok" enctype="multipart/form-data">
 	
 	<div id="form-container">	<!-- form-container start -->
+		
 		<!-- 카테고리 선택 -->
+		<input type="hidden" name="cate1" value="01" />
 		<fieldset style="padding:20px 0 30px 0;">
 			<legend style="font-weight:bold;">카테고리 선택</legend>
 			<c:forEach items="${cate}" var="category">
-				<input type="radio" name="cate" id="${category.catename}" value="${category.cate2}" /><label for="${category.catename}">${category.catename}</label>
+				<input type="radio" name="cate2" id="${category.catename}" value="${category.cate2}" /><label for="${category.catename}">${category.catename}</label>
 			</c:forEach>
 		</fieldset>
 		<p>
@@ -89,10 +94,10 @@
 			
 			<!-- 메뉴명 작성 -->
 			<label for="menu-name">메뉴명</label>
-			<input type="text" name="menu-name" id="menu-name" /><p>
+			<input type="text" name="menu_name" id="menu-name" /><p>
 			
 			<!-- 사진 등록 -->
-			<input type="file" name="menu-img" id="menu-img-file" /><br>
+			<input type="file" name="menu_img" id="menu-img-file" /><br>
 			<img id="menu-img" width="250" />
 		</fieldset>
 		<p>
@@ -112,22 +117,27 @@
 			<fieldset style="background:#f6f5ef;border:none;">
 				<legend>Size</legend>
 				<div style="text-align:left;padding-left:170px;">
+					<input type="hidden" name="sizeArray" />
 					<p>
-					<input type="checkbox" name="size" id="short" value="1" onclick="sizeOnClick(1,'short-price')" />
+					<input type="checkbox" name="size" id="short" value="1" onclick="sizeOnClick(event)" />
+					<!-- <input type="checkbox" name="size" id="short" value="1" onclick="sizeOnClick(1,'price1')" /> -->
 						<label for="short">Short</label>
-						<input type="text" name="short-price" id="short-price" placeholder="Short 가격" disabled />
+						<input type="text" name="price1" id="price1" placeholder="Short 가격" disabled />
 					</p><p>
-					<input type="checkbox" name="size" id="tall" value="2" onclick="sizeOnClick(2,'tall-price')" />
+					<input type="checkbox" name="size" id="tall" value="2" onclick="sizeOnClick(event)" />
+					<!-- <input type="checkbox" name="size" id="tall" value="2" onclick="sizeOnClick(2,'price2')" /> -->
 						<label for="tall">Tall</label>
-						<input type="text" name="tall-price" id="tall-price" placeholder="Tall 가격" disabled />
+						<input type="text" name="price2" id="price2" placeholder="Tall 가격" disabled />
 					</p><p>
-					<input type="checkbox" name="size" id="grande" value="3" onclick="sizeOnClick(3,'grande-price')" />
+					<input type="checkbox" name="size" id="grande" value="3" onclick="sizeOnClick(event)" />
+					<!-- <input type="checkbox" name="size" id="grande" value="3" onclick="sizeOnClick(3,'price3')" /> -->
 						<label for="grande">Grande</label>
-						<input type="text" name="grande-price" id="grande-price" placeholder="Grande 가격" disabled />
+						<input type="text" name="price3" id="price3" placeholder="Grande 가격" disabled />
 					</p><p>
-					<input type="checkbox" name="size" id="venti" value="4" onclick="sizeOnClick(4,'venti-price')" />
+					<input type="checkbox" name="size" id="venti" value="4" onclick="sizeOnClick(event)" />
+					<!-- <input type="checkbox" name="size" id="venti" value="4" onclick="sizeOnClick(4,'price4')" /> -->
 						<label for="venti">Venti</label>
-						<input type="text" name="venti-price" id="venti-price" placeholder="Venti 가격" disabled />
+						<input type="text" name="price4" id="price4" placeholder="Venti 가격" disabled />
 					</p>
 				</div>
 			</fieldset>
@@ -150,13 +160,6 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function(){
-		
-		/* var sizeOnChange = document.menuInput.size;
-		sizeOnChange.onchange = function(e) {
-			var checked = e.target.checked;
-			if(checked){ console.log(e.target.value); }
-		} */
-		
 		// 메뉴이미지 등록 => 표시
 		var img = document.querySelector('#menu-img-file');
 		img.onchange = function(e) {
@@ -169,31 +172,38 @@
 			}
 		}
 		
-		// size 체크박스
-		/* var sizeCheck = document.menuInput.size;
-		console.log(sizeCheck);
+	});
+	
+	const sizeArr = new Array();
+	function sizeOnClick(e) {
+		var num = "price" + e.target.value;
 		
-		sizeCheck.onchange = function() {
-			//console.log(sizeCheck.value);
-			var str = "";
-			for(i of sizeCheck) {
-				if(sizeCheck[i].checked == true) {					
-					str += i + ",";	// i 가 value
+		if(e.target.checked) {
+			// 선택된 size의 가격input tag의 disabled 없애기
+			document.getElementById(num).disabled = false;
+			
+			// 선택된 size의 값을 배열에 추가 
+			sizeArr.push(e.target.value);
+			
+			// 중복제거
+			sizeArr.filter((element, index) => {
+			    return sizeArr.indexOf(element) === index;
+			});
+		} else {
+			// 선택된 size의 가격 input tag의 disabled 다시 추가
+			document.getElementById(num).disabled = true;
+			
+			// 선택된 size의 값을 배열에서 삭제 
+			for(i=0; i<sizeArr.length; i++) {
+				if(sizeArr[i] === e.target.value) {
+					sizeArr.splice(i,1);
+					i--;
 				}
 			}
-		} */
-	});
-	function sizeOnClick(n, price) {
-		var sizeChecked = document.menuInput.size[n-1].checked;
-		var priceTag = document.getElementById(price);
-		console.log(sizeChecked);
-		
-		if(sizeChecked) {			
-			priceTag.disabled = false;
-			console.log(priceTag);
-		} else {			
-			priceTag.disabled = true;
 		}
+		
+		document.menuInput.sizeArray.value = sizeArr;
+		console.log(document.menuInput.sizeArray.value);
 	}
 </script>
 

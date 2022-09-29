@@ -13,6 +13,9 @@ public class WhatsNewVO {
 	// campaign
 	private String startdate, enddate;
 	
+	// common
+	private String catename;
+	
 	
 	public int getId() {
 		return id;
@@ -73,5 +76,11 @@ public class WhatsNewVO {
 	}
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
+	}
+	public String getCatename() {
+		return catename;
+	}
+	public void setCatename(String catename) {
+		this.catename = catename;
 	}
 }

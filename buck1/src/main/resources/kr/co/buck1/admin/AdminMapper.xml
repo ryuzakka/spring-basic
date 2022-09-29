@@ -80,7 +80,8 @@
 			if(menu.size=1, "Short", 
 				if(menu.size=2, "Tall", 
 					if(menu.size=3,"Grande","Venti"))) AS sizename,
-			if(menu.state=1, "주문가능", "철회") AS statename,
+			if(menu.state=1, "주문가능", "주문불가") AS statename,
+			menu.state,
 			cate.catename
 		FROM
 			menu AS menu,
@@ -102,7 +103,36 @@
 	</select>
 	
 	<insert id="setMenu" parameterType="kr.co.buck1.menu.MenuVO">
-		
+		INSERT INTO 
+		menu(cate1, cate2, code, name, type, size, price, img, writeday)
+		VALUES('01', #{cate2}, #{code}, #{name}, #{type}, #{size}, #{price}, #{img}, now())
 	</insert>
+	
+	<select id="codeGenerate" resultType="String">
+		SELECT
+			ifnull(SUBSTR(MAX(code),5,2),0)
+		FROM 
+			menu
+		WHERE
+			code LIKE concat(#{param1},#{param2},'__',#{param3},'%')
+	</select>
+	
+	<update id="menu_stateChange">
+		UPDATE menu
+		SET state = 9
+		WHERE id = #{param1}
+	</update>
+	
+	
+	<!-- 이벤트 관리 -->
+	<select id="campaignList" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
+		SELECT 
+			*, 
+			if(category=1,"스타벅스 카드",
+				if(category=2,"스타벅스 리워드",
+					if(category=3,"온라인","선택없음"))) AS catename
+		FROM campaign
+		ORDER BY id DESC
+	</select>
 	
 </mapper>

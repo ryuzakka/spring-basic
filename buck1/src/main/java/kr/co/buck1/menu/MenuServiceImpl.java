@@ -22,8 +22,15 @@ public class MenuServiceImpl implements MenuService {
 	//private MemberMapper memberMapper;
 	
 	@Override
-	public String drink_list(Model model) {
-		model.addAttribute("list", mapper.drink_list());
+	public String drink_list(Model model, HttpServletRequest req) {
+		String cate2;
+		if(req.getParameter("cate2") == null){
+			cate2 = "";
+		} else {
+			cate2 = req.getParameter("cate2");
+		}
+		
+		model.addAttribute("list", mapper.drink_list(cate2));
 		
 		return "/menu/drink_list";
 	}

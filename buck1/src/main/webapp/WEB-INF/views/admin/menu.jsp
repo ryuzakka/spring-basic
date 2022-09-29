@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:if test="${userid != 'admin'}">
+	<c:redirect url="../error/error404" />
+</c:if>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +18,7 @@
 		text-align:center;
 	}
 	section h2 {
+		/* font-size:2em; */
 		text-align:center;
 	}
 	section #searchArea {
@@ -76,14 +81,17 @@
 		padding-bottom:5px;
 		border-bottom:1px solid #dddddd;
 	}
+	section table tbody tr td input[type='button'] {
+		background:lightsalmon;
+		color:white;
+		border:none;
+	}
+	section table tbody tr td input[type='button']:hover {
+		cursor:pointer;
+		text-decoration:underline;
+	}
 </style>
 <script>
-	
-	function cateSelect(myvalue) {
-		console.log(document.querySelector("#cate-select").selectedIndex);
-		location = "menu?cateid=" + myvalue;
-	}
-	
 	window.onload = () => {
 		let selectBox = document.querySelector("#cate-select");
 		let selectedCate = selectBox.selectedIndex;
@@ -91,18 +99,34 @@
 			selectedCate = "0";
 		}
 	}
+	
+	function cateSelect(myvalue) {
+		console.log(document.querySelector("#cate-select").selectedIndex);
+		location = "menu?cateid=" + myvalue;
+	}
+	function stateChange(id) {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4) {
+				console.log(xhr.responseText.trim());
+				location.reload();
+			}
+		}
+		xhr.open("get", "menu_stateChange?id="+id);
+		xhr.send();
+	}
 </script>
 </head>
 <body>
 
 <section>
-	<h2>메뉴 리스트</h2>
+	<h2>메뉴 관리</h2>
 	
 	<div style="display:inline-block;float:right;padding:0px 80px 20px 80px;">
 		<button onclick="javascript:location='menu_write'">메뉴추가</button>
 	</div>
 	
-	<table align="center" border="1">
+	<table align="center" border="0">
 		<thead>
 			<tr>
 				<th width="180">
@@ -132,7 +156,12 @@
 					<td>${menu.typename}</td>
 					<td>${menu.sizename}</td>
 					<td><fmt:formatNumber pattern="###,###" value="${menu.price}" /></td>
-					<td>${menu.statename}</td>
+					<td>
+						${menu.statename}
+						<c:if test="${menu.state == 1}">
+							<input type="button" value="삭제" onclick="stateChange(${menu.id})" />
+						</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

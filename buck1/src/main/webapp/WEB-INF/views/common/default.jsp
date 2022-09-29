@@ -216,7 +216,7 @@
 								<li><a href="../admin/member">회원정보</a></li>
 								<li><a href="../whatsnew/notice_list">공지관리</a></li>
 								<li><a href="../whatsnew/news_list">뉴스관리</a></li>
-								<li><a href="../whatsnew/campaign_list">이벤트관리</a></li>
+								<li><a href="../admin/campaign">이벤트관리</a></li>
 								<li><a href="../member/logout">로그아웃</a></li>
 							</ul>
 						</c:if>
@@ -228,8 +228,14 @@
 						<li id="top-menu" onmouseover="view(0)" onmouseout="hide(0)">
 							<div class="drop-menu-title">MENU</div>
 							<ul class="drop-menu">
-								<li><a href="../menu/drink_list">음료</a></li>
-								<li><a href="">푸드</a></li>
+								<li><a href="../menu/drink_list">전체</a></li>
+								<li><a href="../menu/drink_list?cate2=01">에스프레소</a></li>
+								<li><a href="../menu/drink_list?cate2=02">콜드브루</a></li>
+								<li><a href="../menu/drink_list?cate2=03">프라푸치노</a></li>
+								<li><a href="../menu/drink_list?cate2=04">블렌디드</a></li>
+								<li><a href="../menu/drink_list?cate2=05">피지오</a></li>
+								<li><a href="../menu/drink_list?cate2=06">티(티바나)</a></li>
+								<!-- <li><a href="">푸드</a></li> -->
 							</ul>
 						</li>
 						<li id="top-menu" onmouseover="view(1)" onmouseout="hide(1)">

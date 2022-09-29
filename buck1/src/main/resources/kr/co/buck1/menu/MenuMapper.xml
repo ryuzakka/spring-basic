@@ -7,9 +7,22 @@
 <mapper namespace="kr.co.buck1.menu.MenuMapper">
 	
 	<select id="drink_list" resultType="kr.co.buck1.menu.MenuVO">
-		select distinct name 
-		from menu 
-		where cate1=01 and state=1
+		SELECT 
+			menu.name, 
+			menu.img, 
+			cate.catename
+		FROM 
+			menu AS menu,
+			menu_cate AS cate
+		WHERE 
+			menu.cate1=01 and 
+			menu.state=1 and
+			menu.cate2 = cate.cate2 and
+			menu.cate2 LIKE concat(#{param1},'%')
+		GROUP BY menu.name
+		ORDER BY 
+			cate.cate2 ASC,
+			menu.id ASC
 	</select>
 	
 	<select id="getOption" resultType="kr.co.buck1.menu.MenuVO">

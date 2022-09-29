@@ -138,41 +138,90 @@ public class AdminServiceImpl implements AdminService {
 			e.printStackTrace();
 		}
 		
-		// 메뉴코드 만들기
+		// 메뉴코드를 생성하기 위한 준비
+		String menuCode, menuCate1, menuCate2, optionType, optionSize;
+		menuCate1 = multi.getParameter("cate1");	// 12 자리
+		menuCate2 = multi.getParameter("cate2");	// 34 자리
+		optionType = multi.getParameter("type");	// 7 자리
 		
+		// 56자리 구하기
+		String menuNum = mapper.codeGenerate(menuCate1, menuCate2, optionType);	
+		if(!menuNum.equals("0")) {
+			int temp = Integer.parseInt(menuNum);
+			temp++;
+			if(temp < 10) {					
+				menuNum = "0" + Integer.toString(temp);
+			} else {					
+				menuNum = Integer.toString(temp);
+			}
+		} else {
+			menuNum += "1";
+		}
 		
 		// 등록할 Size를 배열에 담기
-		String[] sizeStr = multi.getParameterValues("size");
-		int sizeInt;
+		String[] sizeStr = multi.getParameter("sizeArray").split(",");
+		int optionSizeInt;
 		
 		// 사이즈 선택 수 만큼 메뉴 등록
 		for(int i=0; i<sizeStr.length; i++) {
-			// 선택한 사이즈를 하나씩 int형으로 변환하여 사용
-			sizeInt = Integer.parseInt(sizeStr[i]);
-			String price;
-			switch(sizeInt) {
-				case 1 : price = "short-price";
-				case 2 : price = "tall-price";
-				case 3 : price = "grande-price";
-				case 4 : price = "venti-price";
+			
+			// 메뉴코드 만들기
+			/*	
+			 * 총 8자리 => 12345678
+			 * 		12 : 상위 카테고리
+			 * 		34 : 하위 카테고리
+			 * 		56 : 상품 번호
+			 * 		78 : 타입+사이즈
+			 */
+			
+			optionSize = sizeStr[i];					// 8 자리
+			
+			// 메뉴코드 생성
+			menuCode = menuCate1 + menuCate2 + menuNum + optionType + optionSize;
+			
+			// size별 price 설정하기
+			String price = "price" + optionSize;
+			optionSizeInt = Integer.parseInt(optionSize);	// 선택한 사이즈를 int형으로 변환하여 사용
+			/*switch(optionSizeInt) {
+				case 1 : price = "price1";
+				case 2 : price = "price2";
+				case 3 : price = "price3";
+				case 4 : price = "price4";
 				default: price = "";
-			}
+			}*/
 			
+			// MenuVO에 추가할 메뉴 정보 세팅
 			MenuVO vo = new MenuVO();
-			vo.setCate2(multi.getParameter("cate"));
-			vo.setName(multi.getParameter("menu-name"));
-			vo.setImg(multi.getFilesystemName("menu-img"));
+			vo.setCate2(multi.getParameter("cate2"));
+			vo.setCode(menuCode);
+			vo.setName(multi.getParameter("menu_name"));
+			vo.setImg(multi.getFilesystemName("menu_img"));
 			vo.setType(Integer.parseInt(multi.getParameter("type")));
-			vo.setSize(sizeInt);
+			vo.setSize(optionSizeInt);
 			vo.setPrice(Integer.parseInt(multi.getParameter(price)));
+			vo.setPriceStr(multi.getParameter(price));
 			
+			// Menu테이블에 MenuVO에 세팅한 값 등록
 			mapper.setMenu(vo);
 		}
-		
-		
 		
 		return "redirect:/admin/menu";
 	}
 	
+	@Override
+	public void menu_stateChange(HttpServletRequest req) {
+		try {			
+			mapper.menu_stateChange(req.getParameter("id"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	
+	@Override
+	public String campaign(Model model) {
+		model.addAttribute("list", mapper.campaignList());
+		return "/admin/campaign";
+	}
 	
 }

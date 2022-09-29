@@ -6,7 +6,7 @@ public class MenuVO {
 	private String cate1, cate2, code, name, writeday, img;
 	
 	// 문자 치환용
-	private String catename, typename, sizename, statename;
+	private String catename, typename, sizename, statename, priceStr;
 	
 	
 	public int getId() {
@@ -98,5 +98,11 @@ public class MenuVO {
 	}
 	public void setStatename(String statename) {
 		this.statename = statename;
+	}
+	public String getPriceStr() {
+		return priceStr;
+	}
+	public void setPriceStr(String priceStr) {
+		this.priceStr = priceStr;
 	}
 }

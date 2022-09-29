@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${userid != 'admin'}">
+	<c:redirect url="../error/error404" />
+</c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,8 +16,9 @@
 		margin:80px auto 70px auto;
 		text-align:center;
 	}
-	section h1 {
-		font-size:2em;
+	section h2 {
+		/* font-size:2em; */
+		text-align:center;
 	}
 	section #searchArea {
 		width:600px;
@@ -95,7 +99,7 @@
 <body>
 
 <section>
-	<h1>회원정보</h1>
+	<h2>회원정보</h2>
 	<div id="container">
 		
 		<div id="searchArea">

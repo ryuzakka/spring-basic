@@ -48,4 +48,15 @@ public class AdminController {
 		return service.menu_write_ok(req);
 	}
 	
+	@RequestMapping("/admin/menu_stateChange")
+	public void menu_stateChange(HttpServletRequest req) {
+		service.menu_stateChange(req);
+	}
+	
+	@RequestMapping("/admin/campaign")
+	public String campaign(Model model) {
+		return service.campaign(model);
+	}
+	
+	
 }
