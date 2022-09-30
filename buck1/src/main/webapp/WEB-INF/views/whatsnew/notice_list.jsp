@@ -164,8 +164,8 @@
 				<tbody>
 				<c:forEach items="${list}" var="list">
 					<tr onclick="javascript:location='notice_viewcnt?id=${list.id}'">
-						<td> ${list.id} </td>
-						<td style="padding-left:12px;"align="left"> ${list.title} </td>
+						<td> ${list.rnum} </td>
+						<td style="padding-left:12px;text-align:left;"> ${list.title} </td>
 						<td> ${list.writeday} </td>
 						<td> ${list.viewcnt} </td>
 					</tr>

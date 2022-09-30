@@ -6,9 +6,9 @@ import kr.co.buck1.vo.PurchaseVO;
 
 public interface MemberMapper {
 
-	public int signin_ok(MemberVO vo);
+	public int signin_ok(String userid, String pwd);
 	public void signup_ok(MemberVO vo);
-	public int stateCheck(String userid);
+	public String stateCheck(String userid);
 	public MemberVO getInfo(String userid);
 	public int idcheck(String userid);
 	public int phonecheck(String phone);

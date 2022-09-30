@@ -25,8 +25,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/signin_ok")
-	public String signin_ok(MemberVO vo, HttpSession session) {
-		return service.signin_ok(vo, session);
+	public String signin_ok(HttpServletRequest req, HttpSession session) {
+		return service.signin_ok(req, session);
 	}
 	
 	@RequestMapping("/member/signup")

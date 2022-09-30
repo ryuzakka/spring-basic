@@ -23,18 +23,19 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
 	
 	@Override
-	public String signin_ok(MemberVO vo, HttpSession session) {
-		String userid = vo.getUserid();
-		int state = mapper.stateCheck(userid);
+	public String signin_ok(HttpServletRequest req, HttpSession session) {
+		String userid = req.getParameter("userid");
+		String pwd = req.getParameter("pwd");
+		String state = mapper.stateCheck(userid);
 		
-		if(mapper.signin_ok(vo) == 1) {
+		if(mapper.signin_ok(userid, pwd) == 1) {
 			// 로그인 진행
 			MemberVO mvo = mapper.getInfo(userid);
 			session.setAttribute("userid", mvo.getUserid());
 			session.setAttribute("nick", mvo.getNickname());
 			
-			return "/main/index";
-		} else if(state == 9) {
+			return "redirect:/main/index";
+		} else if(state != null && state.equals("9")) {
 			return "redirect:/member/signin?err=2";
 		}
 		else {
@@ -87,9 +88,9 @@ public class MemberServiceImpl implements MemberService {
 			return "redirect:/member/search_id?err=1";
 		} else {
 			String userid = mapper.search_id(phone);
-			int state = mapper.stateCheck(userid);
+			String state = mapper.stateCheck(userid);
 			
-			if(state == 9) {
+			if(state.equals("9")) {
 				return "redirect:/member/search_id?err=2";
 			} else {
 				return "redirect:/member/search_id?userid="+userid;
@@ -102,11 +103,11 @@ public class MemberServiceImpl implements MemberService {
 	public String search_pwd(HttpServletRequest req) {
 		String userid = req.getParameter("userid");
 		String phone = req.getParameter("phone");
-		int state = mapper.stateCheck(userid);
+		String state = mapper.stateCheck(userid);
 		
 		if(mapper.search_pwd(userid, phone) == null) {
 			return "redirect:/member/search_pwd?err=1";
-		} else if(state == 9) {			
+		} else if(state.equals("9")) {			
 			return "redirect:/member/search_pwd?err=2";
 		}
 		else {
@@ -165,7 +166,7 @@ public class MemberServiceImpl implements MemberService {
 		String rechargeFare = req.getParameter("fare");
 		String userid = req.getParameter("userid");
 		mapper.sbcard_recharge(rechargeFare, userid);
-		return "/member/sbcard_charge";
+		return "redirect:/member/sbcard_charge";
 	}
 	
 	@Override

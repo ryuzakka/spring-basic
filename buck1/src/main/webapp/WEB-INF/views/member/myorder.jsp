@@ -95,7 +95,7 @@
 								<!-- 주문 상품 리스트 -->
 								<div>
 									<img 
-										src="${pageContext.request.contextPath}/resources/images/${order.name}.jpg" 
+										src="${pageContext.request.contextPath}/resources/menuimg/${order.name}.jpg" 
 										alt="상품이미지"
 										height="60" />
 								</div>

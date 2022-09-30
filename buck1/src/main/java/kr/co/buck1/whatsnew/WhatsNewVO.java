@@ -14,6 +14,7 @@ public class WhatsNewVO {
 	private String startdate, enddate;
 	
 	// common
+	private int rnum;
 	private String catename;
 	
 	
@@ -82,5 +83,11 @@ public class WhatsNewVO {
 	}
 	public void setCatename(String catename) {
 		this.catename = catename;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 }

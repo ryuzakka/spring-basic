@@ -19,7 +19,7 @@ public class HomeServiceImpl implements HomeService {
 		model.addAttribute("news", mapper.main_news_list());
 		model.addAttribute("campaign", mapper.main_campaign_list());
 		
-		return "/main/index";
+		return "main/index";
 	}
 	
 }

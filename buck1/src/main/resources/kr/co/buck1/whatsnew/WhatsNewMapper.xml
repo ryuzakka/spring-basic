@@ -13,11 +13,16 @@
 	</insert>
 	
 	<select id="notice_list" resultType="kr.co.buck1.whatsnew.WhatsNewVO">
-		select *
-		from notice
-		where title like concat('%',#{param1},'%')
-		order by id desc
-		limit #{param2},10
+		SELECT 
+			*,
+			@rownum:=@rownum+1 as rnum
+		FROM 
+			notice,
+			(select @rownum:=#{param2}) as r
+		WHERE
+			title LIKE concat('%',#{param1},'%')
+		ORDER BY id DESC
+		LIMIT #{param2},10
 	</select>
 	
 	<select id="notice_view" resultType="kr.co.buck1.whatsnew.WhatsNewVO">

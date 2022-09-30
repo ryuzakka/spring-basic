@@ -5,12 +5,12 @@
 
 <mapper namespace="kr.co.buck1.member.MemberMapper">
 	
-	<select id="signin_ok" parameterType="kr.co.buck1.member.MemberVO" resultType="Integer">
+	<select id="signin_ok" resultType="Integer">
 		select count(*) 
 		from member 
 		where 
-			userid=#{userid} and 
-			pwd=#{pwd} and
+			userid=#{param1} and 
+			pwd=#{param2} and
 			state = 0
 	</select>
 	
@@ -20,7 +20,7 @@
 		values(#{userid},#{pwd},#{username},#{nickname},#{birth},#{phone},#{email},now())
 	</insert>
 	
-	<select id="stateCheck" resultType="Integer">
+	<select id="stateCheck" resultType="String">
 		SELECT state
 		FROM member
 		WHERE userid = #{param1}

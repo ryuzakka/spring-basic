@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
+<c:if test="${userid == null}">
+	<c:redirect url="../member/signin?err=3" />
+</c:if>
 
 <style>
 	#section {
@@ -15,20 +16,25 @@
 		margin:30px 0 60px 0;
 	}
 	#section table {
-		width:80%;
-		display:inline-block;
-		text-align:center;
+		/* width:80%; */
+		/* display:inline-block; */
+		/* text-align:center; */
 		border-spacing:0px;
-		margin:auto;
+		margin:30px auto;
+	}
+	#section table tr {
+		padding:10px 0;
 	}
 	#section table tr td {
 		padding:10px 0;
 	}
-	#section table tr td:first-child {
-		width:400px;
+	/* #section table tr td:first-child */
+	#section table tr th {
+		/* width:400px; */
 		text-align:right;
+		padding:18px 0px;
 	}
-	#section table tr td:last-child {
+	#section table tr td{
 		text-align:left;
 		padding-left:30px;
 	}
@@ -73,29 +79,29 @@
 	
 	<form name="updateForm" method="post" action="info_update_ok">
 		<input type="hidden" name="id" value="${my.id}">
-	<table>
+	<table width="600" align="center">
 		<tr>
-			<td>아이디</td>
+			<th>아이디</th>
 			<td>${my.userid}</td>
 		</tr>
 		<tr>
-			<td>이 름</td>
+			<th>이 름</th>
 			<td>${my.username}</td>
 		</tr>
 		<tr>
-			<td>닉네임</td>
+			<th>닉네임</th>
 			<td><input type="text" name="nickname" value="${my.nickname}" ></td>
 		</tr>
 		<tr>
-			<td>생년월일</td>
+			<th>생년월일</th>
 			<td>${my.birth}</td>
 		</tr>
 		<tr>
-			<td>휴대폰번호</td>
+			<th>휴대폰번호</th>
 			<td>${my.phone}</td>
 		</tr>
 		<tr>
-			<td>이메일</td>
+			<th>이메일</th>
 			<td>
 				<input type="text" name="email1" value="${email1}" size="28"><br> @
 				<input type="text" name="email2" value="${email2}">

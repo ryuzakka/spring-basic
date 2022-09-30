@@ -153,7 +153,7 @@
 				dataType: 'text',
 				complete: function(response) {
 					console.log(response);
-					alert(code + "," + state);
+					//alert(code + "," + state);
 					location.reload();
 				}
 			});

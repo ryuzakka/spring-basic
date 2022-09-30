@@ -18,6 +18,19 @@
 	section h2 {
 		text-align:center;
 	}
+	section button {
+		padding:12px 0;
+		border:none;
+		border-bottom:1px solid #DDD;
+		border-radius:3px;
+		width:70px;
+		text-align:center;
+	}
+	section button:hover {
+		color:white;
+		background:#006633;
+		text-decoration:underline;
+	}
 	section table {
 		border-spacing:0px;
 	}
@@ -53,6 +66,10 @@
 
 <section>
 	<h2>이벤트 관리</h2>
+	
+	<div style="display:inline-block;float:right;padding:15px 50px 15px 0px;">
+		<button onclick="javascript:location='../whatsnew/campaign_write'">글쓰기</button>
+	</div>
 	
 	<table width="1000" align="center" border="0">
 		<thead>

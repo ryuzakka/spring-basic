@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 
 public interface MemberService {
 
-	public String signin_ok(MemberVO vo, HttpSession session);
+	public String signin_ok(HttpServletRequest req, HttpSession session);
 	public String signup_ok(HttpServletRequest req);
 	public String logout(HttpSession session);
 	public void idcheck(HttpServletRequest req, PrintWriter out);

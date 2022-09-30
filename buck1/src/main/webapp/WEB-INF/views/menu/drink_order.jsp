@@ -112,7 +112,7 @@
 	<h2>주문서 작성</h2>
 	
 	<div id="intro">
-		<div id="menuImg"><img src="${pageContext.request.contextPath}/resources/images/${param.name}.jpg"></div>
+		<div id="menuImg"><img src="${pageContext.request.contextPath}/resources/menuimg/${param.name}.jpg"></div>
 		<div id="menuName">
 			<h3>${param.name}</h3>
 		</div>

@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:if test="${userid == null}">
+	<c:redirect url="../member/signin?err=3" />
+</c:if>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -79,6 +83,12 @@
 		margin:5px 3px 0px 3px;
 		font-size:11px;
 	}
+	section #receipts .receiptType {
+		margin:18px 30px;
+	}
+	section #receipts .receiptType #receiptNumber {
+		margin-left:8px;
+	}
 	section #costfield .finalCost {
 		margin-bottom:12px;
 	}
@@ -144,26 +154,32 @@
 		document.getElementsByClassName('ssgPay')[0].style.display = "none";
 		document.getElementsByClassName(val)[0].style.display = "block";
 		
-		/* if(val == 'starbucksCard') {			
-			document.querySelector('.starbucksCard').style.display = "block";
-			document.querySelector('.ssgPay').style.display = "none";
-		} else {			
-			document.querySelector('.starbucksCard').style.display = "none";
-			document.querySelector('.ssgPay').style.display = "block";
-		} */
+		if(val == 'creditCard') {
+			document.form.receiptNumber.value = "";
+			document.form.receipt[0].checked = true;
+			document.form.receipt[1].disabled = true;
+			document.form.receipt[2].disabled = true;
+			receiptChange("신청안함");
+		} else {
+			document.form.receiptNumber.value = "";
+			document.form.receipt[0].checked = true;
+			document.form.receipt[1].disabled = false;
+			document.form.receipt[2].disabled = false;
+			receiptChange("신청안함");
+		}
 	}
 	function rechargePopup() {
 		var position = "left=200,top=80,width=570,height=630";
 		var popup = window.open("popup_recharge","starbucks card recharge",position);
 	}
-	function receiptChange(my) {
+	function receiptChange(myValue) {
 		//console.log(n);
 		const receiptType = document.querySelector('.receiptType');
-		let receiptName = my.value;
+		//let receiptName = myValue;
 		
-		if(receiptName != "신청안함") {
+		if(myValue != "신청안함") {
 			receiptType.style.display = "block";
-			receiptType.querySelector('label').innerText = receiptName;
+			receiptType.querySelector('label').innerText = myValue;
 			receiptType.querySelector('input').value = "";
 		} else {
 			receiptType.style.display = "none";
@@ -186,7 +202,7 @@
 <section>
 	<h2>결제하기</h2>
 
-	<form method="post" action="cart_order_ok">
+	<form name="form" method="post" action="cart_order_ok">
 		<input type="hidden" name="store_id" value="${store_id}" />
 
 		<!-- 결제수단 선택 -->
@@ -263,16 +279,16 @@
 			<input type="radio" name="receipt" 
 				id="신청안함" 
 				value="신청안함"
-				onchange="receiptChange(this)" 
+				onchange="receiptChange(this.value)" 
 				checked><label for="신청안함">신청안함</label>
 			<input type="radio" name="receipt" 
 				id="personnelReceipt"
 				value="개인소득공제"
-				onchange="receiptChange(this)"><label for="personnelReceipt">개인소득공제</label>
+				onchange="receiptChange(this.value)"><label for="personnelReceipt">개인소득공제</label>
 			<input type="radio" name="receipt" 
 				id="corporateReceipt" 
 				value="사업자증빙용"
-				onchange="receiptChange(this)"><label for="corporateReceipt">사업자증빙용</label>
+				onchange="receiptChange(this.value)"><label for="corporateReceipt">사업자증빙용</label>
 			<div class="receiptType" style="display:none;">
 				<label for="receiptNumber"></label><input type="phone" name="receiptNumber" id="receiptNumber" />
 			</div>
@@ -292,7 +308,7 @@
 						<c:set var="totalUnit" value="${totalUnit = totalUnit + cart.unit}" />
 						<div>
 							<img 
-								src="${pageContext.request.contextPath}/resources/images/${cart.name}.jpg" 
+								src="${pageContext.request.contextPath}/resources/menuimg/${cart.name}.jpg" 
 								alt="상품이미지"
 								height="60" />
 						</div>

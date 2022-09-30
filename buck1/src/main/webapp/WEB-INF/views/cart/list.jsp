@@ -139,7 +139,7 @@
 						<input type="hidden" name="cartid" value="${cart.id}">
 						<input type="hidden" name="prod_code" value="${cart.code}">
 						<input type="hidden" name="prod_unit" value="${cart.unit}">
-						<td><img width="100" src="${pageContext.request.contextPath}/resources/images/${cart.name}.jpg"></td>
+						<td><img width="100" src="${pageContext.request.contextPath}/resources/menuimg/${cart.name}.jpg"></td>
 						<%-- <td>${cart.code }</td> --%>
 						<td>${cart.name }</td>
 						<td>
