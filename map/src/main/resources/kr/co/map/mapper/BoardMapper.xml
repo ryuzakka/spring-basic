@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.map.mapper.BoardMapper">
+	
+	<select id="list" resultType="HashMap">
+		SELECT 
+			*,
+			@rownum:=@rownum+1 AS rnum
+		FROM 
+			board,
+			(SELECT @rownum:=0) AS r
+		ORDER BY id desc
+	</select>
+	
+	<update id="readnum">
+		UPDATE board
+		SET readnum = readnum+1
+		WHERE id = #{param1}
+	</update>
+	<update id="readnum2" parameterType="HashMap">
+		UPDATE board
+		SET readnum = readnum+1
+		WHERE id = #{id}
+	</update>
+	
+	<select id="content" resultType="HashMap">
+		SELECT *
+		FROM board
+		WHERE id = #{param1}
+	</select>
+	
+	<insert id="write_ok" parameterType="HashMap">
+		INSERT INTO board
+		(title,name,content,pwd,writeday)
+		VALUES(#{title},#{name},#{content},#{pwd},now())
+	</insert>
+
+</mapper>
