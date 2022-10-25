@@ -33,6 +33,7 @@ public class MemberServiceImpl implements MemberService {
 			MemberVO mvo = mapper.getInfo(userid);
 			session.setAttribute("userid", mvo.getUserid());
 			session.setAttribute("nick", mvo.getNickname());
+			session.setAttribute("username", mvo.getUsername());
 			
 			return "redirect:/main/index";
 		} else if(state != null && state.equals("9")) {

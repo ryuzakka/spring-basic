@@ -141,7 +141,8 @@
 		text-decoration:underline;
 	}
 </style>
-
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 	function paymentType(val) {
 		document.getElementById('starbucksCard').style.display = "none";
@@ -186,6 +187,73 @@
 			receiptType.querySelector('input').value = "";
 		}
 	}
+
+	function card_module_click (cost) {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp26512201'); 
+		IMP.request_pay({
+			pg: 'html5_inicis',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			
+			// 결제창에서 보여질 이름
+			name: 'Starbucks',
+			// 가격 
+			amount: cost,
+			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있다.
+			buyer_name: '${username}',
+			buyer_postcode: '123-456',
+		}, function (rsp) {
+			console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				document.form.submit();
+				// 결제 성공 시 정보는 form으로 전달
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	}
+	
+	function pay_module_click (cost) {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp26512201'); 
+		IMP.request_pay({
+			pg: 'kakaopay',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			
+			// 결제창에서 보여질 이름
+			name: 'Starbucks',
+			// 가격 
+			amount: ${param.cost},
+			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있다.
+			buyer_name: '${username}',
+			buyer_postcode: '123-456',
+		}, function (rsp) {
+			console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				document.form.submit();
+				// 결제 성공 시 정보는 form으로 전달
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	}
+	
+	function module_hover(my, n) {
+		if(n > 0)
+			my.style.textDecoration = 'underline';
+		else
+			my.style.textDecoration = '';
+	}
 </script>
 
 </head>
@@ -212,7 +280,7 @@
 				<select id="paymentList" name="paymentList" onchange="paymentType(this.value)">
 					<option value="starbucksCard">스타벅스 카드</option>
 					<option value="creditCard">신용카드</option>
-					<option value="ssgPay">SSGPAY</option>
+					<option value="ssgPay">간편결제</option>
 				</select>
 			</div>
 			<div id="starbucksCard" class="selectedPayment">
@@ -236,12 +304,12 @@
 				<div><img src="${pageContext.request.contextPath}/resources/images/credit01.png"></div>
 				<div>
 					<span class="pay-title">신용카드</span><br>
-					<span class="pay-con">1234-1234-1234-1234</span>
+					<!-- <span class="pay-con">1234-1234-1234-1234</span> -->
 				</div>
 			</div>
 			<div id="ssgPay" class="selectedPayment" style="display:none">
 				<div><img src="${pageContext.request.contextPath}/resources/images/ssgpay.png"></div>
-				<div class="pay-title">SSGPAY</div>
+				<div class="pay-title">카카오페이</div>
 			</div>
 		</div>
 		
@@ -366,10 +434,26 @@
 				</c:if>
 			</div>
 			<div class="creditCard" style="display:none;">
-				<input type="submit" value="신용카드로 결제하기" />
+				<!-- <input type="submit" value="신용카드로 결제하기" /> -->
+				<input 
+					type="button" 
+					id="card_module" 
+					style="background:#006633;color:white;"
+					onmouseover="module_hover(this,1)"
+					onmouseout="module_hover(this,0)"
+					onclick="card_module_click(${param.cost})" 
+					value="신용카드로 결제하기" />
 			</div>
 			<div class="ssgPay" style="display:none;">
-				<input type="submit" value="페이로 결제하기" />
+				<!-- <input type="submit" value="페이로 결제하기" /> -->
+				<input 
+					type="button" 
+					id="pay_module" 
+					style="background:#006633;color:white;"
+					onmouseover="module_hover(this,1)"
+					onmouseout="module_hover(this,0)" 
+					onclick="pay_module_click(${param.cost})" 
+					value="페이로 결제하기" />
 			</div>
 		</div>
 	</form>
